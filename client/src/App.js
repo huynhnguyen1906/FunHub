@@ -1,25 +1,45 @@
-import React, { useEffect, useState } from "react"
-import axios from "axios"
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "~/pages/Home";
+import Landing from "~/pages/LandingPage";
+import Profile from "~/pages/Profile";
+import Search from "./pages/Search";
+import DefaultLayout from "./component/Layout";
 
 function App() {
-	const [message, setMessage] = useState("")
-
-	useEffect(() => {
-		axios
-			.get("/api")
-			.then((response) => {
-				setMessage(response.data)
-			})
-			.catch((error) => {
-				console.error("There was an error!", error)
-			})
-	}, [])
-
 	return (
-		<div>
-			<h1>{message}</h1>
-		</div>
-	)
+		<Router>
+			<div>
+				<Routes>
+					<Route path="/" element={<Landing />} />
+					<Route
+						path="/home"
+						element={
+							<DefaultLayout>
+								<Home />
+							</DefaultLayout>
+						}
+					/>
+					<Route
+						path="/profile"
+						element={
+							<DefaultLayout>
+								<Profile />
+							</DefaultLayout>
+						}
+					/>
+					<Route
+						path="/search"
+						element={
+							<DefaultLayout>
+								<Search />
+							</DefaultLayout>
+						}
+					/>
+				</Routes>
+			</div>
+		</Router>
+	);
 }
 
-export default App
+export default App;

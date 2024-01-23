@@ -11,10 +11,13 @@
 
 html {
 	font-size: 62.5%;
+	box-sizing: border-box;
 }
 
 body {
 	font-family: "Segoe UI Variable", sans-serif;
 	background-color: #fff;
 	font-size: 1.6rem;
+	margin: 0;
+	padding: 0;
 }
