@@ -1,0 +1,183 @@
+.container {
+	font-family: "Roboto", sans-serif;
+	font-feature-settings: "clig" off, "liga" off;
+}
+
+.hero {
+	width: 100vw;
+	height: 100vh;
+	background: url("../../../public/images/landingImg/topImg.svg") no-repeat
+		right 70%;
+	background-size: 80%;
+	overflow: auto;
+	.nav {
+		width: 100%;
+		height: 6rem;
+		display: flex;
+		ul {
+			position: relative;
+			left: 12rem;
+			display: flex;
+			list-style: none;
+			width: 27rem;
+			margin: 0;
+			padding: 0;
+			li {
+				flex-basis: 33%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				color: var(--light-green);
+				font-size: 1.6rem;
+				font-weight: 700;
+				border-radius: 0.2rem;
+				transition: all 0.2s ease-in-out;
+				cursor: pointer;
+				&:hover {
+					color: #f3f3f3;
+					background-color: var(--light-green);
+				}
+			}
+		}
+	}
+	.heroContent {
+		width: 54rem;
+		height: 60rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: flex-start;
+		position: relative;
+		left: 17rem;
+		margin-top: 10rem;
+		.logoBlock {
+			display: flex;
+			align-items: center;
+			div {
+				background: url("../../../public/images/icon/funhub-logo.svg") no-repeat
+					center;
+				background-size: cover;
+				width: 12rem;
+				height: 12rem;
+			}
+			h1 {
+				color: var(--primary);
+				font-size: 6.4rem;
+				font-weight: 900;
+				padding: 0 24px;
+			}
+		}
+		.textBlock {
+			display: flex;
+			flex-direction: column;
+			h1 {
+				font-size: 5rem;
+				font-weight: 500;
+				color: var(--title-color);
+				line-height: 6.6rem;
+			}
+			p {
+				font-size: 1.8rem;
+				font-weight: 400;
+				color: var(--light-green);
+				line-height: 3rem;
+			}
+		}
+		.btnBlock {
+			display: flex;
+			button {
+				width: 20rem;
+				height: 3.6rem;
+				font-size: 1.6rem;
+				font-style: normal;
+				font-weight: 600;
+				line-height: 3.6rem;
+				text-align: center;
+				cursor: pointer;
+				&:first-child {
+					border-radius: 0.2rem;
+					background: #114720;
+					color: #fff;
+					margin-right: 3rem;
+				}
+				&:last-child {
+					border-radius: 0.2rem;
+					border: 2px solid #114720;
+				}
+			}
+		}
+	}
+}
+.mainContent {
+	width: 120rem;
+	height: auto;
+	margin: 0 auto;
+	.info {
+		width: 100%;
+		height: 74rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		.infoBlock {
+			margin-right: 4rem;
+			width: 54rem;
+			.textBlock {
+				h2 {
+					font-size: 3.6rem;
+					font-weight: 500;
+					color: var(--title-color);
+					line-height: 4.8rem;
+					padding-bottom: 6px;
+				}
+				p {
+					font-size: 1.6rem;
+					font-weight: 400;
+					color: var(--light-green);
+					line-height: 2.6rem;
+					padding-top: 6px;
+					margin-bottom: 7.5rem;
+				}
+			}
+			.infoCard {
+				display: flex;
+				justify-content: space-between;
+				.card {
+					flex-basis: 45%;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: flex-start;
+					.cardImg {
+						width: 3.6rem;
+						height: 3.6rem;
+						background: url("../../../public/images/landingImg/card-info.svg")
+							no-repeat center;
+						background-size: cover;
+					}
+					h3 {
+						font-size: 1.6rem;
+						font-weight: 500;
+						color: var(--title-color);
+						line-height: 2.6rem;
+						padding-top: 14px;
+					}
+					p {
+						color: #5d6970;
+						font-size: 1.2rem;
+						line-height: 1.8rem;
+						padding-top: 6px;
+					}
+				}
+			}
+		}
+		.infoImg {
+			width: 54rem;
+			height: 54rem;
+			position: relative;
+			top: -8rem;
+			background: url("../../../public/images/landingImg/infoImg.svg") no-repeat
+				center;
+			background-size: cover;
+		}
+	}
+}
