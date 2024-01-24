@@ -108,6 +108,19 @@ function SigIn() {
 				selectedYear && selectedYear.value,
 				sex
 			);
+			setFirstName("");
+			setLastName("");
+			setEmail("");
+			setUserName("");
+			setPassword("");
+			setPasswordConfirm("");
+			setSelectedDay(null);
+			setSelectedMonth(null);
+			setSelectedYear(null);
+			setSex("");
+			setMailAlert("");
+			setPasswordAlert("");
+			setConfirmAlert("");
 		}
 	};
 
