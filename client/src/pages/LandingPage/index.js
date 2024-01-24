@@ -1,14 +1,27 @@
 import "./style.scss";
-
+import { useRef } from "react";
+import SigIn from "~/component/SigIn/SigIn";
+// import Login from "~/component/Login/Login";
 function Landing() {
+	const handleScrollToTop = () => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	};
+	const aboutRef = useRef(null);
+	const handleScrollToAbout = () => {
+		aboutRef.current.scrollIntoView({ behavior: "smooth" });
+	};
+	const handleScrollToContact = () => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	};
 	return (
 		<div className="lContainer">
+			<SigIn />
 			<div className="hero">
 				<div className="nav">
 					<ul>
-						<li>Top</li>
-						<li>About</li>
-						<li>Contact</li>
+						<li onClick={handleScrollToTop}>Top</li>
+						<li onClick={handleScrollToAbout}>About</li>
+						<li onClick={handleScrollToContact}>Contact</li>
 					</ul>
 				</div>
 				<div className="heroContent">
@@ -32,7 +45,7 @@ function Landing() {
 				</div>
 			</div>
 			<div className="mainContent">
-				<div className="info">
+				<div className="info" ref={aboutRef}>
 					<div className="infoBlock">
 						<div className="textBlock">
 							<h2>もう嫌じゃないの？？</h2>
@@ -125,9 +138,9 @@ function Landing() {
 					<div className="footerNav">
 						<br />
 						<ul>
-							<li>Top</li>
-							<li>About</li>
-							<li>Contact</li>
+							<li onClick={handleScrollToTop}>Top</li>
+							<li onClick={handleScrollToAbout}>About</li>
+							<li onClick={handleScrollToContact}>Contact</li>
 						</ul>
 					</div>
 				</div>
