@@ -1,127 +1,190 @@
-.container {
+.lContainer {
 	font-family: "Roboto", sans-serif;
 	font-feature-settings: "clig" off, "liga" off;
-}
-
-.hero {
-	width: 100vw;
-	height: 100vh;
-	background: url("../../../public/images/landingImg/topImg.svg") no-repeat
-		right 70%;
-	background-size: 80%;
-	overflow: auto;
-	.nav {
-		width: 100%;
-		height: 6rem;
-		display: flex;
-		ul {
-			position: relative;
-			left: 12rem;
+	.hero {
+		width: 100vw;
+		height: 100vh;
+		background: url("../../../public/images/landingImg/topImg.svg") no-repeat
+			right 70%;
+		background-size: 80%;
+		overflow: auto;
+		.nav {
+			width: 100%;
+			height: 6rem;
 			display: flex;
-			list-style: none;
-			width: 27rem;
-			margin: 0;
-			padding: 0;
-			li {
-				flex-basis: 33%;
+			ul {
+				position: relative;
+				left: 12rem;
 				display: flex;
-				justify-content: center;
-				align-items: center;
-				color: var(--light-green);
-				font-size: 1.6rem;
-				font-weight: 700;
-				border-radius: 0.2rem;
-				transition: all 0.2s ease-in-out;
-				cursor: pointer;
-				&:hover {
-					color: #f3f3f3;
-					background-color: var(--light-green);
+				list-style: none;
+				width: 27rem;
+				margin: 0;
+				padding: 0;
+				li {
+					flex-basis: 33%;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					color: var(--light-green);
+					font-size: 1.6rem;
+					font-weight: 700;
+					border-radius: 0.2rem;
+					transition: all 0.2s ease-in-out;
+					cursor: pointer;
+					&:hover {
+						color: #f3f3f3;
+						background-color: var(--light-green);
+					}
 				}
 			}
 		}
-	}
-	.heroContent {
-		width: 54rem;
-		height: 60rem;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		align-items: flex-start;
-		position: relative;
-		left: 17rem;
-		margin-top: 10rem;
-		.logoBlock {
-			display: flex;
-			align-items: center;
-			div {
-				background: url("../../../public/images/icon/funhub-logo.svg") no-repeat
-					center;
-				background-size: cover;
-				width: 12rem;
-				height: 12rem;
-			}
-			h1 {
-				color: var(--primary);
-				font-size: 6.4rem;
-				font-weight: 900;
-				padding: 0 24px;
-			}
-		}
-		.textBlock {
+		.heroContent {
+			width: 54rem;
+			height: 60rem;
 			display: flex;
 			flex-direction: column;
-			h1 {
-				font-size: 5rem;
-				font-weight: 500;
-				color: var(--title-color);
-				line-height: 6.6rem;
-			}
-			p {
-				font-size: 1.8rem;
-				font-weight: 400;
-				color: var(--light-green);
-				line-height: 3rem;
-			}
-		}
-		.btnBlock {
-			display: flex;
-			button {
-				width: 20rem;
-				height: 3.6rem;
-				font-size: 1.6rem;
-				font-style: normal;
-				font-weight: 600;
-				line-height: 3.6rem;
-				text-align: center;
-				cursor: pointer;
-				&:first-child {
-					border-radius: 0.2rem;
-					background: #114720;
-					color: #fff;
-					margin-right: 3rem;
+			justify-content: space-between;
+			align-items: flex-start;
+			position: relative;
+			left: 17rem;
+			margin-top: 10rem;
+			.logoBlock {
+				display: flex;
+				align-items: center;
+				div {
+					background: url("../../../public/images/icon/funhub-logo.svg")
+						no-repeat center;
+					background-size: cover;
+					width: 12rem;
+					height: 12rem;
 				}
-				&:last-child {
-					border-radius: 0.2rem;
-					border: 2px solid #114720;
+				h1 {
+					color: var(--primary);
+					font-size: 6.4rem;
+					font-weight: 900;
+					padding: 0 24px;
+				}
+			}
+			.textBlock {
+				display: flex;
+				flex-direction: column;
+				h1 {
+					font-size: 5rem;
+					font-weight: 500;
+					color: var(--title-color);
+					line-height: 6.6rem;
+				}
+				p {
+					font-size: 1.8rem;
+					font-weight: 400;
+					color: var(--light-green);
+					line-height: 3rem;
+				}
+			}
+			.btnBlock {
+				display: flex;
+				button {
+					width: 20rem;
+					height: 3.6rem;
+					font-size: 1.6rem;
+					font-style: normal;
+					font-weight: 600;
+					line-height: 3.6rem;
+					text-align: center;
+					cursor: pointer;
+					&:first-child {
+						border-radius: 0.2rem;
+						background: #114720;
+						color: #fff;
+						margin-right: 3rem;
+					}
+					&:last-child {
+						border-radius: 0.2rem;
+						border: 2px solid #114720;
+					}
 				}
 			}
 		}
 	}
-}
-.mainContent {
-	width: 120rem;
-	height: auto;
-	margin: 0 auto;
-	.info {
-		width: 100%;
-		height: 74rem;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		.infoBlock {
-			margin-right: 4rem;
-			width: 54rem;
+	.mainContent {
+		width: 120rem;
+		height: auto;
+		margin: 0 auto;
+		.info {
+			width: 100%;
+			height: 74rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			.infoBlock {
+				margin-right: 4rem;
+				width: 54rem;
+				.textBlock {
+					h2 {
+						font-size: 3.6rem;
+						font-weight: 500;
+						color: var(--title-color);
+						line-height: 4.8rem;
+						padding-bottom: 6px;
+					}
+					p {
+						font-size: 1.6rem;
+						font-weight: 400;
+						color: var(--light-green);
+						line-height: 2.6rem;
+						padding-top: 6px;
+					}
+				}
+				.infoCard {
+					display: flex;
+					justify-content: space-between;
+					.card {
+						flex-basis: 45%;
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						align-items: flex-start;
+						.cardImg {
+							width: 3.6rem;
+							height: 3.6rem;
+							background: url("../../../public/images/landingImg/card-info.svg")
+								no-repeat center;
+							background-size: cover;
+						}
+						h3 {
+							font-size: 1.6rem;
+							font-weight: 500;
+							color: var(--title-color);
+							line-height: 2.6rem;
+							padding-top: 14px;
+						}
+						p {
+							color: #5d6970;
+							font-size: 1.2rem;
+							line-height: 1.8rem;
+							padding-top: 6px;
+						}
+					}
+				}
+			}
+			.infoImg {
+				width: 54rem;
+				height: 54rem;
+				position: relative;
+				top: -8rem;
+				background: url("../../../public/images/landingImg/infoImg.svg")
+					no-repeat center;
+				background-size: cover;
+			}
+		}
+		.exBl {
+			width: 100%;
+			height: 55rem;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 			.textBlock {
+				width: 44.5rem;
 				h2 {
 					font-size: 3.6rem;
 					font-weight: 500;
@@ -135,49 +198,162 @@
 					color: var(--light-green);
 					line-height: 2.6rem;
 					padding-top: 6px;
-					margin-bottom: 7.5rem;
+				}
+				button {
+					width: 20rem;
+					height: 3.6rem;
+					font-size: 1.6rem;
+					font-style: normal;
+					font-weight: 600;
+					line-height: 3.6rem;
+					text-align: center;
+					cursor: pointer;
+					border-radius: 0.2rem;
+					background: #114720;
+					color: #fff;
 				}
 			}
-			.infoCard {
+			.introImg {
+				width: 54rem;
+				height: 38.7rem;
+				background: url("../../../public/images/landingImg/introCopy.svg")
+					no-repeat center;
+				background-size: cover;
+			}
+			.crAccountImg {
+				width: 44.5rem;
+				height: 31.2rem;
+				background: url("../../../public/images/landingImg/crAccount.svg")
+					no-repeat center;
+				background-size: cover;
+			}
+		}
+	}
+	.botCatchCopy {
+		width: 100%;
+		height: 41.5rem;
+		display: flex;
+		text-align: center;
+		justify-content: center;
+		background: url("../../../public/images/landingImg/botBackgr.svg") no-repeat
+			center;
+		background-size: cover;
+		.textBlock {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			h2 {
+				font-size: 3.6rem;
+				font-weight: 500;
+				color: var(--title-color);
+				line-height: 4.8rem;
+			}
+			p {
+				width: 60rem;
+				font-size: 1.6rem;
+				font-weight: 400;
+				color: var(--light-green);
+				line-height: 2.6rem;
+			}
+			button {
+				width: 20rem;
+				height: 3.6rem;
+				font-size: 1.6rem;
+				font-style: normal;
+				font-weight: 600;
+				line-height: 3.6rem;
+				text-align: center;
+				cursor: pointer;
+				border-radius: 0.2rem;
+				background: #114720;
+				color: #fff;
+			}
+		}
+	}
+	.footer {
+		width: 100%;
+		height: auto;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		.ctBox {
+			width: 80%;
+			height: auto;
+			display: flex;
+			justify-content: space-around;
+			align-items: flex-start;
+			border-bottom: 1.5px solid #e5e5e5;
+			a {
+				text-decoration: underline;
+			}
+			.contactInfo {
+				width: 15rem;
+				padding: 8px 0;
 				display: flex;
-				justify-content: space-between;
-				.card {
-					flex-basis: 45%;
+				i {
+					background-size: cover;
+					width: 2.4rem;
+					height: 2.4rem;
+				}
+				.fbIcon {
+					background: url("../../../public/images/icon/facebook.svg") no-repeat
+						center;
+				}
+				.insIcon {
+					background: url("../../../public/images/icon/instagram.svg") no-repeat
+						center;
+				}
+				.gitHubIcon {
+					background: url("../../../public/images/icon/github.svg") no-repeat
+						center;
+				}
+				a {
+					font-size: 1.4rem;
+					font-weight: 400;
+					line-height: 2.4rem;
+					padding-left: 5px;
+				}
+			}
+			.footerLogo {
+				width: 8.8rem;
+				height: 10rem;
+				background: url("../../../public/images/landingImg/footerLogo.svg")
+					no-repeat center;
+				background-size: cover;
+				margin-top: 16px;
+			}
+			.footerNav {
+				width: 15rem;
+				ul {
 					display: flex;
 					flex-direction: column;
-					justify-content: center;
+					justify-content: flex-start;
 					align-items: flex-start;
-					.cardImg {
-						width: 3.6rem;
-						height: 3.6rem;
-						background: url("../../../public/images/landingImg/card-info.svg")
-							no-repeat center;
-						background-size: cover;
-					}
-					h3 {
-						font-size: 1.6rem;
-						font-weight: 500;
-						color: var(--title-color);
-						line-height: 2.6rem;
-						padding-top: 14px;
-					}
-					p {
-						color: #5d6970;
-						font-size: 1.2rem;
-						line-height: 1.8rem;
-						padding-top: 6px;
+					list-style: none;
+					padding: 0;
+					li {
+						font-size: 1.4rem;
+						font-weight: 700;
+						line-height: 2.4rem;
+						padding: 8px 0;
+						cursor: pointer;
+						color: var(--light-green);
 					}
 				}
 			}
 		}
-		.infoImg {
-			width: 54rem;
-			height: 54rem;
-			position: relative;
-			top: -8rem;
-			background: url("../../../public/images/landingImg/infoImg.svg") no-repeat
-				center;
-			background-size: cover;
+		.cpRight {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 1.4rem;
+			font-weight: 400;
+			line-height: 5rem;
+			a {
+				text-decoration: underline;
+			}
 		}
 	}
 }

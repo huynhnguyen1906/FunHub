@@ -32,6 +32,10 @@
 	) {
 	margin: 0;
 }
+:where(a, button) {
+	text-decoration: none;
+	color: #000;
+}
 :where(button, input, textarea) {
 	outline: none;
 	border: none;
