@@ -70,18 +70,34 @@
 							}
 						}
 					}
+					.alert {
+						font-size: 1.4rem;
+						font-weight: 350;
+						color: #ff0000;
+					}
+					button {
+						width: 100%;
+						height: 4rem;
+						border-radius: 1rem;
+						background-color: var(--primary);
+						color: #fff;
+						font-size: 1.6rem;
+						font-weight: 700;
+						border: none;
+						cursor: pointer;
+						transition: background-color 0.2s ease;
+						margin-top: 8px;
+						&:hover {
+							background-color: #078307;
+						}
+					}
 				}
-				.alert {
-					font-size: 1.4rem;
-					font-weight: 350;
-					color: #ff0000;
-				}
+
 				.btnBox {
 					display: flex;
 					flex-direction: column;
 					justify-content: center;
 					align-items: center;
-					padding-top: 8px;
 					button {
 						width: 100%;
 						height: 4rem;

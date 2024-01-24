@@ -1,6 +1,6 @@
 import "./style.scss";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 function Login({ onClose, setShowSignIn }) {
 	const [userName, setUserName] = useState("");
 	const [password, setPassword] = useState("");
@@ -22,7 +22,8 @@ function Login({ onClose, setShowSignIn }) {
 	};
 	const [alertText, setAlertText] = useState("");
 	const navigate = useNavigate();
-	const handleSubmit = () => {
+	const handleSubmit = (event) => {
+		event.preventDefault();
 		const userExists = users.some(
 			(user) => user.username === userName && user.password === password
 		);
@@ -37,6 +38,10 @@ function Login({ onClose, setShowSignIn }) {
 		setAlertText("");
 		navigate("/home");
 	};
+	const userRef = useRef();
+	useEffect(() => {
+		userRef.current.focus();
+	}, []);
 	return (
 		<div
 			className="loginDp"
@@ -57,6 +62,7 @@ function Login({ onClose, setShowSignIn }) {
 						<form>
 							<div className="input">
 								<input
+									ref={userRef}
 									onChange={(e) => {
 										setUserName(e.target.value);
 									}}
@@ -75,10 +81,12 @@ function Login({ onClose, setShowSignIn }) {
 									placeholder="パスワード"
 								/>
 							</div>
+							<p className="alert">{alertText}</p>
+							<button type="submit" onClick={handleSubmit}>
+								ログイン
+							</button>
 						</form>
-						<p className="alert">{alertText}</p>
 						<div className="btnBox">
-							<button onClick={handleSubmit}>ログイン</button>
 							<p>パスワードを忘れた場合</p>
 							<div className="bar"></div>
 							<button onClick={showSignIn}>新しいアカウントを作成</button>

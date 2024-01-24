@@ -1,5 +1,5 @@
 import "./style.scss";
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import Select from "react-select";
 
 function SignIn({ onClose, setShowLogin }) {
@@ -14,51 +14,52 @@ function SignIn({ onClose, setShowLogin }) {
 	const [selectedMonth, setSelectedMonth] = useState(null);
 	const [selectedYear, setSelectedYear] = useState(null);
 
-	const daysOptions = [...Array(31).keys()].map((day) => ({
-		value: day + 1,
-		label: `${day + 1}`,
-	}));
-	const monthsOptions = [
-		{ value: 1, label: "1月" },
-		{ value: 2, label: "2月" },
-		{ value: 3, label: "3月" },
-		{ value: 4, label: "4月" },
-		{ value: 5, label: "5月" },
-		{ value: 6, label: "6月" },
-		{ value: 7, label: "7月" },
-		{ value: 8, label: "8月" },
-		{ value: 9, label: "9月" },
-		{ value: 10, label: "10月" },
-		{ value: 11, label: "11月" },
-		{ value: 12, label: "12月" },
-	];
-	const yearsOptions = [...Array(100).keys()].map((year) => ({
-		value: 2022 - year,
-		label: `${2022 - year}`,
-	}));
+	const daysOptions = useMemo(() => {
+		return Array.from({ length: 31 }, (_, i) => ({
+			value: i + 1,
+			label: i + 1,
+		}));
+	}, []);
+	const monthsOptions = useMemo(() => {
+		return Array.from({ length: 12 }, (_, i) => ({
+			value: String(i + 1),
+			label: `${i + 1} 月`,
+		}));
+	}, []);
+	const yearsOptions = useMemo(() => {
+		return Array.from({ length: 121 }, (_, i) => ({
+			value: i + 1900,
+			label: i + 1900,
+		}));
+	}, []);
 
-	const handleDayChange = (selectedOption) => {
+	const handleDayChange = useCallback((selectedOption) => {
 		setSelectedDay(selectedOption);
-	};
+	}, []);
 
-	const handleMonthChange = (selectedOption) => {
+	const handleMonthChange = useCallback((selectedOption) => {
 		setSelectedMonth(selectedOption);
-	};
+	}, []);
 
-	const handleYearChange = (selectedOption) => {
+	const handleYearChange = useCallback((selectedOption) => {
 		setSelectedYear(selectedOption);
-	};
+	}, []);
 	const [sex, setSex] = useState("");
 
-	const handleOptionChange = (event) => {
+	const handleOptionChange = useCallback((event) => {
 		setSex(event.target.value);
-	};
+	}, []);
 
 	const [mailAlert, setMailAlert] = useState("");
 	const [passwordAlert, setPasswordAlert] = useState("");
 	const [confirmAlert, setConfirmAlert] = useState("");
 	const [userNameAlert, setUserNameAlert] = useState("");
-
+	const resetAlerts = () => {
+		setConfirmAlert("");
+		setMailAlert("");
+		setPasswordAlert("");
+		setUserNameAlert("");
+	};
 	const alert = {
 		mail: "有効なメールアドレスを入力してください。",
 		password: {
@@ -69,9 +70,11 @@ function SignIn({ onClose, setShowLogin }) {
 		userName: "ユーザーネームは半角英数字で入力してください。",
 		confirm: "入力している情報は足りていません。",
 	};
-	const handleSubmit = () => {
-		const Format = /^[a-zA-Z0-9!@#$%^&*()_+{}[\]:;<>,.?~\\/-]+$/;
+	const handleSubmit = useCallback(() => {
+		const passwordFormat = /^[a-zA-Z0-9!@#$%^&*()_+{}[\]:;<>,.?~\\/-]+$/;
 		const userNameFormat = /^[a-zA-Z0-9]+$/;
+		const emailFormat =
+			/^(([^<>()\\.,;:\s@"]+(\.[^<>()\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		if (
 			!firstName ||
 			!lastName ||
@@ -85,38 +88,21 @@ function SignIn({ onClose, setShowLogin }) {
 			!sex
 		) {
 			setConfirmAlert(alert.confirm);
-			setMailAlert("");
-			setPasswordAlert("");
-			setUserNameAlert("");
-		} else if (
-			!email.includes("@") ||
-			!email.includes(".com") ||
-			!Format.test(email)
-		) {
+		} else if (!emailFormat.test(email)) {
+			resetAlerts();
 			setMailAlert(alert.mail);
-			setConfirmAlert("");
-			setPasswordAlert("");
-			setUserNameAlert("");
 		} else if (!userNameFormat.test(userName)) {
+			resetAlerts();
 			setUserNameAlert(alert.userName);
-			setMailAlert("");
-			setConfirmAlert("");
-			setPasswordAlert("");
 		} else if (password !== passwordConfirm) {
+			resetAlerts();
 			setPasswordAlert(alert.password.confirm);
-			setMailAlert("");
-			setConfirmAlert("");
-			setUserNameAlert("");
-		} else if (!Format.test(password)) {
+		} else if (!passwordFormat.test(password)) {
+			resetAlerts();
 			setPasswordAlert(alert.password.format);
-			setMailAlert("");
-			setConfirmAlert("");
-			setUserNameAlert("");
 		} else if (password.length < 8 || password.length > 32) {
+			resetAlerts();
 			setPasswordAlert(alert.password.length);
-			setMailAlert("");
-			setConfirmAlert("");
-			setUserNameAlert("");
 		} else {
 			console.log(
 				"User Information:",
@@ -147,12 +133,31 @@ function SignIn({ onClose, setShowLogin }) {
 			onClose();
 			setShowLogin(true);
 		}
-	};
+	}, [
+		firstName,
+		lastName,
+		email,
+		userName,
+		password,
+		passwordConfirm,
+		selectedDay,
+		selectedMonth,
+		selectedYear,
+		sex,
+		alert.confirm,
+		alert.mail,
+		alert.password.confirm,
+		alert.password.format,
+		alert.password.length,
+		alert.userName,
+		onClose,
+		setShowLogin,
+	]);
 
-	const showLogin = () => {
+	const showLogin = useCallback(() => {
 		onClose();
 		setShowLogin(true);
-	};
+	}, [onClose, setShowLogin]);
 	return (
 		<div
 			className="signInDp"
