@@ -1,21 +1,44 @@
 import "./style.scss";
-import { useRef } from "react";
-import SigIn from "~/component/SigIn/SigIn";
-// import Login from "~/component/Login/Login";
+import { useRef, useCallback, useState } from "react";
+import SignIn from "~/component/SignIn/SignIn";
+import Login from "~/component/Login/Login";
 function Landing() {
-	const handleScrollToTop = () => {
+	const handleScrollToTop = useCallback(() => {
 		window.scrollTo({ top: 0, behavior: "smooth" });
-	};
+	}, []);
 	const aboutRef = useRef(null);
-	const handleScrollToAbout = () => {
+	const handleScrollToAbout = useCallback(() => {
 		aboutRef.current.scrollIntoView({ behavior: "smooth" });
-	};
-	const handleScrollToContact = () => {
+	}, []);
+	const handleScrollToContact = useCallback(() => {
 		window.scrollTo({ top: 0, behavior: "smooth" });
-	};
+	}, []);
+
+	const [showSignIn, setShowSignIn] = useState(false);
+
+	const handleShowSignIn = useCallback(() => {
+		setShowSignIn(true);
+	}, []);
+
+	const [showLogin, setShowLogin] = useState(false);
+
+	const handleShowLogin = useCallback(() => {
+		setShowLogin(true);
+	}, []);
 	return (
 		<div className="lContainer">
-			<SigIn />
+			{showLogin && (
+				<Login
+					setShowSignIn={setShowSignIn}
+					onClose={() => setShowLogin(false)}
+				/>
+			)}
+			{showSignIn && (
+				<SignIn
+					setShowLogin={setShowLogin}
+					onClose={() => setShowSignIn(false)}
+				/>
+			)}
 			<div className="hero">
 				<div className="nav">
 					<ul>
@@ -39,8 +62,8 @@ function Landing() {
 						</p>
 					</div>
 					<div className="btnBlock">
-						<button>サインイン</button>
-						<button>ログイン</button>
+						<button onClick={handleShowSignIn}>サインイン</button>
+						<button onClick={handleShowLogin}>ログイン</button>
 					</div>
 				</div>
 			</div>
@@ -93,7 +116,7 @@ function Landing() {
 							多くの情報は不要で、電話番号も必要ありません。これにより、あなたの情報を安全に保ちつつ、時間も節約できます。
 						</p>
 						<br />
-						<button>サインイン</button>
+						<button onClick={handleShowSignIn}>サインイン</button>
 					</div>
 				</div>
 			</div>
@@ -108,7 +131,7 @@ function Landing() {
 						今すぐ登録して、前向きなソーシャルエクスペリエンスを体験し、楽しさを共有する冒険を始めましょう！
 					</p>
 					<br />
-					<button>サインイン</button>
+					<button onClick={handleShowSignIn}>サインイン</button>
 				</div>
 			</div>
 			<div className="footer">

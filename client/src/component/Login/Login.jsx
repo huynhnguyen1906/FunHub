@@ -1,8 +1,91 @@
 import "./style.scss";
-function Login() {
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+function Login({ onClose, setShowSignIn }) {
+	const [userName, setUserName] = useState("");
+	const [password, setPassword] = useState("");
+
+	const showSignIn = () => {
+		onClose();
+		setShowSignIn(true);
+	};
+
+	//fake user api data
+	const users = [
+		{ username: "admin", password: "admin" },
+		{ username: "admin2", password: "admin2" },
+		{ username: "hl456123", password: "19062002" },
+	];
+	//
+	const alert = {
+		Wrong: "ユーザーネームまたはパスワードが間違っています。",
+	};
+	const [alertText, setAlertText] = useState("");
+	const navigate = useNavigate();
+	const handleSubmit = () => {
+		const userExists = users.some(
+			(user) => user.username === userName && user.password === password
+		);
+
+		if (!userExists) {
+			setAlertText(alert.Wrong);
+			return;
+		}
+		console.log("User Information:", userName, password);
+		setUserName("");
+		setPassword("");
+		setAlertText("");
+		navigate("/home");
+	};
 	return (
-		<div className="loginForm">
-			<h1>login</h1>
+		<div
+			className="loginDp"
+			onClick={(e) => {
+				if (e.target === e.currentTarget) {
+					onClose();
+				}
+			}}
+		>
+			<div className="loginForm">
+				<div className="wrap">
+					<h1>ログイン</h1>
+					<div className="closeBtn" onClick={onClose}>
+						<span></span>
+					</div>
+
+					<div className="inputForm">
+						<form>
+							<div className="input">
+								<input
+									onChange={(e) => {
+										setUserName(e.target.value);
+									}}
+									type="text"
+									name="email"
+									placeholder="メールアドレスまたはユーザーネーム"
+								/>
+							</div>
+							<div className="input">
+								<input
+									onChange={(e) => {
+										setPassword(e.target.value);
+									}}
+									type="password"
+									name="password"
+									placeholder="パスワード"
+								/>
+							</div>
+						</form>
+						<p className="alert">{alertText}</p>
+						<div className="btnBox">
+							<button onClick={handleSubmit}>ログイン</button>
+							<p>パスワードを忘れた場合</p>
+							<div className="bar"></div>
+							<button onClick={showSignIn}>新しいアカウントを作成</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 }

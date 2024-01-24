@@ -1,0 +1,117 @@
+.loginDp {
+	font-family: "Segoe UI Variable", sans-serif;
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: 10;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	.loginForm {
+		width: 40rem;
+		height: auto;
+		background-color: #fafafa;
+		border-radius: 1rem;
+		.wrap {
+			padding: 16px;
+			position: relative;
+			h1 {
+				font-size: 2.4rem;
+				font-weight: 700;
+				color: #000;
+				padding-bottom: 10px;
+			}
+			.closeBtn {
+				position: absolute;
+				top: 1rem;
+				right: 1rem;
+				cursor: pointer;
+				width: 3.6rem;
+				height: 3.6rem;
+				border-radius: 50%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				transition: background-color 0.2s ease;
+				&:hover {
+					background-color: #d9d9d9;
+				}
+				span {
+					width: 2rem;
+					height: 2rem;
+					background: url(../../../public/images/icon/x-solid.svg) no-repeat
+						center center;
+					background-size: cover;
+				}
+			}
+			.inputForm {
+				form {
+					width: 100%;
+					height: auto;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					.input {
+						width: 100%;
+						padding: 8px 0 8px 0;
+						input {
+							width: calc(100% - 2rem);
+							height: 4rem;
+							border-radius: 0.5rem;
+							border: 1px solid #d9d9d9;
+							padding: 0 1rem;
+							font-size: 1.6rem;
+							&:focus {
+								border: 1px solid var(--primary);
+							}
+						}
+					}
+				}
+				.alert {
+					font-size: 1.4rem;
+					font-weight: 350;
+					color: #ff0000;
+				}
+				.btnBox {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					padding-top: 8px;
+					button {
+						width: 100%;
+						height: 4rem;
+						border-radius: 1rem;
+						background-color: var(--primary);
+						color: #fff;
+						font-size: 1.6rem;
+						font-weight: 700;
+						border: none;
+						cursor: pointer;
+						transition: background-color 0.2s ease;
+						&:hover {
+							background-color: #078307;
+						}
+					}
+					p {
+						font-size: 1.2rem;
+						font-weight: 700;
+						color: #1b4bf3;
+						padding: 16px;
+						cursor: pointer;
+					}
+					.bar {
+						width: 100%;
+						height: 1px;
+						background-color: #d9d9d9;
+						margin-bottom: 16px;
+					}
+				}
+			}
+		}
+	}
+}

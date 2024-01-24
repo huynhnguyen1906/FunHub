@@ -2,7 +2,7 @@ import "./style.scss";
 import React, { useState } from "react";
 import Select from "react-select";
 
-function SigIn() {
+function SignIn({ onClose, setShowLogin }) {
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
@@ -57,6 +57,7 @@ function SigIn() {
 	const [mailAlert, setMailAlert] = useState("");
 	const [passwordAlert, setPasswordAlert] = useState("");
 	const [confirmAlert, setConfirmAlert] = useState("");
+	const [userNameAlert, setUserNameAlert] = useState("");
 
 	const alert = {
 		mail: "有効なメールアドレスを入力してください。",
@@ -65,10 +66,12 @@ function SigIn() {
 			format: "パスワードは半角英数字記号で入力してください。",
 			length: "パスワードは8文字以上32文字以下で入力してください。",
 		},
+		userName: "ユーザーネームは半角英数字で入力してください。",
 		confirm: "入力している情報は足りていません。",
 	};
 	const handleSubmit = () => {
 		const Format = /^[a-zA-Z0-9!@#$%^&*()_+{}[\]:;<>,.?~\\/-]+$/;
+		const userNameFormat = /^[a-zA-Z0-9]+$/;
 		if (
 			!firstName ||
 			!lastName ||
@@ -82,18 +85,38 @@ function SigIn() {
 			!sex
 		) {
 			setConfirmAlert(alert.confirm);
+			setMailAlert("");
+			setPasswordAlert("");
+			setUserNameAlert("");
 		} else if (
 			!email.includes("@") ||
 			!email.includes(".com") ||
 			!Format.test(email)
 		) {
 			setMailAlert(alert.mail);
+			setConfirmAlert("");
+			setPasswordAlert("");
+			setUserNameAlert("");
+		} else if (!userNameFormat.test(userName)) {
+			setUserNameAlert(alert.userName);
+			setMailAlert("");
+			setConfirmAlert("");
+			setPasswordAlert("");
 		} else if (password !== passwordConfirm) {
 			setPasswordAlert(alert.password.confirm);
+			setMailAlert("");
+			setConfirmAlert("");
+			setUserNameAlert("");
 		} else if (!Format.test(password)) {
 			setPasswordAlert(alert.password.format);
+			setMailAlert("");
+			setConfirmAlert("");
+			setUserNameAlert("");
 		} else if (password.length < 8 || password.length > 32) {
 			setPasswordAlert(alert.password.length);
+			setMailAlert("");
+			setConfirmAlert("");
+			setUserNameAlert("");
 		} else {
 			console.log(
 				"User Information:",
@@ -121,17 +144,30 @@ function SigIn() {
 			setMailAlert("");
 			setPasswordAlert("");
 			setConfirmAlert("");
+			onClose();
+			setShowLogin(true);
 		}
 	};
 
+	const showLogin = () => {
+		onClose();
+		setShowLogin(true);
+	};
 	return (
-		<div className="sigInDp">
-			<div className="sigInform">
+		<div
+			className="signInDp"
+			onClick={(e) => {
+				if (e.target === e.currentTarget) {
+					onClose();
+				}
+			}}
+		>
+			<div className="signInform">
 				<div className="AvsFgaW">
 					<div className="formTitle">
 						<p>アカウント登録</p>
 						<p>簡単に登録できます。</p>
-						<div className="closeBtn">
+						<div className="closeBtn" onClick={onClose}>
 							<span></span>
 						</div>
 					</div>
@@ -186,6 +222,7 @@ function SigIn() {
 											setUserName(e.target.value);
 										}}
 									/>
+									<p className="alert">{userNameAlert}</p>
 								</div>
 								<div className="GgaWda">
 									<input
@@ -293,7 +330,8 @@ function SigIn() {
 					</div>
 					<p className="alert">{confirmAlert}</p>
 					<p>
-						もうアカウントを登録しました？<span>ここに</span>ログイン
+						もうアカウントを登録しました？
+						<span onClick={showLogin}>ここに</span>ログイン
 					</p>
 				</div>
 			</div>
@@ -301,4 +339,4 @@ function SigIn() {
 	);
 }
 
-export default SigIn;
+export default SignIn;
