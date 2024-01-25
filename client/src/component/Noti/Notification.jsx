@@ -1,6 +1,14 @@
-function Notification() {
+import "./Notification.scss";
+function Notification({ onClose }) {
 	return (
-		<div>
+		<div
+			className="Notification"
+			onClick={(e) => {
+				if (e.target === e.currentTarget) {
+					onClose();
+				}
+			}}
+		>
 			<h1>Notification</h1>
 		</div>
 	);
