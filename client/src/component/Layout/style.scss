@@ -1,0 +1,19 @@
+.container {
+	display: flex;
+	height: auto;
+	width: 100%;
+	.main {
+		margin-left: auto;
+		width: calc(100% - 256px);
+		height: auto;
+		display: flex;
+		justify-content: center;
+		border: 1px solid red;
+		.mainContent {
+			width: 680px;
+			height: 100%;
+			margin-right: 10rem;
+			border: 1px solid rgb(0, 243, 65);
+		}
+	}
+}

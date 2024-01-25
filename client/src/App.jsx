@@ -4,6 +4,7 @@ import Home from "~/pages/Home";
 import Landing from "~/pages/LandingPage";
 import Profile from "~/pages/Profile";
 import Search from "./pages/Search";
+import Trending from "./pages/Trending";
 import DefaultLayout from "./component/Layout";
 
 function App() {
@@ -33,6 +34,14 @@ function App() {
 						element={
 							<DefaultLayout>
 								<Search />
+							</DefaultLayout>
+						}
+					/>
+					<Route
+						path="/trending"
+						element={
+							<DefaultLayout>
+								<Trending />
 							</DefaultLayout>
 						}
 					/>

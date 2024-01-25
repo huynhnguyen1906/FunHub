@@ -1,6 +1,6 @@
-import NavBar from "./NavBar";
-import SideBar from "./SideBar";
-
+import NavBar from "./NavBar/NavBar";
+import SideBar from "./SideBar/SideBar";
+import "./style.scss";
 function DefaultLayout({ children }) {
 	return (
 		<div className="container">
