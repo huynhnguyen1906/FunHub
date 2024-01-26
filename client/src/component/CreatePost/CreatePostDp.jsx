@@ -41,10 +41,14 @@ function CrPostDp({ onClose }) {
 		[files]
 	);
 	const handleSend = useCallback(() => {
-		console.log(inputText, files);
-		setFiles([]);
-		setInputText("");
-		setContentEdiTableText("なんか面白いことある？");
+		if (inputText === "" && files.length === 0) {
+			alert("投稿内容を入力してください");
+		} else {
+			console.log(inputText, files);
+			setFiles([]);
+			setInputText("");
+			setContentEdiTableText("なんか面白いことある？");
+		}
 	}, [inputText, files]);
 
 	return (
