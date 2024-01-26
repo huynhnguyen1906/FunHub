@@ -4,4 +4,79 @@
 	top: 0;
 	width: calc(100% - 82px);
 	height: 100vh;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	.notiBox {
+		width: 40rem;
+		height: 100%;
+		border-right: 1px solid #000;
+		background: #fff;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		.notiTitle {
+			width: 100%;
+			height: 6rem;
+			border-bottom: 1px solid #a9a9a9;
+			.notiTitleWr {
+				padding: 16px 24px;
+				h2 {
+					font-size: 2.4;
+					font-weight: 600;
+					color: var(--secondary);
+				}
+			}
+		}
+		.notiContent {
+			width: 100%;
+			height: calc(100% - 6rem);
+			overflow-y: auto;
+			.notiContentWr {
+				padding: 8px 24px;
+				width: calc(100% - 48px);
+				height: auto;
+				.notiBoxS {
+					width: 100%;
+					height: auto;
+					padding: 8px 0;
+					.notiBoxW {
+						width: 100%;
+						height: auto;
+						display: flex;
+						justify-content: space-between;
+						align-items: center;
+						.userIcon {
+							width: 4.4rem;
+							height: 4.4rem;
+							border-radius: 50%;
+							background: #a9a9a9;
+							overflow: hidden;
+						}
+						.notiTextB {
+							flex-basis: 55%;
+							font-size: 1.2rem;
+							.notiText {
+								font-weight: 400;
+								color: #000;
+								.username {
+									font-weight: 600;
+								}
+							}
+							.notiTime {
+								font-weight: 400;
+								color: var(--secondary);
+							}
+						}
+						.NotiCtn {
+							width: 4.4rem;
+							height: 4.4rem;
+							background-color: #a9a9a9;
+						}
+					}
+				}
+			}
+		}
+	}
 }

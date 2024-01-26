@@ -57,6 +57,7 @@ function NavBar() {
 	const closeNotification = () => {
 		setActiveComponent(null);
 		setIsNotificationActive(false);
+		setActiveItem(activeItem);
 	};
 	const closeCreatePost = () => {
 		setActiveComponent(null);
@@ -72,25 +73,37 @@ function NavBar() {
 		<div className="navBar">
 			{activeComponent}
 			<div className="wrap">
-				<div className="logoWrap">
-					<div className="logo" onClick={handleGoHome}>
-						<div className="logoImg"></div>
-						<div className={`FunHub ${isNotificationActive ? "hidden" : ""}`}>
-							FunHub
+				<div className="NavTop">
+					<div className="logoWrap">
+						<div className="logo" onClick={handleGoHome}>
+							<div className="logoImg"></div>
+							<div className={`FunHub ${isNotificationActive ? "hidden" : ""}`}>
+								FunHub
+							</div>
 						</div>
 					</div>
+
+					<div className="NItemWrap">
+						{navItem.map((item, index) => (
+							<div
+								className={`navItem ${activeItem === index ? "active" : ""}`}
+								key={index}
+								onClick={() => handleClick(item, index)}
+							>
+								<div className="icon"></div>
+								{!isNotificationActive && <NavItem item={item} />}
+							</div>
+						))}
+					</div>
 				</div>
-				<div className="NItemWrap">
-					{navItem.map((item, index) => (
-						<div
-							className={`navItem ${activeItem === index ? "active" : ""}`}
-							key={index}
-							onClick={() => handleClick(item, index)}
-						>
-							<div className="icon"></div>
-							{!isNotificationActive && <NavItem item={item} />}
+				<div className="NavBottom">
+					<div className={`bWrap ${isNotificationActive ? "center" : ""}`}>
+						<div className={`userBox ${isNotificationActive ? "hidden" : ""}`}>
+							<div className="userImg"></div>
+							<div className="userName">User Name</div>
 						</div>
-					))}
+						<div className="settingIcon"></div>
+					</div>
 				</div>
 			</div>
 		</div>
