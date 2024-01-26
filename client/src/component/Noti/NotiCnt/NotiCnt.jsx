@@ -1,8 +1,10 @@
-function NotiBox({ type, userName, time }) {
+function NotiBox({ type, userName, time, userIcon, content }) {
 	return (
 		<div className="notiBoxS">
 			<div className="notiBoxW">
-				<div className="userIcon"></div>
+				<div className="userIcon">
+					<img src={userIcon} alt="" />
+				</div>
 				<div className="notiTextB">
 					<p className="notiText">
 						<span className="username">{userName}</span>
@@ -10,7 +12,9 @@ function NotiBox({ type, userName, time }) {
 						<span className="notiTime">{time}</span>
 					</p>
 				</div>
-				<div className="NotiCtn"></div>
+				<div className="NotiCtn">
+					<img src={content} alt="" />
+				</div>
 			</div>
 		</div>
 	);
