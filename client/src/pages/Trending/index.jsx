@@ -1,7 +1,10 @@
+import CratePostBar from "~/component/CreatePost/CreatePostBar/CreatePostBar";
 function Trending() {
 	return (
-		<div>
-			<h1>Trending</h1>
+		<div className="trendingContent">
+			<div className="crateBox">
+				<CratePostBar />
+			</div>
 		</div>
 	);
 }

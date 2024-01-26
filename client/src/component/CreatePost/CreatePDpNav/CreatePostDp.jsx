@@ -1,9 +1,9 @@
-import "./CreatePostDp.scss";
+import "../CreatePostDp.scss";
 import { useState, useRef, useCallback } from "react";
-import MediaInput from "./MediaInput/MediaInput";
+import MediaInput from "../MediaInput/MediaInput";
 import { debounce } from "lodash";
 
-function CrPostDp({ onClose }) {
+function CrPostDpNav({ onClose }) {
 	const [contentEdiTableText, setContentEdiTableText] =
 		useState("なんか面白いことある？");
 
@@ -138,4 +138,4 @@ function CrPostDp({ onClose }) {
 	);
 }
 
-export default CrPostDp;
+export default CrPostDpNav;

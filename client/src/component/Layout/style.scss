@@ -7,12 +7,10 @@
 		width: calc(100% - 256px);
 		height: auto;
 		display: flex;
-		justify-content: center;
+		justify-content: space-evenly;
 		.mainContent {
 			width: 680px;
 			height: 100%;
-			margin-right: 10rem;
-			border: 1px solid rgb(0, 243, 65);
 		}
 	}
 }

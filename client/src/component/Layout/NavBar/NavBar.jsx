@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import NavItem from "./NavItem/NavItem";
 import Notification from "~/component/Noti/Notification";
-import CrPostDp from "~/component/CreatePost/CreatePostDp";
+import CrPostDpNav from "~/component/CreatePost/CreatePDpNav/CreatePostDp";
 
 const navItem = ["ホーム", "トレンド", "通知", "検索", "プロフィール", "作成"];
 
@@ -35,7 +35,7 @@ function NavBar() {
 			setIsNotificationActive(true);
 			setActiveItem(index);
 		} else if (item === "作成") {
-			setActiveComponent(<CrPostDp onClose={closeCreatePost} />);
+			setActiveComponent(<CrPostDpNav onClose={closeCreatePost} />);
 			setIsNotificationActive(false);
 			setActiveItem(activeItem);
 		} else {
