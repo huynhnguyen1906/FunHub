@@ -1,4 +1,5 @@
 import "./SideBar.scss";
+import { useState } from "react";
 import TrendPost from "./TrendPost/TrendPost";
 import TrendUser from "./TrendUser/TrendUser";
 const trendPostInfo = [
@@ -36,11 +37,29 @@ const trendUserInfo = [
 	},
 ];
 function SideBar() {
+	const [searchText, setSearchText] = useState("");
+
 	return (
 		<div className="SideBar">
 			<div className="sideSearchB">
 				<div className="sideSearchBW">
-					<input type="text" placeholder="検索。。。" />
+					<input
+						type="text"
+						placeholder="検索。。。"
+						value={searchText}
+						onChange={(e) => {
+							setSearchText(e.target.value);
+						}}
+						onKeyDown={(e) => {
+							if (e.key === "Enter" && searchText !== "") {
+								console.log(searchText);
+								sessionStorage.setItem("searchText", searchText);
+								setSearchText("");
+							} else if (e.key === "Enter" && searchText === "") {
+								alert("検索内容を入力してください。");
+							}
+						}}
+					/>
 				</div>
 			</div>
 			<div className="trendPostBox">
