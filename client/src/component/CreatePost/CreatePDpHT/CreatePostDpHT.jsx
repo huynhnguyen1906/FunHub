@@ -1,7 +1,11 @@
 import "../CreatePostDp.scss";
 import { useState, useRef, useCallback } from "react";
 import MediaInput from "../MediaInput/MediaInput";
-import { debounce } from "lodash";
+
+const user = {
+	name: "QTaro",
+	icon: "https://imgflip.com/s/meme/Scared-Cat.jpg",
+};
 
 function CrPostDpNavHT({ onClose }) {
 	const [contentEdiTableText, setContentEdiTableText] =
@@ -10,19 +14,13 @@ function CrPostDpNavHT({ onClose }) {
 	const handleFocus = () => {
 		setContentEdiTableText("");
 	};
+	const inputRef = useRef();
 
 	const [inputText, setInputText] = useState("");
 
-	const debouncedHandleInput = debounce((text) => {
-		setInputText(text);
-	}, 300);
-
-	const handleInput = useCallback(
-		(e) => {
-			debouncedHandleInput(e.target.textContent);
-		},
-		[debouncedHandleInput]
-	);
+	const handleInput = useCallback((e) => {
+		setInputText(e.target.textContent);
+	}, []);
 	const fileInputRef = useRef();
 	const [files, setFiles] = useState([]);
 
@@ -48,6 +46,7 @@ function CrPostDpNavHT({ onClose }) {
 			setFiles([]);
 			setInputText("");
 			setContentEdiTableText("なんか面白いことある？");
+			inputRef.current.textContent = ""; // reset the contentEditable text
 		}
 	}, [inputText, files]);
 
@@ -70,15 +69,13 @@ function CrPostDpNavHT({ onClose }) {
 				<div className="inputContentWrap">
 					<div className="inputContent">
 						<div className="avatar">
-							<img
-								src="https://i1.sndcdn.com/avatars-000299868797-urkzpd-t500x500.jpg"
-								alt="meow"
-							/>
+							<img src={user.icon} alt="meow" />
 						</div>
 						<div className="inputWrap">
 							<div
 								className="input"
-								contenteditable="true"
+								ref={inputRef}
+								contentEditable="true"
 								onFocus={handleFocus}
 								onInput={handleInput}
 								onDragOver={(e) => {
@@ -87,9 +84,8 @@ function CrPostDpNavHT({ onClose }) {
 								onDrop={(e) => {
 									e.preventDefault();
 								}}
-							>
-								{contentEdiTableText}
-							</div>
+							></div>
+							<div className="inlineText">{contentEdiTableText}</div>
 							<div className="mediaInputBox">
 								<div className="mediaInput">
 									{files.map((file, index) => (

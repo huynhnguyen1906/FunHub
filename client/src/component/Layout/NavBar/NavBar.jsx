@@ -4,7 +4,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 import NavItem from "./NavItem/NavItem";
 import Notification from "~/component/Noti/Notification";
 import CrPostDpNav from "~/component/CreatePost/CreatePDpNav/CreatePostDp";
-
+const user = {
+	name: "QTaro",
+	icon: "https://imgflip.com/s/meme/Scared-Cat.jpg",
+};
 const navItem = ["ホーム", "トレンド", "通知", "検索", "プロフィール", "作成"];
 
 function NavBar() {
@@ -99,8 +102,10 @@ function NavBar() {
 				<div className="NavBottom">
 					<div className={`bWrap ${isNotificationActive ? "center" : ""}`}>
 						<div className={`userBox ${isNotificationActive ? "hidden" : ""}`}>
-							<div className="userImg"></div>
-							<div className="userName">User Name</div>
+							<div className="userImg">
+								<img src={user.icon} alt="" />
+							</div>
+							<div className="userName">{user.name}</div>
 						</div>
 						<div className="settingIcon"></div>
 					</div>

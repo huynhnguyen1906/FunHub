@@ -3,6 +3,11 @@ import CrPostDpNavHT from "../CreatePDpHT/CreatePostDpHT";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+const user = {
+	name: "QTaro",
+	icon: "https://imgflip.com/s/meme/Scared-Cat.jpg",
+};
+
 function CratePostBar() {
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -45,10 +50,7 @@ function CratePostBar() {
 				<div className="inputBoxW">
 					<div className="inputBox">
 						<div className="userIcon">
-							<img
-								src="https://i.pinimg.com/736x/b9/c4/7e/b9c47ef70bff06613d397abfce02c6e7.jpg"
-								alt=""
-							/>
+							<img src={user.icon} alt="" />
 						</div>
 						<div className="input" onClick={handleShowCreatePost}></div>
 					</div>

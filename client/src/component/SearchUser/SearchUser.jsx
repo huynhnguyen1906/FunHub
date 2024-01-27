@@ -10,9 +10,9 @@ function SearchUser({ user }) {
 					<div className="followCount">フォローワ{user.followCount}人</div>
 				</div>
 			</div>
-			<btn className={`followBtn ${user.follow ? "followed" : ""}`}>
-				フォローする
-			</btn>
+			<button className={`followBtn ${user.follow ? "followed" : ""}`}>
+				{user.follow ? "フォロー中" : "フォローする"}
+			</button>
 		</div>
 	);
 }
