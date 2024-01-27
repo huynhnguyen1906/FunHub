@@ -28,14 +28,14 @@ function CratePostBar() {
 			{showCreatePost && <CrPostDpNavHT onClose={handleCloseCreatePost} />}
 			<div className="crNavbar">
 				<div className={`crNavbarH ${isHActive ? "active" : ""}`}>
-					<div onClick={handleGoHome}>
+					<div className="AWSDW" onClick={handleGoHome}>
 						<i></i>
 						<p>ホーム</p>
 					</div>
 				</div>
 				<div className="Bar"></div>
 				<div className={`crNavbarT ${isTActive ? "active" : ""}`}>
-					<div onClick={handleGoTrending}>
+					<div className="AWSDW" onClick={handleGoTrending}>
 						<i></i>
 						<p>トレンド</p>
 					</div>

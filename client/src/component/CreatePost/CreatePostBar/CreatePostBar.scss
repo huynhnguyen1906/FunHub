@@ -11,15 +11,13 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		position: relative;
 		.crNavbarH,
 		.crNavbarT {
-			position: relative;
 			flex-basis: 50%;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			div {
+			.AWSDW {
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -53,7 +51,8 @@
 			}
 		}
 		.active {
-			div {
+			.AWSDW {
+				position: relative;
 				p {
 					font-weight: 600;
 				}
