@@ -7,6 +7,7 @@ function Home() {
 			<div className="crateBox">
 				<CratePostBar />
 			</div>
+			<div className="postContent"></div>
 		</div>
 	);
 }

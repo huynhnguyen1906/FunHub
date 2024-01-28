@@ -42,6 +42,7 @@ function Profile() {
 					</div>
 				</div>
 			</div>
+			<div className="postContent"></div>
 		</div>
 	);
 }

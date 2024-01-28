@@ -44,6 +44,7 @@ function UserProfile() {
 					</div>
 				</div>
 			</div>
+			<div className="postContent"></div>
 		</div>
 	);
 }

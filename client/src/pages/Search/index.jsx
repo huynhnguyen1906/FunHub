@@ -93,6 +93,7 @@ function Search() {
 					{showText}
 				</div>
 			</div>
+			<div className="postResult"></div>
 		</div>
 	);
 }

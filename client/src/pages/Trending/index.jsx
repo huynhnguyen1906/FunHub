@@ -1,3 +1,4 @@
+import "./style.scss";
 import CratePostBar from "~/component/CreatePost/CreatePostBar/CreatePostBar";
 function Trending() {
 	return (
@@ -5,6 +6,7 @@ function Trending() {
 			<div className="crateBox">
 				<CratePostBar />
 			</div>
+			<div className="postContent"></div>
 		</div>
 	);
 }
