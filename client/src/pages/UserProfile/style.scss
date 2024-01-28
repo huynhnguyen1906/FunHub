@@ -1,0 +1,106 @@
+.PContent {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+	height: 100%;
+	.profileBoxW {
+		padding: 25px;
+		height: auto;
+		width: calc(100% - 50px);
+		margin-top: 5rem;
+		background: #ffffff;
+		border-radius: 1rem;
+		.profileBox {
+			width: 100%;
+			height: auto;
+			display: flex;
+			align-items: flex-start;
+			justify-content: space-between;
+			.userDetailsW {
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+				.userImg {
+					width: 15rem;
+					height: 15rem;
+					border-radius: 50%;
+					background-color: #ccc;
+					margin-right: 2rem;
+					img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+						border-radius: 50%;
+					}
+				}
+				.userDetails {
+					display: flex;
+					flex-direction: column;
+					align-items: flex-start;
+					justify-content: center;
+					.name {
+						font-size: 2.4rem;
+						font-weight: 600;
+						color: #000;
+						padding: 8px 0;
+					}
+					.followCount {
+						display: flex;
+						padding: 8px 0;
+						.followed,
+						.following {
+							font-size: 1.6rem;
+							font-weight: 400;
+							color: #000;
+							span {
+								font-weight: 600;
+							}
+							cursor: pointer;
+						}
+						.following {
+							padding-left: 2rem;
+						}
+					}
+					.postCount {
+						font-size: 1.6rem;
+						font-weight: 400;
+						color: #000;
+						padding: 8px 0;
+						span {
+							font-weight: 600;
+						}
+					}
+					.joinTime {
+						font-size: 1.2rem;
+						color: var(--secondary);
+						font-weight: 400;
+						padding: 8px 0;
+					}
+				}
+			}
+			.btnBox {
+				display: flex;
+				.followBtn {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					width: 12rem;
+					height: 3.2rem;
+					border-radius: 5rem;
+					background: var(--primary);
+					font-size: 1.4rem;
+					font-weight: 600;
+					color: #fff;
+					cursor: pointer;
+					margin-right: 2rem;
+					&.followed {
+						background: #eaeaea;
+						color: #000;
+					}
+				}
+			}
+		}
+	}
+}

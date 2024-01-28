@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "~/pages/Home";
 import Landing from "~/pages/LandingPage";
 import Profile from "~/pages/Profile";
+import UserProfile from "./pages/UserProfile/UserProfile";
 import Search from "./pages/Search";
 import Trending from "./pages/Trending";
 import DefaultLayout from "./component/Layout";
@@ -26,6 +27,14 @@ function App() {
 						element={
 							<DefaultLayout>
 								<Profile />
+							</DefaultLayout>
+						}
+					/>
+					<Route
+						path="/user"
+						element={
+							<DefaultLayout>
+								<UserProfile />
 							</DefaultLayout>
 						}
 					/>
