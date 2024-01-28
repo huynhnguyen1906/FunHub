@@ -91,7 +91,7 @@
 		}
 		.inputBoxW {
 			padding: 16px;
-			width: calc(100% - 32px);
+			width: 100%;
 			height: auto;
 			.inputBox {
 				width: 100%;
@@ -115,7 +115,7 @@
 				}
 				.input {
 					height: 4rem;
-					width: calc(100% - 68px);
+					width: calc(100% - (4rem + 12px));
 					border-radius: 5rem;
 					background: #f1f1f1;
 					cursor: pointer;

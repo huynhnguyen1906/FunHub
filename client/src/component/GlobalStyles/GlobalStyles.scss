@@ -51,7 +51,11 @@ html {
 	font-size: 62.5%;
 	box-sizing: border-box;
 }
-
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
 body {
 	font-family: "Segoe UI Variable", sans-serif;
 	background-color: #f1f1f1;
