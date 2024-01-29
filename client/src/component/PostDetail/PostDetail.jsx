@@ -2,6 +2,7 @@ import "./PostDetail.scss";
 import { useParams, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import CommentW from "./CommentW/CommentW";
+import CmtInput from "./CmtInput/CmtInput";
 
 const comments = [
 	{
@@ -341,6 +342,7 @@ function PostDetail({ onClose }) {
 						</div>
 					)}
 				</div>
+				<CmtInput />
 			</div>
 			<div
 				className="mediaDP"

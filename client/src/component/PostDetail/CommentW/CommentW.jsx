@@ -40,10 +40,10 @@ function CommentW({ comment }) {
 					<div className="cmtTime">{postTimeFormat(comment.timestamp)}</div>
 				</div>
 				<div className="cmtText">
-					{comment.content.length > 350 && !CIsExpanded
-						? `${comment.content.substring(0, 350)}...`
+					{comment.content.length > 175 && !CIsExpanded
+						? `${comment.content.substring(0, 175)}...`
 						: comment.content}
-					{comment.content.length > 350 && (
+					{comment.content.length > 175 && (
 						<span onClick={toggleExpanded}>
 							{CIsExpanded ? "" : "  すべてを見る"}
 						</span>
