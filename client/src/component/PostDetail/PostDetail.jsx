@@ -15,7 +15,7 @@ const comments = [
 		content:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
 		timestamp: "2021-08-01T12:00:00.000Z",
-		media: null,
+		media: [],
 	},
 	{
 		id: 2,
@@ -172,14 +172,14 @@ function PostDetail({ onClose }) {
 
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const handleNextClick = () => {
-		const newIndex = (currentIndex + 1) % media.length;
+		const newIndex = (currentIndex + 1) % post.media.length;
 		setCurrentIndex(newIndex);
-		navigate(`/home/${postId}/${media[newIndex].id}`);
+		navigate(`/home/post/${postId}/${post.media[newIndex].id}`);
 	};
 	const handlePrevClick = () => {
-		const newIndex = (currentIndex - 1 + media.length) % media.length;
+		const newIndex = (currentIndex - 1 + post.media.length) % post.media.length;
 		setCurrentIndex(newIndex);
-		navigate(`/home/${postId}/${media[newIndex].id}`);
+		navigate(`/home/post/${postId}/${post.media[newIndex].id}`);
 	};
 
 	const [tIsExpanded, tSetIsExpanded] = useState(false);
@@ -191,6 +191,27 @@ function PostDetail({ onClose }) {
 	const handleSeeMoreClick = () => {
 		setShowAllComments(true);
 	};
+
+	useEffect(() => {
+		const handleKeyDown = (event) => {
+			if (event.key === "Escape") {
+				onClose();
+			}
+		};
+
+		window.addEventListener("keydown", handleKeyDown);
+		const videos = document.getElementsByTagName("video");
+		setTimeout(() => {
+			for (let i = 0; i < videos.length; i++) {
+				videos[i].pause();
+			}
+		}, 500);
+
+		return () => {
+			window.removeEventListener("keydown", handleKeyDown);
+		};
+	}, [onClose]);
+
 	useEffect(() => {
 		const homeContent = document.querySelector(".homeContent");
 		const commentW = document.querySelector(".CommentW");
@@ -228,6 +249,10 @@ function PostDetail({ onClose }) {
 				setPost(post);
 				const media = post.media.find((media) => media.id === mediaId);
 				setMedia(media);
+				const mediaIndex = post.media.findIndex(
+					(media) => media.id === mediaId
+				);
+				setCurrentIndex(mediaIndex);
 			})
 			.catch((error) => console.error("Lỗi:", error));
 	}, [postId, mediaId]);
@@ -235,8 +260,8 @@ function PostDetail({ onClose }) {
 	if (!post) {
 		return <div className="PostDetailDP"></div>;
 	}
-	console.log(media);
 	const postDate = new Date(post.timestamp);
+
 	return (
 		<div className="PostDetailDP">
 			<div className="PostDetail">
@@ -317,21 +342,33 @@ function PostDetail({ onClose }) {
 					)}
 				</div>
 			</div>
-			<div className="mediaDP">
-				<div className="preBtn"></div>
+			<div
+				className="mediaDP"
+				onClick={(e) => {
+					if (e.target.classList.contains("mediaDP")) {
+						onClose();
+					}
+				}}
+			>
+				<div
+					className={`preBtn ${post.media.length === 1 ? "none" : ""}`}
+					onClick={handlePrevClick}
+				>
+					<span></span>
+				</div>
 				<div className="media">
-					{media &&
-					media[currentIndex] &&
-					media[currentIndex].type === "video" ? (
-						<video src={media[currentIndex].url} controls />
+					{media && media.type === "video" ? (
+						<video src={media.url} controls autoPlay={false} />
 					) : (
-						<img
-							src={media[currentIndex] ? media[currentIndex].url : ""}
-							alt=""
-						/>
+						<img src={media ? media.url : ""} alt="" />
 					)}
 				</div>
-				<div className="preBtn"></div>
+				<div
+					className={`nextBtn ${post.media.length === 1 ? "none" : ""}`}
+					onClick={handleNextClick}
+				>
+					<span></span>
+				</div>
 				<div className="btnBox">
 					<a className="logo" href="/home" aria-label="Home"></a>
 					<div className="closeBtn" onClick={onClose}></div>

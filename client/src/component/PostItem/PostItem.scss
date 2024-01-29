@@ -112,6 +112,9 @@
 		background-color: #000000;
 		border-top: 2px solid #f1f1f1;
 		border-bottom: 2px solid #f1f1f1;
+		&.noMedia {
+			display: none;
+		}
 		.seeMore {
 			position: absolute;
 			background-color: rgba(0, 0, 0, 0.8);

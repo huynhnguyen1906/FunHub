@@ -1,5 +1,7 @@
 import "./PostItem.scss";
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import PMain from "./PMain/PMain";
 
 const postTimeFormat = (time) => {
@@ -36,6 +38,15 @@ const CountFormat = (count) => {
 };
 
 function PostItem({ post, onPostClick }) {
+	const location = useLocation();
+	const navigate = useNavigate();
+	const currentPath = location.pathname;
+
+	const handleOpenPostDetail = () => {
+		if (post && post.id && post.media && post.media[0] && post.media[0].id) {
+			navigate(`${currentPath}/post/${post.id}/${post.media[0].id}`);
+		}
+	};
 	const postDate = new Date(post.timestamp);
 	const [isExpanded, setIsExpanded] = useState(false);
 
@@ -43,7 +54,9 @@ function PostItem({ post, onPostClick }) {
 		setIsExpanded(!isExpanded);
 	};
 	let PMainClass = "PMainW";
-	if (post.media.length === 2) {
+	if (post.media.length === 0) {
+		PMainClass += " noMedia";
+	} else if (post.media.length === 2) {
 		PMainClass += " PMainWTwo";
 	} else if (post.media.length === 3) {
 		PMainClass += " PMainWThree";
@@ -105,7 +118,9 @@ function PostItem({ post, onPostClick }) {
 						<i></i>
 						{CountFormat(post.likes)}
 					</div>
-					<div className="cmtCount">コメント{CountFormat(post.comments)}件</div>
+					<div className="cmtCount" onClick={handleOpenPostDetail}>
+						コメント{CountFormat(post.comments)}件
+					</div>
 				</div>
 				<div className="bar"></div>
 				<div className="btnBox">
@@ -115,7 +130,7 @@ function PostItem({ post, onPostClick }) {
 							いいね！
 						</div>
 					</div>
-					<div className="btnW">
+					<div className="btnW" onClick={handleOpenPostDetail}>
 						<div className="btn">
 							<i></i>
 							コメントする

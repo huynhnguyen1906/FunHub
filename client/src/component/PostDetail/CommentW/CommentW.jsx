@@ -49,7 +49,7 @@ function CommentW({ comment }) {
 						</span>
 					)}
 				</div>
-				<div className="cmtMedia">
+				<div className={`cmtMedia ${comment.media.length === 0 ? "none" : ""}`}>
 					{comment.media ? (
 						comment.media.type === "image" ? (
 							<img src={comment.media.url} alt="Comment" />

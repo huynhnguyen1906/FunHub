@@ -109,6 +109,23 @@ const posts = [
 		timestamp: "2022-01-01T00:00:00Z",
 		location: "Location Name 1",
 	},
+	{
+		id: "3",
+		user: {
+			id: "2",
+			name: "Huynh",
+			avatar:
+				"https://uploads.dailydot.com/2018/10/olli-the-polite-cat.jpg?q=65&auto=format&w=2270&ar=2:1&fit=crop",
+		},
+		content:
+			"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.",
+		media: [],
+		likes: 10504,
+		comments: 45,
+		shares: 67,
+		timestamp: "2022-01-01T00:00:00Z",
+		location: "Location Name 1",
+	},
 ];
 router.get("/posts", (req, res) => {
 	res.json(posts);

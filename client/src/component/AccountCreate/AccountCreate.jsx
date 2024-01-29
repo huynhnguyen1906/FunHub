@@ -2,7 +2,7 @@ import "./style.scss";
 import React, { useState, useCallback, useMemo } from "react";
 import Select from "react-select";
 
-function SignIn({ onClose, setShowLogin }) {
+function AccountCreate({ onClose, setShowLogin }) {
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
@@ -344,4 +344,4 @@ function SignIn({ onClose, setShowLogin }) {
 	);
 }
 
-export default SignIn;
+export default AccountCreate;

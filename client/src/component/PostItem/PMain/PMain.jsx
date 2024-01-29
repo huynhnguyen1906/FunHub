@@ -6,7 +6,11 @@ function PMain({ media, post, Click }) {
 		<div className="PMain" onClick={handleClick}>
 			{media.type === "video" ? (
 				<>
-					<video controls={post.media.length === 1} src={media.url} />
+					<video
+						controls={post.media.length === 1}
+						src={media.url}
+						autoPlay={false}
+					/>
 					{post.media.length > 2 && (
 						<div className="videoW">
 							<span></span>
