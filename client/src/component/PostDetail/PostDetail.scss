@@ -9,11 +9,319 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	overflow: auto;
 	.PostDetail {
 		width: 36rem;
 		height: 100%;
 		background-color: #fff;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		overflow: auto;
+		.pDetailTop {
+			width: 100%;
+			height: auto;
+			padding: 12px 16px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			border-bottom: 1.5px solid #9f9f9f;
+			.userIcon {
+				width: 4rem;
+				height: 4rem;
+				border-radius: 50%;
+				background-color: #f1f1f1;
+				overflow: hidden;
+				cursor: pointer;
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					border-radius: 50%;
+				}
+			}
+			.settingBtn {
+				width: 2.5rem;
+				height: 2.5rem;
+				background: url("../../../public/images/icon/setting.svg") no-repeat
+					center center / contain;
+				cursor: pointer;
+			}
+		}
+		.pDetailM {
+			width: 100%;
+			height: auto;
+			padding: 12px 16px;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: center;
+			.PostTContent {
+				width: 100%;
+				height: auto;
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+				align-items: center;
+				.pInfoW {
+					width: 100%;
+					height: auto;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					padding-bottom: 12px;
+					.pInfo {
+						width: auto;
+						height: auto;
+						display: flex;
+						justify-content: flex-start;
+						align-items: center;
+						.pUInfo {
+							display: flex;
+							justify-content: flex-start;
+							align-items: center;
+							cursor: pointer;
+							.pUserIcon {
+								width: 4rem;
+								height: 4rem;
+								border-radius: 50%;
+								overflow: hidden;
+								img {
+									width: 100%;
+									height: 100%;
+									object-fit: cover;
+									border-radius: 50%;
+								}
+							}
+							.pUserName {
+								font-size: 1.5rem;
+								font-weight: 600;
+								padding-left: 5px;
+							}
+						}
+						.pTime {
+							font-size: 1.2rem;
+							font-weight: 400;
+							color: var(--secondary);
+							padding-left: 5px;
+						}
+					}
+					.plusBtn {
+						width: 2.4rem;
+						height: 2.4rem;
+						border-radius: 50%;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						cursor: pointer;
+						span {
+							width: 1.5rem;
+							height: 1.5rem;
+							background: url("../../../public/images/icon/dot.svg") no-repeat
+								center center / contain;
+						}
+						&:hover {
+							background-color: #e1e1e1;
+						}
+					}
+				}
+				.PText {
+					font-size: 1.6rem;
+					color: #000;
+					font-weight: 400;
+					height: auto;
+					width: 100%;
+					padding-bottom: 16px;
+					span {
+						font-size: 1.4rem;
+						color: #1b4bf3;
+						font-weight: 600;
+						cursor: pointer;
+					}
+				}
+				.pReactBarW {
+					height: 8rem;
+					width: 100%;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					flex-direction: column;
+					.reactCount {
+						width: 100%;
+						height: 45%;
+						display: flex;
+						justify-content: space-between;
+						align-items: center;
+						border-bottom: 1px solid #adadad;
+						padding: 0 15px;
+						.likeCount,
+						.cmtCount {
+							display: flex;
+							align-items: center;
+							font-size: 1.5rem;
+							font-weight: 600;
+							color: var(--secondary);
+							cursor: pointer;
+							i {
+								width: 1.8rem;
+								height: 1.8rem;
+								background: url("../../../public/images/icon/like-active.svg")
+									no-repeat center center/contain;
+								margin-right: 5px;
+							}
+						}
+					}
+					.btnBox {
+						width: 100%;
+						height: 55%;
+						display: flex;
+						justify-content: space-between;
+						align-items: center;
+						border-bottom: 1px solid #adadad;
+					}
+					.bar {
+						flex-basis: 33.333%;
+					}
+					.btnW {
+						height: 100%;
+						flex-basis: 33.333%;
+						.btn {
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							width: 100%;
+							height: 100%;
+							border-radius: 5px;
+							cursor: pointer;
+							font-size: 1.5rem;
+							font-weight: 600;
+							color: var(--secondary);
+							&:hover {
+								background-color: #f1f1f1;
+							}
+							i {
+								width: 2rem;
+								height: 2rem;
+								margin-right: 5px;
+							}
+						}
+						&:nth-child(1) {
+							.btn {
+								i {
+									background: url("../../../public/images/icon/like.svg")
+										no-repeat center center/contain;
+								}
+								&.active {
+									i {
+										background: url("../../../public/images/icon/like-active.svg")
+											no-repeat center center/contain;
+									}
+								}
+							}
+						}
+						&:nth-child(3) {
+							.btn {
+								i {
+									background: url("../../../public/images/icon/share.svg")
+										no-repeat center center/contain;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		.cmtBox {
+			width: 100%;
+			height: auto;
+			padding: 16px;
+			.seeMore {
+				font-size: 1.4rem;
+				color: #1b4bf3;
+				font-weight: 600;
+				cursor: pointer;
+				&.none {
+					display: none;
+				}
+			}
+			.CommentW {
+				width: 100%;
+				height: auto;
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-start;
+				padding-bottom: 16px;
+				.userIcon {
+					width: 4rem;
+					height: 4rem;
+					border-radius: 50%;
+					background-color: #f1f1f1;
+					overflow: hidden;
+					cursor: pointer;
+					img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+						border-radius: 50%;
+					}
+				}
+				.cmtContent {
+					width: calc(100% - 4rem);
+					padding-left: 5px;
+					.cmtInfo {
+						display: flex;
+						align-items: center;
+						justify-content: flex-start;
+						padding: 0px 5px 2px;
+						.userName {
+							font-size: 1.5rem;
+							font-weight: 600;
+							color: #000;
+							cursor: pointer;
+						}
+						.cmtTime {
+							font-size: 1.2rem;
+							font-weight: 400;
+							color: var(--secondary);
+							padding-left: 5px;
+						}
+					}
+					.cmtText {
+						font-size: 1.6rem;
+						font-weight: 400;
+						color: #000;
+						padding: 8px;
+						background-color: #f0f2f5;
+						border-radius: 1rem;
+						span {
+							font-size: 1.4rem;
+							color: #1b4bf3;
+							font-weight: 600;
+							cursor: pointer;
+						}
+					}
+					.cmtMedia {
+						margin-top: 5px;
+						max-width: 100%;
+						max-height: 400px;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						background-color: #000;
+						border-radius: 1rem;
+						overflow: hidden;
+						img {
+							width: 100%;
+							height: 100%;
+						}
+						video {
+							width: 100%;
+							height: 100%;
+						}
+					}
+				}
+			}
+		}
 	}
 	.mediaDP {
 		width: calc(100% - 36rem);
@@ -22,6 +330,7 @@
 		justify-content: center;
 		align-items: center;
 		background-color: #000;
+		position: relative;
 		.media {
 			max-width: 100%;
 			max-height: 100%;
@@ -35,6 +344,32 @@
 			video {
 				width: 100%;
 				height: 100%;
+			}
+		}
+		.btnBox {
+			position: absolute;
+			right: 3.2rem;
+			top: 3.2rem;
+			width: auto;
+			height: auto;
+			display: flex;
+			align-items: center;
+			.logo {
+				width: 4rem;
+				height: 4rem;
+				border-radius: 50%;
+				overflow: hidden;
+				background: url("../../../public/images/icon/funhub-logo.svg") no-repeat
+					center center/contain;
+				margin-right: 1rem;
+			}
+			.closeBtn {
+				margin-left: 1rem;
+				width: 2rem;
+				height: 2rem;
+				background: url("../../../public/images/icon/postClose.svg") no-repeat
+					center center/contain;
+				cursor: pointer;
 			}
 		}
 	}

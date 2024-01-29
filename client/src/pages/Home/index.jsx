@@ -30,15 +30,15 @@ function Home() {
 
 	return (
 		<div className="homeContent noScroll">
-			<div className="crateBox">
-				<CratePostBar />
-			</div>
 			<Routes>
 				<Route
 					path="post/:postId/:mediaId"
 					element={<PostDetail onClose={closePostDetail} />}
 				/>
 			</Routes>
+			<div className="crateBox">
+				<CratePostBar />
+			</div>
 			<div className="postContent">
 				{posts.map((post, id) => (
 					<PostItem key={id} post={post} onPostClick={openPostDetail} />
