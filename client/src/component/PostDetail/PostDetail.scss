@@ -1,0 +1,41 @@
+.PostDetailDP {
+	width: 100%;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 15;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: auto;
+	.PostDetail {
+		width: 36rem;
+		height: 100%;
+		background-color: #fff;
+	}
+	.mediaDP {
+		width: calc(100% - 36rem);
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: #000;
+		.media {
+			max-width: 100%;
+			max-height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			img {
+				width: 100%;
+				height: 100%;
+			}
+			video {
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+}

@@ -15,7 +15,7 @@ function App() {
 				<Routes>
 					<Route path="/" element={<Landing />} />
 					<Route
-						path="/home"
+						path="/home/*"
 						element={
 							<DefaultLayout>
 								<Home />

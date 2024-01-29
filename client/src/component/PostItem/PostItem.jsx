@@ -35,7 +35,7 @@ const CountFormat = (count) => {
 	}
 };
 
-function PostItem({ post }) {
+function PostItem({ post, onPostClick }) {
 	const postDate = new Date(post.timestamp);
 	const [isExpanded, setIsExpanded] = useState(false);
 
@@ -55,7 +55,9 @@ function PostItem({ post }) {
 	if (post.media.length > 4) {
 		seeMoreClass = " seeMore";
 	}
-
+	const handleClick = (mediaId) => {
+		onPostClick(post, mediaId);
+	};
 	return (
 		<div className="PostItem">
 			<div className="pItemTop">
@@ -88,7 +90,12 @@ function PostItem({ post }) {
 			</div>
 			<div className={PMainClass}>
 				{post.media.slice(0, 4).map((mediaItem, index) => (
-					<PMain key={index} media={mediaItem} post={post} />
+					<PMain
+						key={index}
+						media={mediaItem}
+						post={post}
+						Click={() => handleClick(mediaItem.id)}
+					/>
 				))}
 				<div className={seeMoreClass}>{`${post.media.length % 4} 件以上`}</div>
 			</div>
