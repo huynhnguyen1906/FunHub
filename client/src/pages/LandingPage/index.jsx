@@ -55,14 +55,14 @@ function Landing() {
 					<div className="textBlock">
 						<h1>FunHub - 笑顔と創造性を共有する場所</h1>
 						<p>
-							ここでは、評価を気にせず、自由に笑顔と創造性をシェアできる独自のソーシャルスペースです。登録して、活気あるコミュニティに参加し、ポジティブな雰囲気で共感を広げましょう。
+							他のSNSとは異なり、時には他人の悩みを見ることで自分の気分が悪くなる。私たちはあなたに自由で創造的な空間を提供し、笑いの興味深いコンテンツが満載です。
 							<br />
 							<br />
-							あなたらしい自由な表現が楽しめるFunHubで、新しいつながりを見つけましょう！
+							一緒に参加して、強いコミュニティを築き上げ、喜びを共有しましょう！！
 						</p>
 					</div>
 					<div className="btnBlock">
-						<button onClick={handleShowSignIn}>サインイン</button>
+						<button onClick={handleShowSignIn}>登録する</button>
 						<button onClick={handleShowLogin}>ログイン</button>
 					</div>
 				</div>
@@ -116,7 +116,7 @@ function Landing() {
 							多くの情報は不要で、電話番号も必要ありません。これにより、あなたの情報を安全に保ちつつ、時間も節約できます。
 						</p>
 						<br />
-						<button onClick={handleShowSignIn}>サインイン</button>
+						<button onClick={handleShowSignIn}>登録する</button>
 					</div>
 				</div>
 			</div>
@@ -131,7 +131,7 @@ function Landing() {
 						今すぐ登録して、前向きなソーシャルエクスペリエンスを体験し、楽しさを共有する冒険を始めましょう！
 					</p>
 					<br />
-					<button onClick={handleShowSignIn}>サインイン</button>
+					<button onClick={handleShowSignIn}>登録する</button>
 				</div>
 			</div>
 			<div className="footer">
