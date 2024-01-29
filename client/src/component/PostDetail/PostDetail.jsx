@@ -235,7 +235,7 @@ function PostDetail({ onClose }) {
 	if (!post) {
 		return <div className="PostDetailDP"></div>;
 	}
-	console.log(currentIndex);
+	console.log(media);
 	const postDate = new Date(post.timestamp);
 	return (
 		<div className="PostDetailDP">

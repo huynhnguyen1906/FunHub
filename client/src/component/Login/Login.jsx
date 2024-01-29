@@ -68,6 +68,7 @@ function Login({ onClose, setShowSignIn }) {
 									}}
 									type="text"
 									name="email"
+									autoComplete="off"
 									placeholder="メールアドレスまたはユーザーネーム"
 								/>
 							</div>
@@ -78,6 +79,7 @@ function Login({ onClose, setShowSignIn }) {
 									}}
 									type="password"
 									name="password"
+									autoComplete="off"
 									placeholder="パスワード"
 								/>
 							</div>
