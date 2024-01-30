@@ -41,12 +41,14 @@ function CrPostDpNav({ onClose }) {
 	const handleSend = useCallback(() => {
 		if (inputText === "" && files.length === 0) {
 			alert("投稿内容を入力してください");
+		} else if (files.length === 0) {
+			alert("画像または動画最低１枚を選択してください");
 		} else {
 			console.log(inputText, files);
 			setFiles([]);
 			setInputText("");
 			setContentEdiTableText("なんか面白いことある？");
-			inputRef.current.textContent = "";
+			inputRef.current.textContent = ""; // reset the contentEditable text
 		}
 	}, [inputText, files]);
 
