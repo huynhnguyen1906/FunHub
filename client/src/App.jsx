@@ -7,7 +7,7 @@ import UserProfile from "./pages/UserProfile/UserProfile";
 import Search from "./pages/Search";
 import Trending from "./pages/Trending";
 import DefaultLayout from "./component/Layout";
-
+import Test from "./pages/Test/Test";
 function App() {
 	return (
 		<Router>
@@ -51,6 +51,14 @@ function App() {
 						element={
 							<DefaultLayout>
 								<Trending />
+							</DefaultLayout>
+						}
+					/>
+					<Route
+						path="/test"
+						element={
+							<DefaultLayout>
+								<Test />
 							</DefaultLayout>
 						}
 					/>
