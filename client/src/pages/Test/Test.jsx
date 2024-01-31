@@ -6,7 +6,15 @@ function Test() {
 	const [uploadedUrl, setUploadedUrl] = useState("");
 
 	const handleFileChange = (event) => {
-		setFile(event.target.files[0]);
+		const selectedFile = event.target.files[0];
+		const fileSizeInMB = selectedFile.size / (1024 * 1024);
+		const maxFileSizeInMB = 150; // Maximum file size in MB
+
+		if (fileSizeInMB > maxFileSizeInMB) {
+			alert("150MB 以下のファイルを選択してください。");
+		} else {
+			setFile(selectedFile);
+		}
 	};
 
 	const handleUpload = async () => {
