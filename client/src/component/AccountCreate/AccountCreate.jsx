@@ -1,6 +1,7 @@
 import "./style.scss";
 import React, { useState, useCallback, useMemo } from "react";
 import Select from "react-select";
+import Axios from "axios";
 
 function AccountCreate({ onClose, setShowLogin }) {
 	const [firstName, setFirstName] = useState("");
@@ -69,69 +70,83 @@ function AccountCreate({ onClose, setShowLogin }) {
 		},
 		userName: "ユーザーネームは半角英数字で入力してください。",
 		confirm: "入力している情報は足りていません。",
+		already: "メールアドレスまたはユーザーネームが既に登録されています。",
 	};
-	const handleSubmit = useCallback(() => {
-		const passwordFormat = /^[a-zA-Z0-9!@#$%^&*()_+{}[\]:;<>,.?~\\/-]+$/;
-		const userNameFormat = /^[a-zA-Z0-9]+$/;
-		const emailFormat =
-			/^(([^<>()\\.,;:\s@"]+(\.[^<>()\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-		if (
-			!firstName ||
-			!lastName ||
-			!email ||
-			!userName ||
-			!password ||
-			!passwordConfirm ||
-			!(selectedDay && selectedDay.value) ||
-			!(selectedMonth && selectedMonth.value) ||
-			!(selectedYear && selectedYear.value) ||
-			!sex
-		) {
-			setConfirmAlert(alert.confirm);
-		} else if (!emailFormat.test(email)) {
-			resetAlerts();
-			setMailAlert(alert.mail);
-		} else if (!userNameFormat.test(userName)) {
-			resetAlerts();
-			setUserNameAlert(alert.userName);
-		} else if (password !== passwordConfirm) {
-			resetAlerts();
-			setPasswordAlert(alert.password.confirm);
-		} else if (!passwordFormat.test(password)) {
-			resetAlerts();
-			setPasswordAlert(alert.password.format);
-		} else if (password.length < 8 || password.length > 32) {
-			resetAlerts();
-			setPasswordAlert(alert.password.length);
-		} else {
-			console.log(
-				"User Information:",
-				firstName,
-				lastName,
-				email,
-				userName,
-				password,
-				passwordConfirm,
-				selectedDay && selectedDay.value,
-				selectedMonth && selectedMonth.value,
-				selectedYear && selectedYear.value,
-				sex
-			);
-			setFirstName("");
-			setLastName("");
-			setEmail("");
-			setUserName("");
-			setPassword("");
-			setPasswordConfirm("");
-			setSelectedDay(null);
-			setSelectedMonth(null);
-			setSelectedYear(null);
-			setSex("");
-			setMailAlert("");
-			setPasswordAlert("");
-			setConfirmAlert("");
-			onClose();
-			setShowLogin(true);
+	const handleSubmit = useCallback(async () => {
+		try {
+			const passwordFormat = /^[a-zA-Z0-9!@#$%^&*()_+{}[\]:;<>,.?~\\/-]+$/;
+			const userNameFormat = /^[a-zA-Z0-9]+$/;
+			const emailFormat =
+				/^(([^<>()\\.,;:\s@"]+(\.[^<>()\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+			if (
+				!firstName ||
+				!lastName ||
+				!email ||
+				!userName ||
+				!password ||
+				!passwordConfirm ||
+				!(selectedDay && selectedDay.value) ||
+				!(selectedMonth && selectedMonth.value) ||
+				!(selectedYear && selectedYear.value) ||
+				!sex
+			) {
+				setConfirmAlert(alert.confirm);
+			} else if (!emailFormat.test(email)) {
+				resetAlerts();
+				setMailAlert(alert.mail);
+			} else if (!userNameFormat.test(userName)) {
+				resetAlerts();
+				setUserNameAlert(alert.userName);
+			} else if (password !== passwordConfirm) {
+				resetAlerts();
+				setPasswordAlert(alert.password.confirm);
+			} else if (!passwordFormat.test(password)) {
+				resetAlerts();
+				setPasswordAlert(alert.password.format);
+			} else if (password.length < 8 || password.length > 32) {
+				resetAlerts();
+				setPasswordAlert(alert.password.length);
+			} else {
+				const fullName = firstName + " " + lastName;
+				console.log(fullName);
+				const response = await Axios.post("/api/user/signup", {
+					fullName,
+					email,
+					userName,
+					password,
+				});
+				console.log("User Information:", response.data);
+				setFirstName("");
+				setLastName("");
+				setEmail("");
+				setUserName("");
+				setPassword("");
+				setPasswordConfirm("");
+				setSelectedDay(null);
+				setSelectedMonth(null);
+				setSelectedYear(null);
+				setSex("");
+				setMailAlert("");
+				setPasswordAlert("");
+				setConfirmAlert("");
+				onClose();
+				setShowLogin(true);
+				window.alert("アカウント登録が完了しました。");
+			}
+		} catch (error) {
+			if (error.response) {
+				if (error.response.status === 409) {
+					setMailAlert(alert.already);
+					setUserNameAlert(alert.already);
+				} else {
+					console.error(`HTTP Error: ${error.response.status}`);
+				}
+			} else if (error.request) {
+				console.error("No response received from server");
+			} else {
+				console.error(`Error: ${error.message}`);
+			}
 		}
 	}, [
 		firstName,
@@ -150,10 +165,10 @@ function AccountCreate({ onClose, setShowLogin }) {
 		alert.password.format,
 		alert.password.length,
 		alert.userName,
+		alert.already,
 		onClose,
 		setShowLogin,
 	]);
-
 	const showLogin = useCallback(() => {
 		onClose();
 		setShowLogin(true);
