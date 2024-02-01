@@ -1,6 +1,7 @@
 import "./style.scss";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
+import axios from "axios";
 function Login({ onClose, setShowAccountCreate }) {
 	const [userName, setUserName] = useState("");
 	const [password, setPassword] = useState("");
@@ -10,33 +11,27 @@ function Login({ onClose, setShowAccountCreate }) {
 		setShowAccountCreate(true);
 	};
 
-	//fake user api data
-	const users = [
-		{ username: "admin", password: "admin" },
-		{ username: "admin2", password: "admin2" },
-		{ username: "hl456123", password: "19062002" },
-	];
-	//
-	const alert = {
-		Wrong: "ユーザーネームまたはパスワードが間違っています。",
-	};
 	const [alertText, setAlertText] = useState("");
 	const navigate = useNavigate();
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
-		const userExists = users.some(
-			(user) => user.username === userName && user.password === password
-		);
 
-		if (!userExists) {
-			setAlertText(alert.Wrong);
-			return;
+		try {
+			const response = await axios.post("/api/user/login", {
+				usernameOrEmail: userName,
+				password: password,
+			});
+
+			console.log("User Information:", response.data);
+			setUserName("");
+			setPassword("");
+			setAlertText("");
+			navigate("/home");
+		} catch (error) {
+			console.error("Error during login:", error);
+
+			setAlertText("ユーザーネームまたはパスワードが間違っています。");
 		}
-		console.log("User Information:", userName, password);
-		setUserName("");
-		setPassword("");
-		setAlertText("");
-		navigate("/home");
 	};
 	const userRef = useRef();
 	useEffect(() => {

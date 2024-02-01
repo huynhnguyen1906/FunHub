@@ -1,9 +1,11 @@
 import "./NavBar.scss";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import Cookies from "js-cookie";
 import NavItem from "./NavItem/NavItem";
 import Notification from "~/component/Noti/Notification";
 import CrPostDpNav from "~/component/CreatePost/CreatePDpNav/CreatePostDp";
+import LoginBtn from "./loginBtn/loginBtn";
 const user = {
 	name: "QTaro",
 	icon: "https://imgflip.com/s/meme/Scared-Cat.jpg",
@@ -11,6 +13,8 @@ const user = {
 const navItem = ["ホーム", "トレンド", "通知", "検索", "プロフィール", "作成"];
 
 function NavBar() {
+	const token = Cookies.get("token");
+	console.log(token);
 	const navigate = useNavigate();
 	const location = useLocation();
 
@@ -100,15 +104,21 @@ function NavBar() {
 					</div>
 				</div>
 				<div className="NavBottom">
-					<div className={`bWrap ${isNotificationActive ? "center" : ""}`}>
-						<div className={`userBox ${isNotificationActive ? "hidden" : ""}`}>
-							<div className="userImg">
-								<img src={user.icon} alt="" />
+					{token ? (
+						<div className={`bWrap ${isNotificationActive ? "center" : ""}`}>
+							<div
+								className={`userBox ${isNotificationActive ? "hidden" : ""}`}
+							>
+								<div className="userImg">
+									<img src={user.icon} alt="" />
+								</div>
+								<div className="userName">{user.name}</div>
+								<div className="settingIcon"></div>
 							</div>
-							<div className="userName">{user.name}</div>
 						</div>
-						<div className="settingIcon"></div>
-					</div>
+					) : (
+						<LoginBtn />
+					)}
 				</div>
 			</div>
 		</div>
