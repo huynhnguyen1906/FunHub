@@ -1,7 +1,5 @@
-const multer = require("multer");
 const sharp = require("sharp");
 const { Storage } = require("@google-cloud/storage");
-const path = require("path");
 
 const storageClient = new Storage({
 	keyFilename: "./funhub-keyfile.json",
