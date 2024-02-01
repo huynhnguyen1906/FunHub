@@ -12,12 +12,12 @@ async function loginController(req, res) {
 				.json({ error: "Invalid username/email or password" });
 		}
 
-		const token = generateToken(user.userID);
+		const token = generateToken(user);
 
 		res.cookie("token", token, {
 			maxAge: 7 * 24 * 60 * 60 * 1000,
+			httpOnly: true,
 		});
-
 		res.status(200).json({ user });
 	} catch (error) {
 		console.error(error);

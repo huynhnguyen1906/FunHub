@@ -8,63 +8,66 @@ import Search from "./pages/Search";
 import Trending from "./pages/Trending";
 import DefaultLayout from "./component/Layout";
 import Test from "./pages/Test/Test";
+import AuthProvider from "./component/checkLogin/AuthProvider";
 function App() {
 	return (
-		<Router>
-			<div>
-				<Routes>
-					<Route path="/" element={<Landing />} />
-					<Route
-						path="/home/*"
-						element={
-							<DefaultLayout>
-								<Home />
-							</DefaultLayout>
-						}
-					/>
-					<Route
-						path="/profile"
-						element={
-							<DefaultLayout>
-								<Profile />
-							</DefaultLayout>
-						}
-					/>
-					<Route
-						path="/user"
-						element={
-							<DefaultLayout>
-								<UserProfile />
-							</DefaultLayout>
-						}
-					/>
-					<Route
-						path="/search"
-						element={
-							<DefaultLayout>
-								<Search />
-							</DefaultLayout>
-						}
-					/>
-					<Route
-						path="/trending"
-						element={
-							<DefaultLayout>
-								<Trending />
-							</DefaultLayout>
-						}
-					/>
-					<Route
-						path="/test"
-						element={
-							<DefaultLayout>
-								<Test />
-							</DefaultLayout>
-						}
-					/>
-				</Routes>
-			</div>
-		</Router>
+		<AuthProvider>
+			<Router>
+				<div>
+					<Routes>
+						<Route path="/" element={<Landing />} />
+						<Route
+							path="/home/*"
+							element={
+								<DefaultLayout>
+									<Home />
+								</DefaultLayout>
+							}
+						/>
+						<Route
+							path="/profile"
+							element={
+								<DefaultLayout>
+									<Profile />
+								</DefaultLayout>
+							}
+						/>
+						<Route
+							path="/user"
+							element={
+								<DefaultLayout>
+									<UserProfile />
+								</DefaultLayout>
+							}
+						/>
+						<Route
+							path="/search"
+							element={
+								<DefaultLayout>
+									<Search />
+								</DefaultLayout>
+							}
+						/>
+						<Route
+							path="/trending"
+							element={
+								<DefaultLayout>
+									<Trending />
+								</DefaultLayout>
+							}
+						/>
+						<Route
+							path="/test"
+							element={
+								<DefaultLayout>
+									<Test />
+								</DefaultLayout>
+							}
+						/>
+					</Routes>
+				</div>
+			</Router>
+		</AuthProvider>
 	);
 }
 

@@ -1,6 +1,6 @@
-function LoginBtn() {
+function LoginBtn({ onClick }) {
 	return (
-		<div className="loginBtn">
+		<div className="loginBtn" onClick={onClick}>
 			<div className="btn">ログイン</div>
 		</div>
 	);

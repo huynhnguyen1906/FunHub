@@ -5,8 +5,7 @@ const db = require("../config/database");
 
 async function loginUser(usernameOrEmail, password) {
 	try {
-		const query =
-			"SELECT userName, email, password FROM USERS WHERE userName = ? OR email = ?";
+		const query = "SELECT * FROM USERS WHERE userName = ? OR email = ?";
 		const [user] = await db.query(query, [usernameOrEmail, usernameOrEmail]);
 
 		if (user.length === 0) {
@@ -25,8 +24,12 @@ async function loginUser(usernameOrEmail, password) {
 	}
 }
 
-function generateToken(userID) {
-	return jwt.sign({ userID }, process.env.LOGIN_TOKEN_KEY, { expiresIn: "1w" });
+function generateToken(user) {
+	const userWithoutPassword = { ...user };
+	delete userWithoutPassword.password;
+	return jwt.sign(userWithoutPassword, process.env.LOGIN_TOKEN_KEY, {
+		expiresIn: "1w",
+	});
 }
 
 module.exports = {

@@ -1,20 +1,20 @@
 import "./NavBar.scss";
-import { useState } from "react";
+import { useState, useContext, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import Cookies from "js-cookie";
 import NavItem from "./NavItem/NavItem";
 import Notification from "~/component/Noti/Notification";
 import CrPostDpNav from "~/component/CreatePost/CreatePDpNav/CreatePostDp";
 import LoginBtn from "./loginBtn/loginBtn";
-const user = {
-	name: "QTaro",
-	icon: "https://imgflip.com/s/meme/Scared-Cat.jpg",
-};
+import Login from "~/component/Login/Login";
+import AccountCreate from "~/component/AccountCreate/AccountCreate";
+
+import AuthContext from "~/component/checkLogin/AuthContext";
+
 const navItem = ["ホーム", "トレンド", "通知", "検索", "プロフィール", "作成"];
 
 function NavBar() {
-	const token = Cookies.get("token");
-	console.log(token);
+	const { isLoggedIn } = useContext(AuthContext);
+	const { user } = useContext(AuthContext);
 	const navigate = useNavigate();
 	const location = useLocation();
 
@@ -76,8 +76,30 @@ function NavBar() {
 		setActiveComponent(null);
 		setIsNotificationActive(false);
 	};
+
+	const [showAccountCreate, setShowAccountCreate] = useState(false);
+
+	const handleShowAccountCreate = useCallback(() => {
+		setShowAccountCreate(true);
+	}, []);
+	const [showLogin, setShowLogin] = useState(false);
+	const handleShowLogin = () => {
+		setShowLogin(true);
+	};
 	return (
 		<div className="navBar">
+			{showLogin && (
+				<Login
+					setShowAccountCreate={handleShowAccountCreate}
+					onClose={() => setShowLogin(false)}
+				/>
+			)}
+			{showAccountCreate && (
+				<AccountCreate
+					onClose={() => setShowAccountCreate(false)}
+					setShowLogin={setShowLogin}
+				/>
+			)}
 			{activeComponent}
 			<div className="wrap">
 				<div className="NavTop">
@@ -104,20 +126,20 @@ function NavBar() {
 					</div>
 				</div>
 				<div className="NavBottom">
-					{token ? (
+					{isLoggedIn ? (
 						<div className={`bWrap ${isNotificationActive ? "center" : ""}`}>
 							<div
 								className={`userBox ${isNotificationActive ? "hidden" : ""}`}
 							>
 								<div className="userImg">
-									<img src={user.icon} alt="" />
+									<img src={user.avatar} alt="" />
 								</div>
-								<div className="userName">{user.name}</div>
+								<div className="userName">{user.fullName}</div>
 							</div>
 							<div className="settingIcon"></div>
 						</div>
 					) : (
-						<LoginBtn />
+						<LoginBtn onClick={handleShowLogin} />
 					)}
 				</div>
 			</div>

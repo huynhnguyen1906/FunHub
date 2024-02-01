@@ -17,16 +17,17 @@ function Login({ onClose, setShowAccountCreate }) {
 		event.preventDefault();
 
 		try {
-			const response = await axios.post("/api/user/login", {
+			await axios.post("/api/user/login", {
 				usernameOrEmail: userName,
 				password: password,
 			});
 
-			console.log("User Information:", response.data);
 			setUserName("");
 			setPassword("");
 			setAlertText("");
 			navigate("/home");
+			onClose();
+			window.location.reload();
 		} catch (error) {
 			console.error("Error during login:", error);
 
@@ -47,7 +48,7 @@ function Login({ onClose, setShowAccountCreate }) {
 			}}
 		>
 			<div className="loginForm">
-				<div className="wrap">
+				<div className="LWrap">
 					<h1>ログイン</h1>
 					<div className="closeBtn" onClick={onClose}>
 						<span></span>
