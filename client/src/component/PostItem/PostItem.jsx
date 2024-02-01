@@ -22,7 +22,6 @@ function PostItem({ post, onPostClick }) {
 			navigate(`${currentPath}/post/${post.id}/${post.media[0].id}`);
 		}
 	};
-	const postDate = new Date(post.timestamp);
 	const [isExpanded, setIsExpanded] = useState(false);
 
 	const toggleExpanded = () => {
