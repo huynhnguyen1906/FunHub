@@ -1,4 +1,6 @@
+import { useState } from "react";
 import "./style.scss";
+import UpdateUserInfo from "../../component/UpdateUserInfo/UpdateUserInfo";
 
 const user = {
 	name: "QTaro",
@@ -8,9 +10,25 @@ const user = {
 	post: 53,
 	joinTime: { year: 2024, month: 1, day: 7 },
 };
+
 function Profile() {
+	const [isUpdateUserInfo, setIsUpdateUserInfo] = useState(false);
+
+	const handleShowUpdateInfo = () => {
+		setIsUpdateUserInfo(true);
+	};
+
+	const handleReload = () => {
+		window.location.reload();
+	};
 	return (
 		<div className="PContent">
+			{isUpdateUserInfo && (
+				<UpdateUserInfo
+					onClose={() => setIsUpdateUserInfo(false)}
+					reload={handleReload}
+				/>
+			)}
 			<div className="profileBoxW">
 				<div className="profileBox">
 					<div className="userDetailsW">
@@ -37,7 +55,9 @@ function Profile() {
 						</div>
 					</div>
 					<div className="btnBox">
-						<div className="editBtn">プロフィールを編集</div>
+						<div className="editBtn" onClick={handleShowUpdateInfo}>
+							プロフィールを編集
+						</div>
 						<div className="settingBtn"></div>
 					</div>
 				</div>

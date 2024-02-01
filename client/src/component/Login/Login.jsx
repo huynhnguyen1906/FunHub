@@ -1,13 +1,13 @@
 import "./style.scss";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-function Login({ onClose, setShowSignIn }) {
+function Login({ onClose, setShowAccountCreate }) {
 	const [userName, setUserName] = useState("");
 	const [password, setPassword] = useState("");
 
 	const showSignIn = () => {
 		onClose();
-		setShowSignIn(true);
+		setShowAccountCreate(true);
 	};
 
 	//fake user api data

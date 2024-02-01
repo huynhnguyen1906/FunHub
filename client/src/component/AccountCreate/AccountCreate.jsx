@@ -109,7 +109,6 @@ function AccountCreate({ onClose, setShowLogin }) {
 				setPasswordAlert(alert.password.length);
 			} else {
 				const fullName = firstName + " " + lastName;
-				console.log(fullName);
 				const response = await Axios.post("/api/user/signup", {
 					fullName,
 					email,
