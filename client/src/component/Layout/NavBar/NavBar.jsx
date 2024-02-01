@@ -113,8 +113,8 @@ function NavBar() {
 									<img src={user.icon} alt="" />
 								</div>
 								<div className="userName">{user.name}</div>
-								<div className="settingIcon"></div>
 							</div>
+							<div className="settingIcon"></div>
 						</div>
 					) : (
 						<LoginBtn />
