@@ -12,6 +12,33 @@ const notiData = [
 			"https://static01.nyt.com/images/2021/04/30/multimedia/30xp-meme/29xp-meme-articleLarge-v3.jpg?quality=75&auto=webp&disable=upscale",
 	},
 	{
+		type: "like",
+		userName: "Aさん",
+		time: "2024-01-26T00:09:26.535Z",
+		userIcon:
+			"https://i.pinimg.com/236x/7e/3b/b2/7e3bb2b4059cceb64279789d228e2da2.jpg",
+		content:
+			"https://static01.nyt.com/images/2021/04/30/multimedia/30xp-meme/29xp-meme-articleLarge-v3.jpg?quality=75&auto=webp&disable=upscale",
+	},
+	{
+		type: "like",
+		userName: "Aさん",
+		time: "2024-01-26T00:09:26.535Z",
+		userIcon:
+			"https://i.pinimg.com/236x/7e/3b/b2/7e3bb2b4059cceb64279789d228e2da2.jpg",
+		content:
+			"https://static01.nyt.com/images/2021/04/30/multimedia/30xp-meme/29xp-meme-articleLarge-v3.jpg?quality=75&auto=webp&disable=upscale",
+	},
+	{
+		type: "like",
+		userName: "Aさん",
+		time: "2024-01-26T00:09:26.535Z",
+		userIcon:
+			"https://i.pinimg.com/236x/7e/3b/b2/7e3bb2b4059cceb64279789d228e2da2.jpg",
+		content:
+			"https://static01.nyt.com/images/2021/04/30/multimedia/30xp-meme/29xp-meme-articleLarge-v3.jpg?quality=75&auto=webp&disable=upscale",
+	},
+	{
 		type: "comment",
 		userName: "Aさん",
 		time: "2024-01-25T15:09:26.535Z",
