@@ -2,6 +2,7 @@ import "./style.scss";
 import { useRef, useCallback, useState } from "react";
 import AccountCreate from "~/component/AccountCreate/AccountCreate";
 import Login from "~/component/Login/Login";
+import ChangeForgotPass from "~/component/ChangeForgotPass/ChangeForgotPass";
 function Landing() {
 	const handleScrollToTop = useCallback(() => {
 		window.scrollTo({ top: 0, behavior: "smooth" });
@@ -25,12 +26,18 @@ function Landing() {
 	const handleShowLogin = useCallback(() => {
 		setShowLogin(true);
 	}, []);
+
+	const [showChangeForgotPass, setShowChangeForgotPass] = useState(false);
+	const handleShowChangeForgotPass = useCallback(() => {
+		setShowChangeForgotPass(true);
+	}, []);
 	return (
 		<div className="lContainer">
 			{showLogin && (
 				<Login
 					setShowAccountCreate={setShowAccountCreate}
 					onClose={() => setShowLogin(false)}
+					onShowChangeForgotPass={handleShowChangeForgotPass}
 				/>
 			)}
 			{showAccountCreate && (
@@ -38,6 +45,9 @@ function Landing() {
 					setShowLogin={setShowLogin}
 					onClose={() => setShowAccountCreate(false)}
 				/>
+			)}
+			{showChangeForgotPass && (
+				<ChangeForgotPass onClose={() => setShowChangeForgotPass(false)} />
 			)}
 			<div className="hero">
 				<div className="nav">

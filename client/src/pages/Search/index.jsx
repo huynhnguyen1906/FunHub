@@ -63,6 +63,7 @@ function Search() {
 	const [displayedUsers, setDisplayedUsers] = useState(userResult.slice(0, 3));
 	const [showText, setShowText] = useState("すべてを見る");
 	const [isShowingAll, setIsShowingAll] = useState(false);
+	const [searchText, setSearchText] = useState("");
 
 	const handleSeeAllClick = () => {
 		if (isShowingAll) {
@@ -79,15 +80,29 @@ function Search() {
 		<div className="SContent">
 			<div className="searchBarW">
 				<div className="searchBar">
-					<input type="text" placeholder="検索。。。" />
+					<input
+						type="text"
+						placeholder="検索。。。"
+						onChange={(e) => setSearchText(e.target.value)}
+						value={sessionStorage.getItem("searchText") || searchText}
+						onKeyDown={(e) => {
+							if (e.key === "Enter" && searchText !== "") {
+								console.log(searchText);
+								setSearchText("");
+								sessionStorage.setItem("searchText", searchText);
+							} else if (e.key === "Enter" && searchText === "") {
+								alert("検索内容を入力してください。");
+							}
+						}}
+					/>
 				</div>
 			</div>
 			<div className="userResult">
 				<div className="title">
 					<h2>投稿者</h2>
 				</div>
-				{displayedUsers.map((user) => (
-					<SearchUser user={user} />
+				{displayedUsers.map((user, index) => (
+					<SearchUser key={index} user={user} />
 				))}
 				<div className="seeAll" onClick={handleSeeAllClick}>
 					{showText}

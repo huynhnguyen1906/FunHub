@@ -7,8 +7,9 @@ import CrPostDpNav from "~/component/CreatePost/CreatePDpNav/CreatePostDp";
 import LoginBtn from "./loginBtn/loginBtn";
 import Login from "~/component/Login/Login";
 import AccountCreate from "~/component/AccountCreate/AccountCreate";
-
+import SettingBox from "./Setting/Setting";
 import AuthContext from "~/component/checkLogin/AuthContext";
+import ChangeForgotPass from "~/component/ChangeForgotPass/ChangeForgotPass";
 
 const navItem = ["ホーム", "トレンド", "通知", "検索", "プロフィール", "作成"];
 
@@ -86,12 +87,26 @@ function NavBar() {
 	const handleShowLogin = () => {
 		setShowLogin(true);
 	};
+
+	const [showSetting, setShowSetting] = useState(false);
+	const handleShowSetting = () => {
+		setShowSetting(true);
+	};
+	const handleCloseSetting = () => {
+		setShowSetting(false);
+	};
+
+	const [showChangeForgotPass, setShowChangeForgotPass] = useState(false);
+	const handleShowChangeForgotPass = () => {
+		setShowChangeForgotPass(true);
+	};
 	return (
 		<div className="navBar">
 			{showLogin && (
 				<Login
 					setShowAccountCreate={handleShowAccountCreate}
 					onClose={() => setShowLogin(false)}
+					onShowChangeForgotPass={handleShowChangeForgotPass}
 				/>
 			)}
 			{showAccountCreate && (
@@ -99,6 +114,9 @@ function NavBar() {
 					onClose={() => setShowAccountCreate(false)}
 					setShowLogin={setShowLogin}
 				/>
+			)}
+			{showChangeForgotPass && (
+				<ChangeForgotPass onClose={() => setShowChangeForgotPass(false)} />
 			)}
 			{activeComponent}
 			<div className="wrap">
@@ -126,6 +144,13 @@ function NavBar() {
 					</div>
 				</div>
 				<div className="NavBottom">
+					{showSetting && (
+						<SettingBox
+							onClose={handleCloseSetting}
+							setShowLogin={setShowLogin}
+							handleShowChangeForgotPass={handleShowChangeForgotPass}
+						/>
+					)}
 					{isLoggedIn ? (
 						<div className={`bWrap ${isNotificationActive ? "center" : ""}`}>
 							<div
@@ -136,7 +161,7 @@ function NavBar() {
 								</div>
 								<div className="userName">{user.fullName}</div>
 							</div>
-							<div className="settingIcon"></div>
+							<div className="settingIcon" onClick={handleShowSetting}></div>
 						</div>
 					) : (
 						<LoginBtn onClick={handleShowLogin} />

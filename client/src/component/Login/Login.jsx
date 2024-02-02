@@ -2,7 +2,7 @@ import "./style.scss";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import axios from "axios";
-function Login({ onClose, setShowAccountCreate }) {
+function Login({ onClose, setShowAccountCreate, onShowChangeForgotPass }) {
 	const [userName, setUserName] = useState("");
 	const [password, setPassword] = useState("");
 
@@ -85,7 +85,14 @@ function Login({ onClose, setShowAccountCreate }) {
 							</button>
 						</form>
 						<div className="btnBox">
-							<p>パスワードを忘れた場合</p>
+							<p
+								onClick={() => {
+									onClose();
+									onShowChangeForgotPass(true);
+								}}
+							>
+								パスワードを忘れた場合
+							</p>
 							<div className="bar"></div>
 							<button onClick={showSignIn}>新しいアカウントを作成</button>
 						</div>

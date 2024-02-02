@@ -58,7 +58,6 @@ function Profile() {
 						<div className="editBtn" onClick={handleShowUpdateInfo}>
 							プロフィールを編集
 						</div>
-						<div className="settingBtn"></div>
 					</div>
 				</div>
 			</div>
