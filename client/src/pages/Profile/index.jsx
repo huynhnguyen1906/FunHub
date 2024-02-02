@@ -1,26 +1,40 @@
-import { useState } from "react";
 import "./style.scss";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import UpdateUserInfo from "../../component/UpdateUserInfo/UpdateUserInfo";
 
-const user = {
-	name: "QTaro",
-	icon: "https://imgflip.com/s/meme/Scared-Cat.jpg",
-	followed: 164,
-	following: 468,
-	post: 53,
-	joinTime: { year: 2024, month: 1, day: 7 },
-};
+function formatDateTime(dateTimeString) {
+	const date = new Date(dateTimeString);
 
+	const month = (date.getMonth() + 1).toString().padStart(2, "0");
+	const year = date.getFullYear();
+
+	return { year, month };
+}
 function Profile() {
 	const [isUpdateUserInfo, setIsUpdateUserInfo] = useState(false);
-
+	const [userData, setUserData] = useState(null);
 	const handleShowUpdateInfo = () => {
 		setIsUpdateUserInfo(true);
 	};
-
+	const { year, month } = formatDateTime(userData?.user?.create_at);
 	const handleReload = () => {
 		window.location.reload();
 	};
+
+	useEffect(() => {
+		const fetchUserData = async () => {
+			try {
+				const response = await axios.get("/api/user/myProfile");
+				setUserData(response.data);
+			} catch (error) {
+				console.error("Error fetching user profile:", error);
+			}
+		};
+
+		fetchUserData();
+	}, []);
+	console.log(userData);
 	return (
 		<div className="PContent">
 			{isUpdateUserInfo && (
@@ -33,24 +47,23 @@ function Profile() {
 				<div className="profileBox">
 					<div className="userDetailsW">
 						<div className="userImg">
-							<img src={user.icon} alt="" />
+							<img src="" alt="" />
 						</div>
 						<div className="userDetails">
-							<div className="name">{user.name}</div>
+							<div className="name">{userData.user.fullName}</div>
 							<div className="followCount">
 								<div className="followed">
-									<span>{user.followed}</span>フォロー中
+									<span>{userData.followingCount}</span>フォロー中
 								</div>
 								<div className="following">
-									<span>{user.following}</span>フォロわー
+									<span>{userData.followerCount}</span>フォロわー
 								</div>
 							</div>
 							<div className="postCount">
-								投稿<span>{user.post}</span>件
+								投稿<span>{userData.postsCount}</span>件
 							</div>
 							<div className="joinTime">
-								{user.joinTime.year}年{user.joinTime.month}
-								月からFunHubを利用しています。
+								{year}年月{month}からFunHubを利用しています。
 							</div>
 						</div>
 					</div>

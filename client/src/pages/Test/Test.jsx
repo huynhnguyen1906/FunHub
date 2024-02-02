@@ -2,37 +2,43 @@ import React, { useState } from "react";
 import axios from "axios";
 
 function Test() {
-	const [file, setFile] = useState(null);
-	const [uploadedUrl, setUploadedUrl] = useState("");
+	const [files, setFiles] = useState([]);
+	const [uploadedUrls, setUploadedUrls] = useState([]);
 
 	const handleFileChange = (event) => {
-		const selectedFile = event.target.files[0];
-		const fileSizeInMB = selectedFile.size / (1024 * 1024);
+		const selectedFiles = Array.from(event.target.files);
 		const maxFileSizeInMB = 150; // Maximum file size in MB
 
-		if (fileSizeInMB > maxFileSizeInMB) {
+		const validFiles = selectedFiles.filter(
+			(file) => file.size / (1024 * 1024) <= maxFileSizeInMB
+		);
+
+		if (validFiles.length !== selectedFiles.length) {
 			alert("150MB 以下のファイルを選択してください。");
-		} else {
-			setFile(selectedFile);
 		}
+
+		setFiles(validFiles);
 	};
 
 	const handleUpload = async () => {
 		try {
-			if (!file || !(file instanceof File)) {
-				throw new Error("Invalid file");
+			if (!files.length) {
+				throw new Error("No files selected");
 			}
 
 			const formData = new FormData();
-			formData.append("media", file);
+			files.forEach((file) => {
+				formData.append("media", file);
+			});
 
 			const response = await axios.post("/upload", formData, {
 				headers: { "Content-Type": "multipart/form-data" },
 			});
 
-			setUploadedUrl(response.data.url);
+			setUploadedUrls(response.data.urls);
+			console.log(response.data);
 		} catch (error) {
-			console.error("Error uploading file:", error);
+			console.error("Error uploading files:", error);
 		}
 	};
 
@@ -43,25 +49,22 @@ function Test() {
 	const isVideo = (url) => {
 		return url.match(/\.(mp4|webm)$/) != null;
 	};
-
 	return (
 		<div>
-			<input type="file" onChange={handleFileChange} />
+			<input type="file" multiple onChange={handleFileChange} />
 			<button onClick={handleUpload}>Upload</button>
 
-			{uploadedUrl && isImage(uploadedUrl) && (
-				<div>
+			{uploadedUrls.map((url, index) => (
+				<div key={index}>
 					<p>Uploaded URL:</p>
-					<img src={uploadedUrl} alt="Uploaded" style={{ maxWidth: "100%" }} />
+					{isImage(url) && (
+						<img src={url} alt="Uploaded" style={{ maxWidth: "100%" }} />
+					)}
+					{isVideo(url) && (
+						<video src={url} controls style={{ maxWidth: "100%" }} />
+					)}
 				</div>
-			)}
-
-			{uploadedUrl && isVideo(uploadedUrl) && (
-				<div>
-					<p>Uploaded URL:</p>
-					<video src={uploadedUrl} controls style={{ maxWidth: "100%" }} />
-				</div>
-			)}
+			))}
 		</div>
 	);
 }
