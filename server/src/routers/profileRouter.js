@@ -12,10 +12,10 @@ const router = express.Router();
 
 router.get("/myProfile", verifyTokenMiddleware, async (req, res) => {
 	try {
-		const userID = req.user.userID;
+		const userID = req.user ? req.user.userID : null;
 		const userProfile = await getMyProfile(userID);
 		if (!userProfile) {
-			return res.status(404).json({ error: "User not found" });
+			return res.status(200).json({ message: "No user logged in" });
 		}
 
 		res.status(200).json(userProfile);
@@ -46,25 +46,29 @@ router.post("/update-profile-info", verifyTokenMiddleware, async (req, res) => {
 
 router.post("/change-password", verifyTokenMiddleware, async (req, res) => {
 	try {
-		const userID = req.user.userID;
-		const { currentEmail, currentPassword, newPassword } = req.body;
+		const userID = req.user ? req.user.userID : null;
+		const { currentPassword, newPassword, currentEmail } = req.body;
 
-		const isUserLegit = await checkCurrentPassword(
+		const isCurrentPasswordCorrect = await checkCurrentPassword(
 			userID,
 			currentPassword,
 			currentEmail
 		);
-		if (!isUserLegit) {
-			return res
-				.status(400)
-				.json({ error: "Invalid current email or password" });
+
+		if (!isCurrentPasswordCorrect) {
+			return res.status(400).json({ error: "Current password is incorrect" });
 		}
 
-		await updatePassword(userID, newPassword);
-		res.status(200).json({ message: "Password changed successfully" });
+		await updatePassword(userID, newPassword, currentEmail);
+
+		res.status(200).json({ message: "Password updated successfully" });
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: "Internal Server Error" });
+		if (error.message === "User not found") {
+			res.status(400).json({ error: "User not found" });
+		} else {
+			res.status(500).json({ error: "Internal Server Error" });
+		}
 	}
 });
 module.exports = router;

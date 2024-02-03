@@ -1,5 +1,5 @@
 import "./NavBar.scss";
-import { useState, useContext, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import NavItem from "./NavItem/NavItem";

@@ -2,6 +2,9 @@ const db = require("../config/database");
 const bcrypt = require("bcrypt");
 
 async function getMyProfile(userID) {
+	if (!userID) {
+		return null;
+	}
 	try {
 		const userQuery =
 			"SELECT userID, userName, email, fullName, avatar, create_at FROM USERS WHERE userID = ?";
@@ -58,8 +61,20 @@ async function getExistingUser(email, userID) {
 }
 
 async function checkCurrentPassword(userID, currentPassword, currentEmail) {
-	const query = "SELECT password, email FROM USERS WHERE userID = ?";
-	const [result] = await db.query(query, [userID]);
+	let query;
+	let values;
+
+	if (userID) {
+		query = "SELECT password, email FROM USERS WHERE userID = ?";
+		values = [userID];
+	} else if (currentEmail) {
+		query = "SELECT password, email FROM USERS WHERE email = ?";
+		values = [currentEmail];
+	} else {
+		throw new Error("User identifier not provided");
+	}
+
+	const [result] = await db.query(query, values);
 	const user = result[0];
 	if (!user) {
 		throw new Error("User not found");
@@ -72,10 +87,22 @@ async function checkCurrentPassword(userID, currentPassword, currentEmail) {
 	return isPasswordMatch || isEmailMatch;
 }
 
-async function updatePassword(userID, newPassword) {
+async function updatePassword(userID, newPassword, currentEmail) {
 	const hashedPassword = await bcrypt.hash(newPassword, 10);
-	const query = "UPDATE USERS SET password = ? WHERE userID = ?";
-	await db.query(query, [hashedPassword, userID]);
+	let query;
+	let values;
+
+	if (userID) {
+		query = "UPDATE USERS SET password = ? WHERE userID = ?";
+		values = [hashedPassword, userID];
+	} else if (currentEmail) {
+		query = "UPDATE USERS SET password = ? WHERE email = ?";
+		values = [hashedPassword, currentEmail];
+	} else {
+		throw new Error("User identifier not provided");
+	}
+
+	await db.query(query, values);
 }
 module.exports = {
 	getMyProfile,
