@@ -1,6 +1,6 @@
 import "./PasswordChange.scss";
 import { useState } from "react";
-
+import axios from "axios";
 const alert = {
 	password: {
 		confirm: "パスワードが一致しません。",
@@ -11,7 +11,6 @@ const alert = {
 	confirm: "入力している情報は足りていません。",
 };
 
-const userPassword = "password"; // This is a mock user password
 function PasswordChange({ onClose, handleShowChangeForgotPass }) {
 	const [password, setPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
@@ -26,14 +25,11 @@ function PasswordChange({ onClose, handleShowChangeForgotPass }) {
 		setPasswordConfirmAlert("");
 	};
 
-	const handlePasswordChange = () => {
+	const handlePasswordChange = async () => {
 		const passwordFormat = /^[a-zA-Z0-9!@#$%^&*()_+{}[\]:;<>,.?~\\/-]+$/;
 		if (!password || !newPassword || !confirmPassword) {
 			resetAlerts();
 			setConfirmAlert(alert.confirm);
-		} else if (password !== userPassword) {
-			resetAlerts();
-			setPasswordAlert(alert.password.wrong);
 		} else if (newPassword !== confirmPassword) {
 			resetAlerts();
 			setPasswordConfirmAlert(alert.password.confirm);
@@ -44,8 +40,25 @@ function PasswordChange({ onClose, handleShowChangeForgotPass }) {
 			resetAlerts();
 			setPasswordAlert(alert.password.length);
 		} else {
-			// Send the new password to the server
-			console.log("Password changed");
+			try {
+				const response = await axios.post("/api/user/change-password", {
+					currentPassword: password,
+					newPassword: newPassword,
+				});
+
+				if (response.status === 200) {
+					window.alert("パスワードが変更されました。");
+					onClose();
+				} else {
+					console.error("Error changing password");
+				}
+			} catch (error) {
+				if (error.response && error.response.status === 400) {
+					resetAlerts();
+					setPasswordAlert(alert.password.wrong);
+				}
+				console.error(error);
+			}
 		}
 	};
 

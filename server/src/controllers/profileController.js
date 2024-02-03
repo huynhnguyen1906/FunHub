@@ -1,4 +1,5 @@
 const db = require("../config/database");
+const bcrypt = require("bcrypt");
 
 async function getMyProfile(userID) {
 	try {
@@ -50,13 +51,36 @@ async function updateUserProfileInfo(userID, email, avatar, fullName) {
 		throw error;
 	}
 }
-async function getUserByEmail(email, userID) {
+async function getExistingUser(email, userID) {
 	const query = "SELECT * FROM USERS WHERE email = ? AND userID != ?";
 	const result = await db.query(query, [email, userID]);
 	return result[0];
 }
+
+async function checkCurrentPassword(userID, currentPassword, currentEmail) {
+	const query = "SELECT password, email FROM USERS WHERE userID = ?";
+	const [result] = await db.query(query, [userID]);
+	const user = result[0];
+	if (!user) {
+		throw new Error("User not found");
+	}
+
+	const isPasswordMatch = currentPassword
+		? await bcrypt.compare(currentPassword, user.password)
+		: false;
+	const isEmailMatch = currentEmail ? currentEmail === user.email : false;
+	return isPasswordMatch || isEmailMatch;
+}
+
+async function updatePassword(userID, newPassword) {
+	const hashedPassword = await bcrypt.hash(newPassword, 10);
+	const query = "UPDATE USERS SET password = ? WHERE userID = ?";
+	await db.query(query, [hashedPassword, userID]);
+}
 module.exports = {
 	getMyProfile,
 	updateUserProfileInfo,
-	getUserByEmail,
+	getExistingUser,
+	checkCurrentPassword,
+	updatePassword,
 };

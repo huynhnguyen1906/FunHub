@@ -2,7 +2,9 @@ const express = require("express");
 const {
 	getMyProfile,
 	updateUserProfileInfo,
-	getUserByEmail,
+	getExistingUser,
+	checkCurrentPassword,
+	updatePassword,
 } = require("../controllers/profileController");
 const verifyTokenMiddleware = require("../controllers/verifyTokenController");
 
@@ -28,8 +30,7 @@ router.post("/update-profile-info", verifyTokenMiddleware, async (req, res) => {
 		const userID = req.user.userID;
 		const { email, avatar, fullName } = req.body;
 
-		// Check if the new email already exists in the database
-		const existingUser = await getUserByEmail(email, userID);
+		const existingUser = await getExistingUser(email, userID);
 		if (existingUser.length > 0) {
 			return res.status(409).json({ error: "Email already in use" });
 		}
@@ -43,4 +44,27 @@ router.post("/update-profile-info", verifyTokenMiddleware, async (req, res) => {
 	}
 });
 
+router.post("/change-password", verifyTokenMiddleware, async (req, res) => {
+	try {
+		const userID = req.user.userID;
+		const { currentEmail, currentPassword, newPassword } = req.body;
+
+		const isUserLegit = await checkCurrentPassword(
+			userID,
+			currentPassword,
+			currentEmail
+		);
+		if (!isUserLegit) {
+			return res
+				.status(400)
+				.json({ error: "Invalid current email or password" });
+		}
+
+		await updatePassword(userID, newPassword);
+		res.status(200).json({ message: "Password changed successfully" });
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error: "Internal Server Error" });
+	}
+});
 module.exports = router;

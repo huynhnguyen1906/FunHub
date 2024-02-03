@@ -1,6 +1,6 @@
 import "./ChangeForgotPass.scss";
 import { useState } from "react";
-
+import axios from "axios";
 const alert = {
 	password: {
 		confirm: "パスワードが一致しません。",
@@ -10,8 +10,6 @@ const alert = {
 	confirm: "入力している情報は足りていません。",
 	mail: "メールアドレスが間違っています。",
 };
-
-const userMail = "abc@gmail.com"; // This is a mock user mail
 
 function ChangeForgotPass({ onClose }) {
 	const [mail, setMail] = useState("");
@@ -27,14 +25,11 @@ function ChangeForgotPass({ onClose }) {
 		setPasswordAlert("");
 	};
 
-	const handlePasswordChange = () => {
+	const handlePasswordChange = async () => {
 		const passwordFormat = /^[a-zA-Z0-9!@#$%^&*()_+{}[\]:;<>,.?~\\/-]+$/;
 		if (!mail || !password || !confirmPassword) {
 			resetAlerts();
 			setConfirmAlert(alert.confirm);
-		} else if (mail !== userMail) {
-			resetAlerts();
-			setMailAlert(alert.mail);
 		} else if (password !== confirmPassword) {
 			resetAlerts();
 			setPasswordAlert(alert.password.confirm);
@@ -45,8 +40,25 @@ function ChangeForgotPass({ onClose }) {
 			resetAlerts();
 			setPasswordAlert(alert.password.length);
 		} else {
-			// Send the new password to the server
-			console.log("Password changed");
+			try {
+				const response = await axios.post("/api/user/change-password", {
+					currentEmail: mail,
+					newPassword: password,
+				});
+
+				if (response.status === 200) {
+					window.alert("パスワードが変更されました。");
+					onClose();
+				} else {
+					console.error("Error changing password");
+				}
+			} catch (error) {
+				if (error.response && error.response.status === 400) {
+					resetAlerts();
+					setMailAlert(alert.mail);
+				}
+				console.error(error);
+			}
 		}
 	};
 
