@@ -2,6 +2,7 @@ import "./SettingBox.scss";
 import { useRef, useEffect, useState } from "react";
 import UpdateUserInfo from "~/component/UpdateUserInfo/UpdateUserInfo";
 import PasswordChange from "../PasswordChange/PasswordChange";
+import axios from "axios";
 
 function SettingBox({ onClose, handleShowChangeForgotPass }) {
 	const settingRef = useRef();
@@ -29,6 +30,21 @@ function SettingBox({ onClose, handleShowChangeForgotPass }) {
 			window.removeEventListener("mousedown", handleClickOutside);
 		};
 	}, [onClose]);
+
+	const handleLogout = async () => {
+		try {
+			const response = await axios.post("/api/user/logout");
+
+			if (response.status === 200) {
+				console.log("User logged out");
+				window.location.reload();
+			} else {
+				console.error("Error logging out");
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
 	return (
 		<div className="SettingBox" ref={settingRef}>
@@ -63,7 +79,7 @@ function SettingBox({ onClose, handleShowChangeForgotPass }) {
 					<i></i>
 					<p>パスワード変更</p>
 				</div>
-				<div className="settingItem">
+				<div className="settingItem" onClick={handleLogout}>
 					<i></i>
 					<p>ログアウト</p>
 				</div>

@@ -37,19 +37,24 @@ function NavBar() {
 	}
 	const [activeItem, setActiveItem] = useState(initialActiveItem);
 	const handleClick = (item, index) => {
+		if (
+			user === null &&
+			(item === "通知" || item === "作成" || item === "プロフィール")
+		) {
+			alert("ログインしてください。");
+			return;
+		}
+
 		setActiveItem(index);
 		if (item === "通知") {
 			setActiveComponent(<Notification onClose={closeNotification} />);
 			setIsNotificationActive(true);
-			setActiveItem(index);
 		} else if (item === "作成") {
 			setActiveComponent(<CrPostDpNav onClose={closeCreatePost} />);
 			setIsNotificationActive(false);
-			setActiveItem(activeItem);
 		} else {
 			setActiveComponent(null);
 			setIsNotificationActive(false);
-			setActiveItem(index);
 		}
 
 		if (item === "ホーム") {
