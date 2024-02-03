@@ -34,46 +34,50 @@ function Profile() {
 
 		fetchUserData();
 	}, []);
-	console.log(userData);
 	return (
 		<div className="PContent">
 			{isUpdateUserInfo && (
 				<UpdateUserInfo
 					onClose={() => setIsUpdateUserInfo(false)}
 					reload={handleReload}
+					userData={userData}
+					year={year}
+					month={month}
 				/>
 			)}
-			<div className="profileBoxW">
-				<div className="profileBox">
-					<div className="userDetailsW">
-						<div className="userImg">
-							<img src="" alt="" />
-						</div>
-						<div className="userDetails">
-							<div className="name">{userData.user.fullName}</div>
-							<div className="followCount">
-								<div className="followed">
-									<span>{userData.followingCount}</span>フォロー中
+			{userData && userData.user && (
+				<div className="profileBoxW">
+					<div className="profileBox">
+						<div className="userDetailsW">
+							<div className="userImg">
+								<img src={userData.user.avatar} alt="" />
+							</div>
+							<div className="userDetails">
+								<div className="name">{userData.user.fullName}</div>
+								<div className="followCount">
+									<div className="followed">
+										<span>{userData.followingCount}</span>フォロー中
+									</div>
+									<div className="following">
+										<span>{userData.followerCount}</span>フォロわー
+									</div>
 								</div>
-								<div className="following">
-									<span>{userData.followerCount}</span>フォロわー
+								<div className="postCount">
+									投稿<span>{userData.postsCount}</span>件
+								</div>
+								<div className="joinTime">
+									{year}年月{month}からFunHubを利用しています。
 								</div>
 							</div>
-							<div className="postCount">
-								投稿<span>{userData.postsCount}</span>件
-							</div>
-							<div className="joinTime">
-								{year}年月{month}からFunHubを利用しています。
-							</div>
 						</div>
-					</div>
-					<div className="btnBox">
-						<div className="editBtn" onClick={handleShowUpdateInfo}>
-							プロフィールを編集
+						<div className="btnBox">
+							<div className="editBtn" onClick={handleShowUpdateInfo}>
+								プロフィールを編集
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			)}
 			<div className="postContent"></div>
 		</div>
 	);
