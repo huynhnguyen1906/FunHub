@@ -1,6 +1,7 @@
 import "./NavBar.scss";
-import { useState, useContext, useCallback } from "react";
+import { useState, useContext, useCallback, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 import NavItem from "./NavItem/NavItem";
 import Notification from "~/component/Noti/Notification";
 import CrPostDpNav from "~/component/CreatePost/CreatePDpNav/CreatePostDp";
@@ -8,14 +9,12 @@ import LoginBtn from "./loginBtn/loginBtn";
 import Login from "~/component/Login/Login";
 import AccountCreate from "~/component/AccountCreate/AccountCreate";
 import SettingBox from "./Setting/Setting";
-import AuthContext from "~/component/checkLogin/AuthContext";
 import ChangeForgotPass from "~/component/ChangeForgotPass/ChangeForgotPass";
 
 const navItem = ["ホーム", "トレンド", "通知", "検索", "プロフィール", "作成"];
 
 function NavBar() {
-	const { isLoggedIn } = useContext(AuthContext);
-	const { user } = useContext(AuthContext);
+	const [userData, setUserData] = useState(null);
 	const navigate = useNavigate();
 	const location = useLocation();
 
@@ -38,7 +37,7 @@ function NavBar() {
 	const [activeItem, setActiveItem] = useState(initialActiveItem);
 	const handleClick = (item, index) => {
 		if (
-			user === null &&
+			userData === null &&
 			(item === "通知" || item === "作成" || item === "プロフィール")
 		) {
 			alert("ログインしてください。");
@@ -105,6 +104,18 @@ function NavBar() {
 	const handleShowChangeForgotPass = () => {
 		setShowChangeForgotPass(true);
 	};
+	useEffect(() => {
+		const fetchUserData = async () => {
+			try {
+				const response = await axios.get("/api/user/myProfile");
+				setUserData(response.data);
+			} catch (error) {
+				console.error("Error fetching user profile:", error);
+			}
+		};
+
+		fetchUserData();
+	}, []);
 	return (
 		<div className="navBar">
 			{showLogin && (
@@ -156,15 +167,15 @@ function NavBar() {
 							handleShowChangeForgotPass={handleShowChangeForgotPass}
 						/>
 					)}
-					{isLoggedIn ? (
+					{userData && userData.user ? (
 						<div className={`bWrap ${isNotificationActive ? "center" : ""}`}>
 							<div
 								className={`userBox ${isNotificationActive ? "hidden" : ""}`}
 							>
 								<div className="userImg">
-									<img src={user.avatar} alt="" />
+									<img src={userData.user.avatar} alt="" />
 								</div>
-								<div className="userName">{user.fullName}</div>
+								<div className="userName">{userData.user.fullName}</div>
 							</div>
 							<div className="settingIcon" onClick={handleShowSetting}></div>
 						</div>
