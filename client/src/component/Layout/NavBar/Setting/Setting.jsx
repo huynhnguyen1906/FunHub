@@ -4,7 +4,7 @@ import UpdateUserInfo from "~/component/UpdateUserInfo/UpdateUserInfo";
 import PasswordChange from "../PasswordChange/PasswordChange";
 import axios from "axios";
 
-function SettingBox({ onClose, handleShowChangeForgotPass }) {
+function SettingBox({ onClose, handleShowChangeForgotPass, userData }) {
 	const settingRef = useRef();
 
 	const [showUpdateUserInfo, setShowUpdateUserInfo] = useState(false);
@@ -30,7 +30,9 @@ function SettingBox({ onClose, handleShowChangeForgotPass }) {
 			window.removeEventListener("mousedown", handleClickOutside);
 		};
 	}, [onClose]);
-
+	const handleReload = () => {
+		window.location.reload();
+	};
 	const handleLogout = async () => {
 		try {
 			const response = await axios.post("/api/user/logout");
@@ -49,7 +51,11 @@ function SettingBox({ onClose, handleShowChangeForgotPass }) {
 	return (
 		<div className="SettingBox" ref={settingRef}>
 			{showUpdateUserInfo && (
-				<UpdateUserInfo onClose={() => setShowUpdateUserInfo(false)} />
+				<UpdateUserInfo
+					onClose={() => setShowUpdateUserInfo(false)}
+					userData={userData}
+					reload={handleReload}
+				/>
 			)}
 			{showPasswordChange && (
 				<PasswordChange

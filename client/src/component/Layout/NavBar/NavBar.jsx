@@ -165,6 +165,7 @@ function NavBar() {
 							onClose={handleCloseSetting}
 							setShowLogin={setShowLogin}
 							handleShowChangeForgotPass={handleShowChangeForgotPass}
+							userData={userData}
 						/>
 					)}
 					{userData && userData.user ? (
