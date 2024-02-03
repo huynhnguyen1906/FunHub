@@ -1,7 +1,7 @@
 const mysql = require("mysql2/promise");
 require("dotenv").config();
 
-const connection = mysql.createPool({
+const pool = mysql.createPool({
 	host: process.env.DB_HOST,
 	user: process.env.DB_USER,
 	password: process.env.DB_PASS,
@@ -11,4 +11,26 @@ const connection = mysql.createPool({
 	charset: "utf8mb4",
 });
 
-module.exports = connection;
+let connection;
+
+async function beginTransaction() {
+	connection = await pool.getConnection();
+	await connection.beginTransaction();
+}
+
+async function commit() {
+	await connection.commit();
+	connection.release();
+}
+
+async function rollback() {
+	await connection.rollback();
+	connection.release();
+}
+
+module.exports = {
+	query: pool.query.bind(pool),
+	beginTransaction,
+	commit,
+	rollback,
+};

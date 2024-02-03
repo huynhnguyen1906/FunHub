@@ -11,10 +11,9 @@ async function getMyProfile(userID) {
 		const [userResult] = await db.query(userQuery, [userID]);
 		const user = userResult[0];
 		if (user.length === 0) {
-			return null; // Người dùng không tồn tại
+			return null;
 		}
 
-		// Số lượng bài viết
 		const postsCountQuery =
 			"SELECT COUNT(*) AS postsCount FROM POSTS WHERE userID = ?";
 		const [postsCountResult] = await db.query(postsCountQuery, [userID]);
