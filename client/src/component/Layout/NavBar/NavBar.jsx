@@ -1,7 +1,6 @@
 import "./NavBar.scss";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
 import NavItem from "./NavItem/NavItem";
 import Notification from "~/component/Noti/Notification";
 import CrPostDpNav from "~/component/CreatePost/CreatePDpNav/CreatePostDp";
@@ -10,11 +9,12 @@ import Login from "~/component/Login/Login";
 import AccountCreate from "~/component/AccountCreate/AccountCreate";
 import SettingBox from "./Setting/Setting";
 import ChangeForgotPass from "~/component/ChangeForgotPass/ChangeForgotPass";
+import AuthContext from "~/component/checkLogin/AuthContext";
 
 const navItem = ["ホーム", "トレンド", "通知", "検索", "プロフィール", "作成"];
 
 function NavBar() {
-	const [userData, setUserData] = useState(null);
+	const { userData } = useContext(AuthContext);
 	const navigate = useNavigate();
 	const location = useLocation();
 
@@ -37,7 +37,7 @@ function NavBar() {
 	const [activeItem, setActiveItem] = useState(initialActiveItem);
 	const handleClick = (item, index) => {
 		if (
-			userData === null &&
+			!userData &&
 			(item === "通知" || item === "作成" || item === "プロフィール")
 		) {
 			alert("ログインしてください。");
@@ -104,18 +104,6 @@ function NavBar() {
 	const handleShowChangeForgotPass = () => {
 		setShowChangeForgotPass(true);
 	};
-	useEffect(() => {
-		const fetchUserData = async () => {
-			try {
-				const response = await axios.get("/api/user/myProfile");
-				setUserData(response.data);
-			} catch (error) {
-				console.error("Error fetching user profile:", error);
-			}
-		};
-
-		fetchUserData();
-	}, []);
 	return (
 		<div className="navBar">
 			{showLogin && (

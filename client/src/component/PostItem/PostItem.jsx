@@ -1,8 +1,33 @@
 import "./PostItem.scss";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import moment from "moment-timezone";
 import PMain from "./PMain/PMain";
+
+const timeFormat = (time) => {
+	const notiTime = moment.utc(time).add(9, "hours").toDate();
+	const now = new Date();
+	const nowUTC = new Date(now.toUTCString());
+	const diff = nowUTC - notiTime;
+	const diffMin = Math.floor(diff / 60000);
+	const diffHour = Math.floor(diffMin / 60);
+	const diffDay = Math.floor(diffHour / 24);
+	const diffMonth = Math.floor(diffDay / 30);
+	const diffYear = Math.floor(diffMonth / 12);
+	if (diffYear > 0) {
+		return `${diffYear}年前`;
+	} else if (diffMonth > 0) {
+		return `${diffMonth}ヶ月前`;
+	} else if (diffDay > 0) {
+		return `${diffDay}日前`;
+	} else if (diffHour > 0) {
+		return `${diffHour}時間前`;
+	} else if (diffMin > 0) {
+		return `${diffMin}分前`;
+	} else {
+		return `たった今`;
+	}
+};
 
 const CountFormat = (count) => {
 	if (count > 10000) {
@@ -12,12 +37,16 @@ const CountFormat = (count) => {
 	}
 };
 
-function PostItem({ post, onPostClick }) {
+function PostItem({ post, onPostClick, userData }) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const currentPath = location.pathname;
 
 	const handleOpenPostDetail = () => {
+		if (!userData) {
+			alert("ログインしてください。");
+			return;
+		}
 		if (post && post.id && post.media && post.media[0] && post.media[0].id) {
 			navigate(`${currentPath}/post/${post.id}/${post.media[0].id}`);
 		}
@@ -52,11 +81,11 @@ function PostItem({ post, onPostClick }) {
 					<div className="userInfo">
 						<div className="userInfoK">
 							<div className="userIcon">
-								<img src={post.user.avatar} alt="" />
+								<img src={post.user_avatar} alt="" />
 							</div>
-							<div className="userName">{post.user.name}</div>
+							<div className="userName">{post.user_name}</div>
 						</div>
-						<div className="postTime">2年前</div>
+						<div className="postTime">{timeFormat(post.create_at)}</div>
 					</div>
 					<div className="btn">
 						<span></span>
@@ -90,10 +119,10 @@ function PostItem({ post, onPostClick }) {
 				<div className="reactCount">
 					<div className="likeCount">
 						<i></i>
-						{CountFormat(post.likes)}
+						{CountFormat(post.like_count)}
 					</div>
 					<div className="cmtCount" onClick={handleOpenPostDetail}>
-						コメント{CountFormat(post.comments)}件
+						コメント{CountFormat(post.comment_count)}件
 					</div>
 				</div>
 				<div className="bar"></div>

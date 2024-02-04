@@ -1,9 +1,12 @@
 import "./CmtInput.scss";
-import { useState, useRef, useCallback } from "react";
-function CmtInput() {
+import { useState, useRef, useCallback, useContext } from "react";
+import AuthContext from "~/component/checkLogin/AuthContext";
+import axios from "axios";
+function CmtInput({ postId }) {
+	const { userData } = useContext(AuthContext);
 	const [contentEdiTableText, setContentEdiTableText] =
 		useState("コメントを入力。。。");
-
+	const postID = postId;
 	const handleFocus = () => {
 		setContentEdiTableText("");
 	};
@@ -19,7 +22,7 @@ function CmtInput() {
 		fileInputRef.current.click();
 	}, []);
 
-	const [files, setFiles] = useState([]);
+	const [files, setFiles] = useState(null);
 	const handleFileChange = (event) => {
 		setFiles(event.target.files[0]);
 	};
@@ -35,79 +38,111 @@ function CmtInput() {
 	const handleDelete = useCallback((deleteIndex) => {
 		setFiles(null);
 	}, []);
-	const handleSend = useCallback(() => {
-		if (inputText === "" && files.length === 0) {
+	const handleSend = useCallback(async () => {
+		if (inputText === "" && !files) {
 			alert("投稿内容を入力してください");
 		} else {
-			console.log(inputText, files);
-			setFiles([]);
-			setInputText("");
-			setContentEdiTableText("コメントを入力。。。");
-			inputRef.current.textContent = "";
+			try {
+				let mediaURL = "";
+				if (files) {
+					const formData = new FormData();
+					formData.append("media", files);
+
+					const response = await axios.post("/upload", formData, {
+						headers: { "Content-Type": "multipart/form-data" },
+					});
+
+					mediaURL = response.data;
+				}
+
+				const commentData = {
+					postID: postID,
+					content: inputText,
+					mediaType: files
+						? files.type.startsWith("video")
+							? "video"
+							: "image"
+						: null,
+					mediaURL: mediaURL,
+				};
+
+				await axios.post("/comments", commentData);
+
+				setFiles(null);
+				setInputText("");
+				setContentEdiTableText("コメントを入力。。。");
+				inputRef.current.textContent = "";
+			} catch (error) {
+				console.error("Error uploading file:", error);
+			}
 		}
-	}, [inputText, files]);
+	}, [inputText, files, postID]);
 
 	return (
 		<div className="CmtInput">
-			{files && fileURL && (
-				<div className="mediaInputBox">
-					<div className="closeBtn" onClick={handleDelete}>
-						<span></span>
-					</div>
-					{isVideo ? (
-						<div className="playBtnB">
-							<video src={fileURL} />{" "}
-							<div className="playBtn">
+			{userData && (
+				<>
+					{files && fileURL && (
+						<div className="mediaInputBox">
+							<div className="closeBtn" onClick={handleDelete}>
 								<span></span>
 							</div>
+							{isVideo ? (
+								<div className="playBtnB">
+									<video src={fileURL} />{" "}
+									<div className="playBtn">
+										<span></span>
+									</div>
+								</div>
+							) : (
+								<img src={fileURL} alt="" />
+							)}
 						</div>
-					) : (
-						<img src={fileURL} alt="" />
 					)}
-				</div>
-			)}
-			<div className="inputContent">
-				<div className="avatar">
-					<img src="https://imgflip.com/s/meme/Scared-Cat.jpg" alt="" />
-				</div>
-				<div className="inputWrap">
-					<div
-						className="input"
-						ref={inputRef}
-						contentEditable="true"
-						onFocus={handleFocus}
-						onInput={handleInput}
-						onDragOver={(e) => {
-							e.preventDefault();
-						}}
-						onDrop={(e) => {
-							e.preventDefault();
-						}}
-					></div>
-					<div className="inlineText">{contentEdiTableText}</div>
-					<div className="mediaToolsB">
-						<div className="mediaTools">
-							<div className="tools" onClick={handleIconClick}>
-								<i></i>
-								<input
-									type="file"
-									ref={fileInputRef}
-									style={{ display: "none" }}
-									accept="image/*,video/*"
-									onChange={handleFileChange}
-								/>
-							</div>
-							<div className="tools">
-								<i></i>
-							</div>
-							<div className="tools">
-								<i></i>
+					<div className="inputContent">
+						<div className="avatar">
+							{userData.user && <img src={userData.user.avatar} alt="" />}
+						</div>
+						<div className="inputWrap">
+							<div
+								className="input"
+								ref={inputRef}
+								contentEditable="true"
+								onFocus={handleFocus}
+								onInput={handleInput}
+								onDragOver={(e) => {
+									e.preventDefault();
+								}}
+								onDrop={(e) => {
+									e.preventDefault();
+								}}
+							></div>
+							<div className="inlineText">{contentEdiTableText}</div>
+							<div className="mediaToolsB">
+								<div className="mediaTools">
+									<div className="tools" onClick={handleIconClick}>
+										<i></i>
+										<input
+											type="file"
+											ref={fileInputRef}
+											style={{ display: "none" }}
+											accept="image/*,video/*"
+											onChange={handleFileChange}
+										/>
+									</div>
+									<div className="tools">
+										<i></i>
+									</div>
+									<div className="tools">
+										<i></i>
+									</div>
+								</div>
+								<div className="sendBtn" onClick={handleSend}></div>
 							</div>
 						</div>
-						<div className="sendBtn" onClick={handleSend}></div>
 					</div>
-				</div>
-			</div>
+				</>
+			)}
 		</div>
 	);
 }

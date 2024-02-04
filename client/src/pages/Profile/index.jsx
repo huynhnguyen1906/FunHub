@@ -1,7 +1,7 @@
 import "./style.scss";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, useContext } from "react";
 import UpdateUserInfo from "../../component/UpdateUserInfo/UpdateUserInfo";
+import AuthContext from "~/component/checkLogin/AuthContext";
 
 function formatDateTime(dateTimeString) {
 	const date = new Date(dateTimeString);
@@ -13,7 +13,7 @@ function formatDateTime(dateTimeString) {
 }
 function Profile() {
 	const [isUpdateUserInfo, setIsUpdateUserInfo] = useState(false);
-	const [userData, setUserData] = useState(null);
+	const { userData } = useContext(AuthContext);
 	const handleShowUpdateInfo = () => {
 		setIsUpdateUserInfo(true);
 	};
@@ -22,18 +22,6 @@ function Profile() {
 		window.location.reload();
 	};
 
-	useEffect(() => {
-		const fetchUserData = async () => {
-			try {
-				const response = await axios.get("/api/user/myProfile");
-				setUserData(response.data);
-			} catch (error) {
-				console.error("Error fetching user profile:", error);
-			}
-		};
-
-		fetchUserData();
-	}, []);
 	return (
 		<div className="PContent">
 			{isUpdateUserInfo && (

@@ -63,9 +63,9 @@ function CrPostDpNav({ onClose }) {
 	}, []);
 	const handleSend = useCallback(async () => {
 		if (inputText === "" && selectedFiles.length === 0) {
-			alert("投稿内容を入力してください");
+			window.alert("投稿内容を入力してください");
 		} else if (selectedFiles.length === 0) {
-			alert("画像または動画最低１枚を選択してください");
+			window.alert("画像または動画最低１枚を選択してください");
 		} else {
 			try {
 				const formData = new FormData();
@@ -100,7 +100,7 @@ function CrPostDpNav({ onClose }) {
 				console.error("Error creating post:", error);
 			}
 		}
-	}, [inputText, selectedFiles, onClose, setAlert, alert]);
+	}, [inputText, selectedFiles, onClose, setAlert]);
 
 	return (
 		<div

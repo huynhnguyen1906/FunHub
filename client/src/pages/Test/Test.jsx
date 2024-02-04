@@ -43,7 +43,7 @@ function Test() {
 	};
 
 	const isImage = (url) => {
-		return url.match(/\.(jpeg|jpg|gif|png)$/) != null;
+		return url.match(/\.(jpeg|jpg|gif|png|webp)$/) != null;
 	};
 
 	const isVideo = (url) => {

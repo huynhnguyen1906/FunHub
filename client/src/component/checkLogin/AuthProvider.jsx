@@ -3,27 +3,26 @@ import axios from "axios";
 import AuthContext from "./AuthContext";
 
 const AuthProvider = ({ children }) => {
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const [user, setUser] = useState(null);
-
+	const [userData, setUserData] = useState(null);
 	useEffect(() => {
-		const checkToken = async () => {
+		const fetchUserData = async () => {
 			try {
-				const response = await axios.get("/api/user/checkToken", {
-					withCredentials: true,
-				});
-				setIsLoggedIn(true);
-				setUser(response.data);
+				const response = await axios.get("/api/user/myProfile");
+				if (response.data.message === "No user logged in") {
+					setUserData(null);
+				} else {
+					setUserData(response.data);
+				}
 			} catch (error) {
-				setIsLoggedIn(false);
-				setUser(null);
+				console.error("Error fetching user profile:", error);
 			}
 		};
 
-		checkToken();
+		fetchUserData();
 	}, []);
+
 	return (
-		<AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, user, setUser }}>
+		<AuthContext.Provider value={{ userData }}>
 			{" "}
 			{/* Add user and setUser here */}
 			{children}
