@@ -1,8 +1,11 @@
 import "./style.scss";
-import { useRef, useCallback, useState } from "react";
+import { useRef, useCallback, useState, useEffect } from "react";
 import AccountCreate from "~/component/AccountCreate/AccountCreate";
 import Login from "~/component/Login/Login";
 import ChangeForgotPass from "~/component/ChangeForgotPass/ChangeForgotPass";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 function Landing() {
 	const handleScrollToTop = useCallback(() => {
 		window.scrollTo({ top: 0, behavior: "smooth" });
@@ -31,6 +34,24 @@ function Landing() {
 	const handleShowChangeForgotPass = useCallback(() => {
 		setShowChangeForgotPass(true);
 	}, []);
+
+	const navigate = useNavigate();
+	useEffect(() => {
+		const fetchUserData = async () => {
+			try {
+				const response = await axios.get("/api/user/myProfile");
+				if (response.data.message === "No user logged in") {
+				} else {
+					navigate("/home");
+				}
+			} catch (error) {
+				console.error("Error fetching user profile:", error);
+			}
+		};
+
+		fetchUserData();
+	}, [navigate]);
+
 	return (
 		<div className="lContainer">
 			{showLogin && (

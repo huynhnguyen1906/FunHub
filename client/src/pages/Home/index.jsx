@@ -89,7 +89,9 @@ function Home() {
 					<Routes>
 						<Route
 							path="post/:postId/:mediaId"
-							element={<PostDetail onClose={closePostDetail} />}
+							element={
+								<PostDetail onClose={closePostDetail} userData={userData} />
+							}
 						/>
 					</Routes>
 					<div className="crateBox">

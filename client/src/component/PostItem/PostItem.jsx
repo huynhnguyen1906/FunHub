@@ -1,8 +1,9 @@
 import "./PostItem.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment-timezone";
 import PMain from "./PMain/PMain";
+import axios from "axios";
 
 const timeFormat = (time) => {
 	const notiTime = moment.utc(time).add(9, "hours").toDate();
@@ -74,6 +75,55 @@ function PostItem({ post, onPostClick, userData }) {
 	const handleClick = (mediaId) => {
 		onPostClick(post, mediaId);
 	};
+	const [likeCount, setLikeCount] = useState(post.like_count);
+
+	const [like, setLike] = useState(false);
+	const handleLike = () => {
+		if (userData && userData.user && userData.user.userID && post && post.id) {
+			const action = like ? "dislike" : "like";
+			axios
+				.post("/post/like", {
+					userID: userData.user.userID,
+					postID: post.id,
+					action: action,
+				})
+				.then((response) => {
+					setLike(!like);
+					setLikeCount(like ? likeCount - 1 : likeCount + 1);
+				})
+				.catch((error) => {
+					console.error(
+						"An error occurred while liking/unliking the post",
+						error
+					);
+				});
+		} else {
+			alert("ログインしてください。");
+		}
+	};
+
+	useEffect(() => {
+		if (userData && userData.user && userData.user.userID && post && post.id) {
+			axios
+				.get("/post/hasLiked", {
+					params: {
+						userID: userData.user.userID,
+						postID: post.id,
+					},
+				})
+				.then((response) => {
+					if (response.data && response.data.hasLiked) {
+						setLike(response.data.hasLiked);
+					}
+				})
+				.catch((error) => {
+					console.error(
+						"An error occurred while checking the like status",
+						error
+					);
+				});
+		}
+	}, [userData, post]);
 	return (
 		<div className="PostItem">
 			<div className="pItemTop">
@@ -119,7 +169,7 @@ function PostItem({ post, onPostClick, userData }) {
 				<div className="reactCount">
 					<div className="likeCount">
 						<i></i>
-						{CountFormat(post.like_count)}
+						{CountFormat(likeCount)}
 					</div>
 					<div className="cmtCount" onClick={handleOpenPostDetail}>
 						コメント{CountFormat(post.comment_count)}件
@@ -128,7 +178,7 @@ function PostItem({ post, onPostClick, userData }) {
 				<div className="bar"></div>
 				<div className="btnBox">
 					<div className="btnW">
-						<div className="btn active">
+						<div className={`btn ${like ? "active" : ""}`} onClick={handleLike}>
 							<i></i>
 							いいね！
 						</div>

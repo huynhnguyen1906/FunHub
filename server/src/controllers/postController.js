@@ -39,15 +39,11 @@ async function getAllPosts(page = 1, limit = 10) {
                 U.avatar AS user_avatar,
                 U.userID AS user_id,
                 U.fullName AS user_name,
-                COUNT(L.likeID) AS like_count,
-                COUNT(C.commentID) AS comment_count
+                (SELECT COUNT(*) FROM LIKES L WHERE P.postID = L.postID) AS like_count,
+                (SELECT COUNT(*) FROM COMMENTS C WHERE P.postID = C.postID) AS comment_count
             FROM
                 POSTS P
                 JOIN USERS U ON P.userID = U.userID
-                LEFT JOIN LIKES L ON P.postID = L.postID
-                LEFT JOIN COMMENTS C ON P.postID = C.postID
-            GROUP BY
-                P.postID, U.avatar, U.userID, U.fullName
             ORDER BY P.create_at DESC
             LIMIT ? OFFSET ?
         `;
@@ -66,7 +62,6 @@ async function getAllPosts(page = 1, limit = 10) {
             `;
 			const [media] = await db.query(mediaQuery, [post.id]);
 			post.media = media;
-			console.log(posts[0].create_at);
 		}
 
 		return posts;
@@ -86,17 +81,13 @@ async function getPostById(postId) {
                 U.avatar AS user_avatar,
                 U.userID AS user_id,
                 U.fullName AS user_name,
-                COUNT(L.likeID) AS like_count,
-                COUNT(C.commentID) AS comment_count
+                (SELECT COUNT(*) FROM LIKES L WHERE P.postID = L.postID) AS like_count,
+                (SELECT COUNT(*) FROM COMMENTS C WHERE P.postID = C.postID) AS comment_count
             FROM
                 POSTS P
                 JOIN USERS U ON P.userID = U.userID
-                LEFT JOIN LIKES L ON P.postID = L.postID
-                LEFT JOIN COMMENTS C ON P.postID = C.postID
             WHERE
                 P.postID = ?
-            GROUP BY
-                P.postID, U.avatar, U.userID, U.fullName
         `;
 		const [posts] = await db.query(postQuery, [postId]);
 

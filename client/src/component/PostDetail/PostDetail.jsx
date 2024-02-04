@@ -39,7 +39,7 @@ const timeFormat = (time) => {
 	}
 };
 
-function PostDetail({ onClose }) {
+function PostDetail({ onClose, userData }) {
 	const navigate = useNavigate();
 	const { postId, mediaId } = useParams();
 	const [post, setPost] = useState(null);
@@ -142,6 +142,61 @@ function PostDetail({ onClose }) {
 			})
 			.catch((error) => console.error("Error fetching comments:", error));
 	}, [postId]);
+
+	const [likeCount, setLikeCount] = useState(0);
+
+	const [like, setLike] = useState(false);
+	const handleLike = () => {
+		if (userData && userData.user && userData.user.userID && post && post.id) {
+			const action = like ? "dislike" : "like";
+			axios
+				.post("/post/like", {
+					userID: userData.user.userID,
+					postID: post.id,
+					action: action,
+				})
+				.then((response) => {
+					setLike(!like);
+					setLikeCount(like ? likeCount - 1 : likeCount + 1);
+				})
+				.catch((error) => {
+					console.error(
+						"An error occurred while liking/unliking the post",
+						error
+					);
+				});
+		} else {
+			alert("ログインしてください。");
+		}
+	};
+
+	useEffect(() => {
+		if (post) {
+			setLikeCount(post.like_count);
+
+			if (userData && userData.user && userData.user.userID) {
+				axios
+					.get("/post/hasLiked", {
+						params: {
+							userID: userData.user.userID,
+							postID: post.id,
+						},
+					})
+					.then((response) => {
+						if (response.data && response.data.hasLiked) {
+							setLike(response.data.hasLiked);
+						}
+					})
+					.catch((error) => {
+						console.error(
+							"An error occurred while checking the like status",
+							error
+						);
+					});
+			}
+		}
+	}, [userData, post]);
+
 	if (!post) {
 		return <div className="PostDetailDP"></div>;
 	}
@@ -185,7 +240,7 @@ function PostDetail({ onClose }) {
 							<div className="reactCount">
 								<div className="likeCount">
 									<i></i>
-									{CountFormat(post.like_count)}
+									{CountFormat(likeCount)}{" "}
 								</div>
 								<div className="cmtCount">
 									コメント{CountFormat(post.comment_count)}件
@@ -193,7 +248,10 @@ function PostDetail({ onClose }) {
 							</div>
 							<div className="btnBox">
 								<div className="btnW">
-									<div className="btn active">
+									<div
+										className={`btn ${like ? "active" : ""}`}
+										onClick={handleLike}
+									>
 										<i></i>
 										いいね！
 									</div>

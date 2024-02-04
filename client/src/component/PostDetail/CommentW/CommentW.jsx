@@ -16,7 +16,7 @@ function CommentW({ comment }) {
 						<div className="userName">{comment.user.fullName}</div>
 						<div className="cmtTime">2年前</div>
 					</div>
-					<div className={`cmtText ${comment.content === null ? "none" : ""}`}>
+					<div className={`cmtText ${comment.content === "" ? "none" : ""}`}>
 						{comment.content && comment.content.length > 175 && !CIsExpanded
 							? `${comment.content.substring(0, 175)}...`
 							: comment.content}
