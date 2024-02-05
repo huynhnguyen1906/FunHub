@@ -1,6 +1,6 @@
-# プロジェクト名
+# Funhub
 
-## はじめに
+## 紹介
 
 このプロジェクトは、JavaScript を使用したフルスタックのアプリケーションで、さまざまな技術を利用しています。
 
@@ -9,24 +9,24 @@
 - `React.js`
 - `MySQL`
 
-### 前提条件
+## 前提条件
 
 マシンに `Node.js` と `npm`がインストールされていることを確認してください。
 `Node.js` のバージョン `18` を使用してください。バージョンを確認するには、`node -v` を実行します。
 
-### インストール
+## インストール
 
 1. リポジトリをクローンします：
    `git clone <repository-url>`
 
 2. ルート、サーバー、およびクライアントディレクトリで依存関係をインストールします：
 
-   - `cd <project-name>`
-   - `npm install`
-   - `cd server`
-   - `npm install`
-   - `cd ../client`
-   - `npm install`
+cd <Funhub>
+npm install
+cd server
+npm install
+cd ../client
+npm install
 
 3. 設定
    サーバーディレクトリに`.env.example`を`.env`にコピーし、環境変数を入力してください。
@@ -36,7 +36,7 @@
 
 アプリケーションを起動するには、ルートディレクトリに戻り、次のコマンドを実行します：
 
-    npm start
+npm start
 
 ## プロジェクト構造
 
