@@ -21,12 +21,29 @@
 
 2. ルート、サーバー、およびクライアントディレクトリで依存関係をインストールします：
 
-   - cd <Funhub>
-   - npm install
-   - cd server
-   - npm install
-   - cd ../client
-   - npm install
+#
+
+    cd <Funhub>
+
+#
+
+    npm install
+
+#
+
+    cd server
+
+#
+
+    npm install
+
+#
+
+    cd ../client
+
+#
+
+    npm install
 
 3. 設定
    サーバーディレクトリに`.env.example`を`.env`にコピーし、環境変数を入力してください。
