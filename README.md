@@ -21,27 +21,27 @@
 
 2. ルート、サーバー、およびクライアントディレクトリで依存関係をインストールします：
 
-#
+####
 
     cd <Funhub>
 
-#
+####
 
     npm install
 
-#
+####
 
     cd server
 
-#
+####
 
     npm install
 
-#
+####
 
     cd ../client
 
-#
+####
 
     npm install
 
