@@ -17,7 +17,7 @@
 ## インストール
 
 1. リポジトリをクローンします：
-   `git clone <repository-url>`
+   `git clone <https://github.com/huynhnguyen1906/FunHub.git>`
 
 2. ルート、サーバー、およびクライアントディレクトリで依存関係をインストールします：
 
@@ -60,10 +60,12 @@
 プロジェクトは以下の構造を持っています：
 
 - `client/`：React クライアントアプリケーションが含まれています。
-  - src/：React アプリケーションのソースコードが含まれています。
-  - src/components/：再利用可能な React コンポーネントが含まれています。
-  - src/pages/：React アプリケーションの異なるページが含まれています。
-- server/：Node.js サーバーが含まれています。
-  - src/：サーバーのソースコードが含まれています
-  - src/controllers/：HTTP リクエストを処理するためのコントローラー関数が含まれています。
-  - src/models/：データモデルが含まれています。
+  - `src/`：React アプリケーションのソースコードが含まれています。
+  - `src/components/`：再利用可能な React コンポーネントが含まれています。
+  - `src/pages/`：React アプリケーションの異なるページが含まれています。
+- `server/`：Node.js サーバーが含まれています。
+  - `src/`：サーバーのソースコードが含まれています
+  - `src/controllers/`：HTTP リクエストを処理するためのコントローラー関数が含まれています。
+  - `src/models/`：データモデルが含まれています。
+  - `src/routes/`: API ルートが含まれています。
+  - `src/config/database`：データベースの設定が含まれています。
