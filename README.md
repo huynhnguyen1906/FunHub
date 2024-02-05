@@ -1,5 +1,15 @@
 # Funhub
 
+<p align="center">
+  <img src="https://cdn.discordapp.com/attachments/1082524923102248980/1203887288300474428/image.png?ex=65d2ba68&is=65c04568&hm=5053bd335f4a7c002c7f28d58580b51a1446b1878cc4c5eeba35e81797c0b87f&" width="100%"/>
+</p>
+
+####
+
+<p align="center">
+<img src="https://cdn.discordapp.com/attachments/1082524923102248980/1203887453862105118/image.png?ex=65d2ba90&is=65c04590&hm=aab0bec1981e2e75e74630014367b3fa2466b0d4c8072d9a8f915faebed435cc&" width="100%"/>
+</p>
+
 ## 紹介
 
 このプロジェクトは、JavaScript を使用したフルスタックのアプリケーションで、さまざまな技術を利用しています。
