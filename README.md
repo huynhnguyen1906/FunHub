@@ -21,12 +21,12 @@
 
 2. ルート、サーバー、およびクライアントディレクトリで依存関係をインストールします：
 
-   cd <Funhub>
-   npm install
-   cd server
-   npm install
-   cd ../client
-   npm install
+   - cd <Funhub>
+   - npm install
+   - cd server
+   - npm install
+   - cd ../client
+   - npm install
 
 3. 設定
    サーバーディレクトリに`.env.example`を`.env`にコピーし、環境変数を入力してください。
@@ -36,7 +36,7 @@
 
 アプリケーションを起動するには、ルートディレクトリに戻り、次のコマンドを実行します：
 
-npm start
+    npm start
 
 ## プロジェクト構造
 
@@ -47,6 +47,6 @@ npm start
   - src/components/：再利用可能な React コンポーネントが含まれています。
   - src/pages/：React アプリケーションの異なるページが含まれています。
 - server/：Node.js サーバーが含まれています。
-  - src/：サーバーのソースコードが含まれています。
+  - src/：サーバーのソースコードが含まれています
   - src/controllers/：HTTP リクエストを処理するためのコントローラー関数が含まれています。
   - src/models/：データモデルが含まれています。
