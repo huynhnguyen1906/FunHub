@@ -95,7 +95,6 @@ function CrPostDpNav({ onClose }) {
 					media,
 				});
 				onClose();
-				// ...
 			} catch (error) {
 				console.error("Error creating post:", error);
 			}

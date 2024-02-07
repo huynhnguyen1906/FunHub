@@ -94,7 +94,6 @@ function CrPostDpNavHT({ onClose }) {
 					content: inputText,
 					media,
 				});
-				console.log(response.data);
 				onClose();
 				// ...
 			} catch (error) {
