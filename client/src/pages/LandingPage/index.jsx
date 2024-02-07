@@ -52,6 +52,37 @@ function Landing() {
 		fetchUserData();
 	}, [navigate]);
 
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add("fade-in-up");
+					}
+				});
+			},
+			{ threshold: 0.1 }
+		);
+
+		document
+			.querySelectorAll(
+				".heroContent *, .mainContent *, .botCatchCopy *, .footer *"
+			)
+			.forEach((element) => {
+				observer.observe(element);
+			});
+
+		return () => {
+			document
+				.querySelectorAll(
+					".heroContent *, .mainContent *, .botCatchCopy *, .footer *"
+				)
+				.forEach((element) => {
+					observer.unobserve(element);
+				});
+		};
+	}, []);
+
 	return (
 		<div className="lContainer">
 			{showLogin && (
