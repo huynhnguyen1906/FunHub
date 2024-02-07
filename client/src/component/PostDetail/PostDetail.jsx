@@ -206,7 +206,9 @@ function PostDetail({ onClose, userData }) {
 			<div className="PostDetail">
 				<div className="pDetailTop">
 					<div className="userIcon">
-						<img src={post.user_avatar} alt="" />
+						{userData && userData.user && (
+							<img src={userData.user.avatar} alt="" />
+						)}
 					</div>
 					<div className="settingBtn"></div>
 				</div>
