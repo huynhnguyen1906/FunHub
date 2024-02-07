@@ -31,7 +31,7 @@ function AccountCreate({ onClose, setShowLogin }) {
 		return Array.from({ length: 121 }, (_, i) => ({
 			value: i + 1900,
 			label: i + 1900,
-		}));
+		})).reverse();
 	}, []);
 
 	const handleDayChange = useCallback((selectedOption) => {
