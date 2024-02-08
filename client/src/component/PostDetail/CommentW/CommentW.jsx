@@ -2,7 +2,7 @@ import { useState } from "react";
 import moment from "moment-timezone";
 
 const timeFormat = (time) => {
-	const notiTime = moment.utc(time).toDate();
+	const notiTime = moment.utc(time).add(9, "hours").toDate();
 	const now = new Date();
 	const nowUTC = new Date(now.toUTCString());
 	const diff = nowUTC - notiTime;
