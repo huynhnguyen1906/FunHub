@@ -47,7 +47,7 @@ function Profile() {
 										<span>{userData.followingCount}</span>フォロー中
 									</div>
 									<div className="following">
-										<span>{userData.followerCount}</span>フォロわー
+										<span>{userData.followerCount}</span>フォロワー
 									</div>
 								</div>
 								<div className="postCount">

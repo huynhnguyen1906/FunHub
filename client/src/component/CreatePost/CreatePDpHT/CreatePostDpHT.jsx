@@ -90,7 +90,7 @@ function CrPostDpNavHT({ onClose }) {
 					};
 				});
 
-				const response = await axios.post("/createPost", {
+				await axios.post("/createPost", {
 					content: inputText,
 					media,
 				});
