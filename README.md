@@ -1,3 +1,5 @@
+[英語版](README.en.md)
+
 # Funhub
 
 <p align="center">
