@@ -10,23 +10,22 @@
 <img src="https://lh3.googleusercontent.com/pw/AP1GczMdL-vsdWUakouN0rh6mll1Wfz2OTmj0djNpHA1XlmTxjcpl5Btv6boDNCmVBiEZH8hzm_9yVoGqTu4Wkvcr7_klQg_IQCfjobmD-yMqNlTvhEU9uzDltwwLH-zPNS_RjrAK6DX_R9XGsdTkgSSEVjjZNa3Ym_pcTbGkABuKhbnFzU9IYly1i4uEm8UqiU2_Ms0ghF4UkcsrkpGLl-nkSb_RZc6GwB2kJ72XoG3SzvcX_RVuywsuOPrrxNa8A2XuGUe1XEzvYT9IF6RZgiBuelG4ILrPS0WZeL-wEvwWbGrFixNFROPoKoQu5Yz5hzHt49Zl67Vc7Y0UpbQxRdhhD_d9pBxc6cGPf8vPw9vPpkG5NCiGMe7ITuv9M_bh_AOfinw4CIT5wlEzumdd9rpO9VGEB3a25hlkReu1kyWomv5tXG14Bev7Faw4nYdxcMolayWSqQCksxkSgYckzEEjIjsV0Er8WHrhBGYmjQMqTS63o1Lla1KeZiNVTojJxv1JCTwI1zbGfKxWLGRl7m-zj5j5zk7-ddSyqUhVSRfdmVA9bSfguqD0yqxR-xjLeuqLKBzdlPgxM0xBPWrUTJBM6smoP-01PhBqH3fcL-IcU4iq3DW9KXQ840aMNzLlEJ-lPLf0SpnR-SFADQmFyJ39BLPngA0UNpe7aoddlJD6ddoxUrTHfCqFKJ24pW5O0GsV_tEUdYNiqXNZTMxpOY7pYfSYpfu3X_1cH5g8MqajxD-gWlyG7J1CvC7hRtPVTzYVVTQNgDJB1wABspZzOq3Y0oBBoxaJYDmOOAzHTk87xe3ji9_SmD3VXg3dn6rVErIprZMESgLh-nRf2K0JurtwYTxHq0_pWJk8z3l55O7bMrS80_HNTyFoAJwZiIXneu4etcjfGq-mdcTYVCIn5ZlISuzrmHDhs8gzaT_ScRbXyorkZuQKzRWhz0WYp9b=w1441-h958-s-no-gm?authuser=0" width="100%"/>
 </p>
 
-## 紹介
+## Introduction
 
-このプロジェクトは、JavaScript を使用したフルスタックのアプリケーションで、さまざまな技術を利用しています。
+    This project is a full-stack application using JavaScript, utilizing various technologies.
 
 - `Node.js`
 - `Express.js`
 - `React.js`
 - `MySQL`
 
-## 前提条件
+## Prerequisites
 
-マシンに `Node.js` と `npm`がインストールされていることを確認してください。
-`Node.js` のバージョン `18` を使用してください。バージョンを確認するには、`node -v` を実行します。
+    Please make sure that `Node.js` and `npm` are installed on your machine. Please use version `18` of `Node.js`. To check the version, run `node -v`.
 
-## インストール
+Installation
 
-1. リポジトリをクローンします：
+1. Clone the repository:
    `git clone <https://github.com/huynhnguyen1906/FunHub.git>`
 
 2. ルート、サーバー、およびクライアントディレクトリで依存関係をインストールします：
@@ -55,27 +54,27 @@
 
     npm install
 
-3. 設定
-   サーバーディレクトリに`.env.example`を`.env`にコピーし、環境変数を入力してください。
-   サーバーディレクトリに `funhub-keyfile.example.json` を `funhub-keyfile.json` にコピーし、環境変数を入力してください。
+3. Configuration
 
-## 開始方法
+   Configuration Copy `.env.example` in the server directory to `.env` and enter the environment variables. Copy `funhub-keyfile.example.json` in the server directory to `funhub-keyfile.json` and enter the environment variables.
 
-アプリケーションを起動するには、ルートディレクトリに戻り、次のコマンドを実行します：
+## How to Start
+
+    To start the application, return to the root directory and run the following command:
 
     npm start
 
-## プロジェクト構造
+## Project Structure
 
-プロジェクトは以下の構造を持っています：
+    The project has the following structure:
 
-- `client/`：React クライアントアプリケーションが含まれています。
-  - `src/`：React アプリケーションのソースコードが含まれています。
-  - `src/components/`：再利用可能な React コンポーネントが含まれています。
-  - `src/pages/`：React アプリケーションの異なるページが含まれています。
-- `server/`：Node.js サーバーが含まれています。
-  - `src/`：サーバーのソースコードが含まれています
-  - `src/controllers/`：HTTP リクエストを処理するためのコントローラー関数が含まれています。
-  - `src/models/`：データモデルが含まれています。
-  - `src/routes/`: API ルートが含まれています。
-  - `src/config/database`：データベースの設定が含まれています。
+- `client/`： Contains the React client application
+  - `src/`：Contains the source code of the React application.
+  - `src/components/`：Contains reusable React components.
+  - `src/pages/`：Contains different pages of the React application.
+- `server/`：Contains the server source code
+  - `src/`：Contains the source code of the server.
+  - `src/controllers/`： Contains controller functions to handle HTTP requests.
+  - `src/models/`：Contains data models.
+  - `src/routes/`: Contains the routes of the application.
+  - `src/config/database`：Contains the configuration of the database.
