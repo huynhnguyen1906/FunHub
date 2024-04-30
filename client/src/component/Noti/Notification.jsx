@@ -4,7 +4,7 @@ import NotiBox from "./NotiCnt/NotiCnt";
 const notiData = [
 	{
 		type: "like",
-		userName: "Aさん",
+		userName: "takuto",
 		time: "2024-01-26T00:09:26.535Z",
 		userIcon:
 			"https://i.pinimg.com/236x/7e/3b/b2/7e3bb2b4059cceb64279789d228e2da2.jpg",
@@ -13,7 +13,7 @@ const notiData = [
 	},
 	{
 		type: "like",
-		userName: "Aさん",
+		userName: "houjyuu",
 		time: "2024-01-26T00:09:26.535Z",
 		userIcon:
 			"https://i.pinimg.com/236x/7e/3b/b2/7e3bb2b4059cceb64279789d228e2da2.jpg",
@@ -22,7 +22,7 @@ const notiData = [
 	},
 	{
 		type: "like",
-		userName: "Aさん",
+		userName: "yuuji",
 		time: "2024-01-26T00:09:26.535Z",
 		userIcon:
 			"https://i.pinimg.com/236x/7e/3b/b2/7e3bb2b4059cceb64279789d228e2da2.jpg",
@@ -31,7 +31,7 @@ const notiData = [
 	},
 	{
 		type: "like",
-		userName: "Aさん",
+		userName: "honda",
 		time: "2024-01-26T00:09:26.535Z",
 		userIcon:
 			"https://i.pinimg.com/236x/7e/3b/b2/7e3bb2b4059cceb64279789d228e2da2.jpg",
@@ -40,7 +40,7 @@ const notiData = [
 	},
 	{
 		type: "comment",
-		userName: "Aさん",
+		userName: "kuge",
 		time: "2024-01-25T15:09:26.535Z",
 		userIcon:
 			"https://images.pexels.com/photos/15006072/pexels-photo-15006072/free-photo-of-view-of-pic-du-midi-d-ossau-mountain-in-france.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -49,7 +49,7 @@ const notiData = [
 	},
 	{
 		type: "like",
-		userName: "Aさん",
+		userName: "nakagawa",
 		time: "2024-01-24T15:09:26.535Z",
 		userIcon:
 			"https://i.pinimg.com/236x/7e/3b/b2/7e3bb2b4059cceb64279789d228e2da2.jpg",
@@ -58,7 +58,7 @@ const notiData = [
 	},
 	{
 		type: "comment",
-		userName: "Aさん",
+		userName: "yabaihito",
 		time: "2024-01-23T15:09:26.535Z",
 		userIcon:
 			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSjVW0SZOp8QdyTUb9FH0m5CoTLqfe7PyTSQ&usqp=CAU",
@@ -67,7 +67,7 @@ const notiData = [
 	},
 	{
 		type: "follow",
-		userName: "Aさん",
+		userName: "wtfman",
 		time: "2024-01-22T15:09:26.535Z",
 		userIcon:
 			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO1_zJQOuyXfJyykzjaPv1I67xbKI3pJO0Mw&usqp=CAU",
@@ -76,7 +76,7 @@ const notiData = [
 	},
 	{
 		type: "like",
-		userName: "Aさん",
+		userName: "nanisore",
 		time: "2024-01-21T15:09:26.535Z",
 		userIcon:
 			"https://ichef.bbci.co.uk/news/976/cpsprodpb/16620/production/_91408619_55df76d5-2245-41c1-8031-07a4da3f313f.jpg",
@@ -85,7 +85,7 @@ const notiData = [
 	},
 	{
 		type: "comment",
-		userName: "Aさん",
+		userName: "auhgowww",
 		time: "2024-01-21T15:09:26.535Z",
 		userIcon:
 			"https://lh3.googleusercontent.com/l1PbMRIFRS4BcOXSyUjbSsi3OKJOdp6ysy0G5w2O-jNCHcRMnWRDXSWNee0MHifq9IMVqLxo23K3A0iMh8UutYMjOUpwyrsxnS-VpO7S=rp-w1080-nu",
@@ -94,7 +94,7 @@ const notiData = [
 	},
 	{
 		type: "like",
-		userName: "Aさん",
+		userName: "nanimonaiiii",
 		time: "2024-01-20T15:09:26.535Z",
 		userIcon:
 			"https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/09/meme-che-15.jpg",
@@ -103,7 +103,7 @@ const notiData = [
 	},
 	{
 		type: "comment",
-		userName: "Aさん",
+		userName: "queksoa",
 		time: "2024-01-19T15:09:26.535Z",
 		userIcon:
 			"https://lh3.googleusercontent.com/l1PbMRIFRS4BcOXSyUjbSsi3OKJOdp6ysy0G5w2O-jNCHcRMnWRDXSWNee0MHifq9IMVqLxo23K3A0iMh8UutYMjOUpwyrsxnS-VpO7S=rp-w1080-nu",
@@ -112,7 +112,7 @@ const notiData = [
 	},
 	{
 		type: "like",
-		userName: "Aさん",
+		userName: "huias",
 		time: "2024-01-19T15:09:26.535Z",
 		userIcon:
 			"https://ichef.bbci.co.uk/news/976/cpsprodpb/16620/production/_91408619_55df76d5-2245-41c1-8031-07a4da3f313f.jpg",
@@ -121,7 +121,7 @@ const notiData = [
 	},
 	{
 		type: "follow",
-		userName: "Aさん",
+		userName: "loisg",
 		time: "2024-01-17T15:09:26.535Z",
 		userIcon:
 			"https://i.pinimg.com/236x/7e/3b/b2/7e3bb2b4059cceb64279789d228e2da2.jpg",
