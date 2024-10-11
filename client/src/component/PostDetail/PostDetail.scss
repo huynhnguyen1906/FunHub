@@ -53,8 +53,7 @@
 			.settingBtn {
 				width: 2.5rem;
 				height: 2.5rem;
-				background: url("../../../public/images/icon/setting.svg") no-repeat
-					center center / contain;
+				background: url("../../../public/images/icon/setting.svg") no-repeat center center / contain;
 				cursor: pointer;
 			}
 		}
@@ -128,8 +127,7 @@
 						span {
 							width: 1.5rem;
 							height: 1.5rem;
-							background: url("../../../public/images/icon/dot.svg") no-repeat
-								center center / contain;
+							background: url("../../../public/images/icon/dot.svg") no-repeat center center / contain;
 						}
 						&:hover {
 							background-color: #e1e1e1;
@@ -143,6 +141,8 @@
 					height: auto;
 					width: 100%;
 					padding-bottom: 16px;
+					word-break: break-all;
+					overflow-wrap: break-word;
 					span {
 						font-size: 1.4rem;
 						color: #1b4bf3;
@@ -176,8 +176,7 @@
 							i {
 								width: 1.8rem;
 								height: 1.8rem;
-								background: url("../../../public/images/icon/like-active.svg")
-									no-repeat center center/contain;
+								background: url("../../../public/images/icon/like-active.svg") no-repeat center center/contain;
 								margin-right: 5px;
 							}
 						}
@@ -221,13 +220,11 @@
 						&:nth-child(1) {
 							.btn {
 								i {
-									background: url("../../../public/images/icon/like.svg")
-										no-repeat center center/contain;
+									background: url("../../../public/images/icon/like.svg") no-repeat center center/contain;
 								}
 								&.active {
 									i {
-										background: url("../../../public/images/icon/like-active.svg")
-											no-repeat center center/contain;
+										background: url("../../../public/images/icon/like-active.svg") no-repeat center center/contain;
 									}
 								}
 							}
@@ -235,8 +232,7 @@
 						&:nth-child(3) {
 							.btn {
 								i {
-									background: url("../../../public/images/icon/share.svg")
-										no-repeat center center/contain;
+									background: url("../../../public/images/icon/share.svg") no-repeat center center/contain;
 								}
 							}
 						}
@@ -377,8 +373,7 @@
 				display: block;
 				width: 3rem;
 				height: 3rem;
-				background: url("../../../public/images/icon/arrow-right-solid.svg")
-					no-repeat center center/contain;
+				background: url("../../../public/images/icon/arrow-right-solid.svg") no-repeat center center/contain;
 			}
 		}
 		.preBtn {
@@ -387,8 +382,7 @@
 				display: block;
 				width: 3rem;
 				height: 3rem;
-				background: url("../../../public/images/icon/arrow-left-solid.svg")
-					no-repeat center center/contain;
+				background: url("../../../public/images/icon/arrow-left-solid.svg") no-repeat center center/contain;
 			}
 		}
 		.media {
@@ -422,16 +416,14 @@
 				height: 4rem;
 				border-radius: 50%;
 				overflow: hidden;
-				background: url("../../../public/images/icon/funhub-logo.svg") no-repeat
-					center center/contain;
+				background: url("../../../public/images/icon/funhub-logo.svg") no-repeat center center/contain;
 				margin-right: 1rem;
 			}
 			.closeBtn {
 				margin-left: 1rem;
 				width: 2rem;
 				height: 2rem;
-				background: url("../../../public/images/icon/postClose.svg") no-repeat
-					center center/contain;
+				background: url("../../../public/images/icon/postClose.svg") no-repeat center center/contain;
 				cursor: pointer;
 			}
 		}

@@ -73,8 +73,7 @@
 					width: 1.6rem;
 					height: 1.6rem;
 					border-radius: 50%;
-					background: url("../../../public/images/icon/dot.svg") no-repeat
-						center center/contain;
+					background: url("../../../public/images/icon/dot.svg") no-repeat center center/contain;
 				}
 				&:hover {
 					background-color: #e1e1e1;
@@ -92,6 +91,8 @@
 				font-weight: 400;
 				height: auto;
 				width: 100%;
+				word-break: break-all;
+				overflow-wrap: break-word;
 				span {
 					font-size: 1.4rem;
 					color: #1b4bf3;
@@ -167,8 +168,7 @@
 				span {
 					width: 4rem;
 					height: 4rem;
-					background: url("../../../public/images/icon/play.svg") no-repeat
-						center center/contain;
+					background: url("../../../public/images/icon/play.svg") no-repeat center center/contain;
 				}
 			}
 		}
@@ -299,8 +299,7 @@
 				i {
 					width: 1.8rem;
 					height: 1.8rem;
-					background: url("../../../public/images/icon/like-active.svg")
-						no-repeat center center/contain;
+					background: url("../../../public/images/icon/like-active.svg") no-repeat center center/contain;
 					margin-right: 5px;
 				}
 			}
@@ -340,13 +339,11 @@
 			&:nth-child(1) {
 				.btn {
 					i {
-						background: url("../../../public/images/icon/like.svg") no-repeat
-							center center/contain;
+						background: url("../../../public/images/icon/like.svg") no-repeat center center/contain;
 					}
 					&.active {
 						i {
-							background: url("../../../public/images/icon/like-active.svg")
-								no-repeat center center/contain;
+							background: url("../../../public/images/icon/like-active.svg") no-repeat center center/contain;
 						}
 					}
 				}
@@ -354,16 +351,14 @@
 			&:nth-child(2) {
 				.btn {
 					i {
-						background: url("../../../public/images/icon/comment.svg") no-repeat
-							center center/contain;
+						background: url("../../../public/images/icon/comment.svg") no-repeat center center/contain;
 					}
 				}
 			}
 			&:nth-child(3) {
 				.btn {
 					i {
-						background: url("../../../public/images/icon/share.svg") no-repeat
-							center center/contain;
+						background: url("../../../public/images/icon/share.svg") no-repeat center center/contain;
 					}
 				}
 			}
