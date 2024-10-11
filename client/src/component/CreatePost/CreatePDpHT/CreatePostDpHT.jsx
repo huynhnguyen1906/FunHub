@@ -1,7 +1,7 @@
 import "../CreatePostDp.scss";
 import { useState, useRef, useCallback, useEffect } from "react";
 import MediaInput from "../MediaInput/MediaInput";
-import axios from "axios"; // Make sure to import axios
+import axios from "axios";
 
 function CrPostDpNavHT({ onClose }) {
 	const [userData, setUserData] = useState(null);
@@ -17,8 +17,7 @@ function CrPostDpNavHT({ onClose }) {
 
 		fetchUserData();
 	}, []);
-	const [contentEdiTableText, setContentEdiTableText] =
-		useState("なんか面白いことある？");
+	const [contentEdiTableText, setContentEdiTableText] = useState("なんか面白いことある？");
 
 	const handleFocus = () => {
 		setContentEdiTableText("");
@@ -41,25 +40,35 @@ function CrPostDpNavHT({ onClose }) {
 	const handleFileChange = useCallback(
 		(e) => {
 			const selectedFiles = Array.from(e.target.files);
-			const maxFileSizeInMB = 150; // Maximum file size in MB
+			const maxFileSizeInMB = 150;
 
-			const validFiles = selectedFiles.filter(
-				(file) => file.size / (1024 * 1024) <= maxFileSizeInMB
-			);
+			const validFiles = selectedFiles.filter((file) => file.size / (1024 * 1024) <= maxFileSizeInMB);
 
 			if (validFiles.length !== selectedFiles.length) {
 				alert("150MB 以下のファイルを選択してください。");
 			}
 
-			setSelectedFiles((prevFiles) => [...prevFiles, ...validFiles]);
+			const media = validFiles.map((file) => {
+				let type;
+				if (file.type.startsWith("image/")) {
+					type = "image";
+				} else if (file.type.startsWith("video/")) {
+					type = "video";
+				} else {
+					type = "unknown";
+				}
+
+				return { type, file };
+			});
+
+			setSelectedFiles((prevFiles) => [...prevFiles, ...media]);
+			console.log("Selected files:", selectedFiles);
 		},
 		[alert]
 	);
 
 	const handleDelete = useCallback((deleteIndex) => {
-		setSelectedFiles((currentMedia) =>
-			currentMedia.filter((_, index) => index !== deleteIndex)
-		);
+		setSelectedFiles((currentMedia) => currentMedia.filter((_, index) => index !== deleteIndex));
 	}, []);
 	const handleSend = useCallback(async () => {
 		if (inputText === "" && selectedFiles.length === 0) {
@@ -69,7 +78,7 @@ function CrPostDpNavHT({ onClose }) {
 		} else {
 			try {
 				const formData = new FormData();
-				selectedFiles.forEach((file) => {
+				selectedFiles.forEach(({ file }) => {
 					formData.append("media", file);
 				});
 				setAlert("投稿中...");
@@ -77,30 +86,22 @@ function CrPostDpNavHT({ onClose }) {
 					headers: { "Content-Type": "multipart/form-data" },
 				});
 
-				const media = uploadResponse.data.urls.map((url) => {
-					let type;
-					if (url.match(/\.(jpeg|jpg|gif|png|webp)$/)) {
-						type = "image";
-					} else if (url.match(/\.(mp4|webm)$/)) {
-						type = "video";
-					}
-					return {
-						type,
-						url,
-					};
-				});
+				const media = uploadResponse.data.urls.map((url, index) => ({
+					url,
+					type: selectedFiles[index].type,
+				}));
 
 				await axios.post("/createPost", {
 					content: inputText,
 					media,
 				});
 				onClose();
-				// ...
 			} catch (error) {
 				console.error("Error creating post:", error);
 			}
 		}
 	}, [inputText, selectedFiles, onClose, setAlert]);
+
 	return (
 		<div
 			className="CrPostDp"
@@ -140,12 +141,8 @@ function CrPostDpNavHT({ onClose }) {
 								<div className="inlineText">{contentEdiTableText}</div>
 								<div className="mediaInputBox">
 									<div className="mediaInput">
-										{selectedFiles.map((file, index) => (
-											<MediaInput
-												key={index}
-												file={file}
-												onDelete={() => handleDelete(index)}
-											/>
+										{selectedFiles.map((fileData, index) => (
+											<MediaInput key={index} file={fileData.file} onDelete={() => handleDelete(index)} />
 										))}
 									</div>
 								</div>

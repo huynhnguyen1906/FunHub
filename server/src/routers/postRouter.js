@@ -1,17 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const {
-	createPost,
-	getAllPosts,
-	getPostById,
-} = require("../controllers/postController");
+const { createPost, getAllPosts, getPostById } = require("../controllers/postController");
 const verifyTokenMiddleware = require("../controllers/verifyTokenController");
 
 router.post("/createPost", verifyTokenMiddleware, async (req, res) => {
 	try {
 		const { content, media } = req.body;
 		const userID = req.user.userID;
-
 		const newPost = await createPost(userID, content, media);
 
 		if (!newPost) {

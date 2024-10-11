@@ -1,10 +1,6 @@
+const { storage } = require("../config/firebase-config");
+const { ref, uploadBytes, getDownloadURL } = require("firebase/storage");
 const sharp = require("sharp");
-const { Storage } = require("@google-cloud/storage");
-
-const storageClient = new Storage({
-	keyFilename: "./funhub-keyfile.json",
-});
-const bucket = storageClient.bucket("funhub");
 
 const uploadMedia = async (req, res) => {
 	try {
@@ -18,54 +14,30 @@ const uploadMedia = async (req, res) => {
 
 			let processedBuffer;
 			let newFileName;
-			let contentType;
 
 			if (isImage) {
-				try {
-					processedBuffer = await sharp(buffer).toFormat("webp").toBuffer();
-				} catch (error) {
-					console.error("Error processing image:", error); // Log any errors from sharp
-				}
-				newFileName = `${Date.now()}_${originalname.replace(
-					/\.[^/.]+$/,
-					""
-				)}.webp`;
+				processedBuffer = await sharp(buffer).toFormat("webp").toBuffer();
+				newFileName = `${Date.now()}_${originalname.replace(/\.[^/.]+$/, "")}.webp`;
 			} else {
 				processedBuffer = buffer;
 				newFileName = `${Date.now()}_${originalname}`;
-				contentType = mimetype;
 			}
 
-			const gcsFile = bucket.file(newFileName);
-			const stream = gcsFile.createWriteStream({
-				metadata: {
-					contentType: contentType,
-				},
-			});
+			const storageRef = ref(storage, newFileName);
+			await uploadBytes(storageRef, processedBuffer, { contentType: mimetype });
 
-			return new Promise((resolve, reject) => {
-				stream.on("error", (err) => {
-					console.error(err);
-					reject(err);
-				});
-
-				stream.on("finish", () => {
-					const publicUrl = `https://storage.googleapis.com/${bucket.name}/${gcsFile.name}`;
-					resolve(publicUrl);
-				});
-
-				stream.end(processedBuffer);
-			});
+			const publicUrl = await getDownloadURL(storageRef);
+			return publicUrl;
 		});
 
 		const urls = await Promise.all(uploadPromises);
-
 		res.status(200).json({ urls });
 	} catch (error) {
 		console.error(error);
 		res.status(500).send("Internal Server Error");
 	}
 };
+
 module.exports = {
 	uploadMedia,
 };

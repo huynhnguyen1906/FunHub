@@ -44,8 +44,7 @@
 					display: block;
 					width: 2rem;
 					height: 2rem;
-					background: url("../../../public/images/icon/x-solid.svg") center
-						no-repeat;
+					background: url("../../../public/images/icon/x-solid.svg") center no-repeat;
 					background-size: contain;
 				}
 				&:hover {
@@ -130,8 +129,7 @@
 										display: block;
 										width: 1.5rem;
 										height: 1.5rem;
-										background: url("../../../public/images/icon/x-solid.svg")
-											center no-repeat;
+										background: url("../../../public/images/icon/x-solid.svg") center no-repeat;
 										background-size: contain;
 									}
 								}
@@ -143,14 +141,13 @@
 									display: flex;
 									align-items: center;
 									justify-content: center;
-									background-color: #000000;
+									background-color: #989898;
 									span {
 										position: absolute;
 										display: block;
 										width: 3rem;
 										height: 3rem;
-										background: url("../../../public/images/icon/play.svg") 60%
-											no-repeat;
+										background: url("../../../public/images/icon/play.svg") 60% no-repeat;
 										background-size: 50%;
 										top: 50%;
 										left: 50%;
@@ -196,23 +193,19 @@
 					.tool {
 						padding-right: 32px;
 						.media {
-							background: url("../../../public/images/icon/picture.svg") center
-								no-repeat;
+							background: url("../../../public/images/icon/picture.svg") center no-repeat;
 							background-size: contain;
 						}
 						.emoji {
-							background: url("../../../public/images/icon/emoji.svg") center
-								no-repeat;
+							background: url("../../../public/images/icon/emoji.svg") center no-repeat;
 							background-size: contain;
 						}
 						.gif {
-							background: url("../../../public/images/icon/gif.svg") center
-								no-repeat;
+							background: url("../../../public/images/icon/gif.svg") center no-repeat;
 							background-size: contain;
 						}
 						.map {
-							background: url("../../../public/images/icon/map.svg") center
-								no-repeat;
+							background: url("../../../public/images/icon/map.svg") center no-repeat;
 							background-size: contain;
 						}
 						i {

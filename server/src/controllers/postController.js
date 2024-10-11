@@ -4,7 +4,7 @@ const postModel = require("../models/postModel");
 async function createPost(userID, content, media) {
 	try {
 		await db.beginTransaction();
-
+		console.log(media);
 		const createPostQuery = "INSERT INTO POSTS (userID, content) VALUES (?, ?)";
 		const [postResult] = await db.query(createPostQuery, [userID, content]);
 
