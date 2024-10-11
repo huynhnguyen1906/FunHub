@@ -7,9 +7,10 @@ import axios from "axios";
 
 const timeFormat = (time) => {
 	const notiTime = moment.utc(time).toDate();
+	console.log(notiTime);
 	const now = new Date();
 	const nowUTC = new Date(now.toUTCString());
-	const diff = nowUTC - notiTime;
+	const diff = nowUTC - notiTime - 9 * 60 * 60 * 1000;
 	const diffMin = Math.floor(diff / 60000);
 	const diffHour = Math.floor(diffMin / 60);
 	const diffDay = Math.floor(diffHour / 24);
@@ -92,10 +93,7 @@ function PostItem({ post, onPostClick, userData }) {
 					setLikeCount(like ? likeCount - 1 : likeCount + 1);
 				})
 				.catch((error) => {
-					console.error(
-						"An error occurred while liking/unliking the post",
-						error
-					);
+					console.error("An error occurred while liking/unliking the post", error);
 				});
 		} else {
 			alert("ログインしてください。");
@@ -117,10 +115,7 @@ function PostItem({ post, onPostClick, userData }) {
 					}
 				})
 				.catch((error) => {
-					console.error(
-						"An error occurred while checking the like status",
-						error
-					);
+					console.error("An error occurred while checking the like status", error);
 				});
 		}
 	}, [userData, post]);
@@ -143,25 +138,14 @@ function PostItem({ post, onPostClick, userData }) {
 				</div>
 				<div className="PTextW">
 					<div className="PText">
-						{post.content.length > 400 && !isExpanded
-							? `${post.content.substring(0, 400)}...`
-							: post.content}
-						{post.content.length > 400 && (
-							<span onClick={toggleExpanded}>
-								{isExpanded ? "" : "  すべてを見る"}
-							</span>
-						)}
+						{post.content.length > 400 && !isExpanded ? `${post.content.substring(0, 400)}...` : post.content}
+						{post.content.length > 400 && <span onClick={toggleExpanded}>{isExpanded ? "" : "  すべてを見る"}</span>}
 					</div>
 				</div>
 			</div>
 			<div className={PMainClass}>
 				{post.media.slice(0, 4).map((mediaItem, index) => (
-					<PMain
-						key={index}
-						media={mediaItem}
-						post={post}
-						Click={() => handleClick(mediaItem.id)}
-					/>
+					<PMain key={index} media={mediaItem} post={post} Click={() => handleClick(mediaItem.id)} />
 				))}
 				<div className={seeMoreClass}>{`${post.media.length % 4} 件以上`}</div>
 			</div>
