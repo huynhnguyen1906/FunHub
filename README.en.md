@@ -19,6 +19,17 @@
 - `React.js`
 - `MySQL`
 
+## Implemented Features
+
+- User account creation 
+- Login functionality 
+- Authentication functionality 
+- Profile information update
+- Password change functionality 
+- Posting functionality 
+- Like functionality for posts 
+- Comment functionality 
+
 ## Prerequisites
 
     Please make sure that `Node.js` and `npm` are installed on your machine. Please use version `18` of `Node.js`. To check the version, run `node -v`.
@@ -28,7 +39,7 @@ Installation
 1. Clone the repository:
    `git clone <https://github.com/huynhnguyen1906/FunHub.git>`
 
-2. ルート、サーバー、およびクライアントディレクトリで依存関係をインストールします：
+2. Install dependencies in the root, server, and client directories:
 
 ####
 
