@@ -4,8 +4,7 @@ import AuthContext from "~/component/checkLogin/AuthContext";
 import axios from "axios";
 function CmtInput({ postId }) {
 	const { userData } = useContext(AuthContext);
-	const [contentEdiTableText, setContentEdiTableText] =
-		useState("コメントを入力。。。");
+	const [contentEdiTableText, setContentEdiTableText] = useState("コメントを入力。。。");
 	const postID = postId;
 	const handleFocus = () => {
 		setContentEdiTableText("");
@@ -58,15 +57,11 @@ function CmtInput({ postId }) {
 				const commentData = {
 					postID: postID,
 					content: inputText,
-					mediaType: files
-						? files.type.startsWith("video")
-							? "video"
-							: "image"
-						: null,
+					mediaType: files ? (files.type.startsWith("video") ? "video" : "image") : null,
 					mediaURL: mediaURL,
 				};
 
-				await axios.post("/comments", commentData);
+				await axios.post("/api/comments", commentData);
 
 				setFiles(null);
 				setInputText("");
@@ -100,9 +95,7 @@ function CmtInput({ postId }) {
 						</div>
 					)}
 					<div className="inputContent">
-						<div className="avatar">
-							{userData.user && <img src={userData.user.avatar} alt="" />}
-						</div>
+						<div className="avatar">{userData.user && <img src={userData.user.avatar} alt="" />}</div>
 						<div className="inputWrap">
 							<div
 								className="input"

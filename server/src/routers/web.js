@@ -12,11 +12,11 @@ const likeRouters = require("./likeRouter");
 
 // router.use(apiTestRouters);
 router.use(uploadRouters);
-router.use(postRouters);
-router.use(commentRouters);
+router.use("/api", postRouters);
+router.use("/api", commentRouters);
 router.use("/api/user", createUserRouters);
 router.use("/api/user", userLoginRouters);
 router.use("/api/user", myProfileRouters);
-router.use("/post", likeRouters);
+router.use("/api/post", likeRouters);
 
 module.exports = router;

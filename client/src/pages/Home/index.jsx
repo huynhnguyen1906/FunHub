@@ -1,11 +1,5 @@
 import "./Home.scss";
-import React, {
-	useState,
-	useEffect,
-	useCallback,
-	useRef,
-	useContext,
-} from "react";
+import React, { useState, useEffect, useCallback, useRef, useContext } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import CratePostBar from "~/component/CreatePost/CreatePostBar/CreatePostBar";
 import PostItem from "~/component/PostItem/PostItem";
@@ -30,15 +24,13 @@ function Home() {
 			return;
 		}
 		setLoading(true);
-		const response = await axios.get(`/posts?page=${pageRef.current}&limit=10`);
+		const response = await axios.get(`/api/posts?page=${pageRef.current}&limit=10`);
 		if (response.data.length < 10) {
 			setAllPostsLoaded(true);
 		}
 		setPosts((prevPosts) => {
 			// Filter out any posts that already exist in the list
-			const newPosts = response.data.filter(
-				(newPost) => !prevPosts.find((post) => post.id === newPost.id)
-			);
+			const newPosts = response.data.filter((newPost) => !prevPosts.find((post) => post.id === newPost.id));
 			return [...prevPosts, ...newPosts];
 		});
 		setPage((prevPage) => prevPage + 1);
@@ -47,10 +39,7 @@ function Home() {
 
 	const handleScroll = useCallback(
 		(event) => {
-			if (
-				!allPostsLoaded &&
-				window.innerHeight + window.scrollY >= document.body.offsetHeight
-			) {
+			if (!allPostsLoaded && window.innerHeight + window.scrollY >= document.body.offsetHeight) {
 				loadPosts();
 			}
 		},
@@ -89,9 +78,7 @@ function Home() {
 					<Routes>
 						<Route
 							path="post/:postId/:mediaId"
-							element={
-								<PostDetail onClose={closePostDetail} userData={userData} />
-							}
+							element={<PostDetail onClose={closePostDetail} userData={userData} />}
 						/>
 					</Routes>
 					<div className="crateBox">
@@ -99,12 +86,7 @@ function Home() {
 					</div>
 					<div className="postContent">
 						{posts.map((post, id) => (
-							<PostItem
-								key={id}
-								post={post}
-								onPostClick={openPostDetail}
-								userData={userData}
-							/>
+							<PostItem key={id} post={post} onPostClick={openPostDetail} userData={userData} />
 						))}
 					</div>
 				</>

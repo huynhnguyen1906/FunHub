@@ -82,7 +82,7 @@ function PostItem({ post, onPostClick, userData }) {
 		if (userData && userData.user && userData.user.userID && post && post.id) {
 			const action = like ? "dislike" : "like";
 			axios
-				.post("/post/like", {
+				.post("/api/post/like", {
 					userID: userData.user.userID,
 					postID: post.id,
 					action: action,
@@ -102,7 +102,7 @@ function PostItem({ post, onPostClick, userData }) {
 	useEffect(() => {
 		if (userData && userData.user && userData.user.userID && post && post.id) {
 			axios
-				.get("/post/hasLiked", {
+				.get("/api/post/hasLiked", {
 					params: {
 						userID: userData.user.userID,
 						postID: post.id,

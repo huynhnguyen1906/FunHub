@@ -91,7 +91,7 @@ function CrPostDpNavHT({ onClose }) {
 					type: selectedFiles[index].type,
 				}));
 
-				await axios.post("/createPost", {
+				await axios.post("/api/createPost", {
 					content: inputText,
 					media,
 				});

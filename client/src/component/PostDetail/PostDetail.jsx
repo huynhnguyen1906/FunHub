@@ -119,7 +119,7 @@ function PostDetail({ onClose, userData }) {
 
 	useEffect(() => {
 		axios
-			.get(`/posts/${postId}`)
+			.get(`/api/posts/${postId}`)
 			.then((response) => {
 				const post = response.data;
 				setPost(post);
@@ -133,7 +133,7 @@ function PostDetail({ onClose, userData }) {
 
 	useEffect(() => {
 		axios
-			.get(`/comments/${postId}`)
+			.get(`/api/comments/${postId}`)
 			.then((response) => {
 				const comments = response.data;
 				setComments(comments);
@@ -148,7 +148,7 @@ function PostDetail({ onClose, userData }) {
 		if (userData && userData.user && userData.user.userID && post && post.id) {
 			const action = like ? "dislike" : "like";
 			axios
-				.post("/post/like", {
+				.post("/api/post/like", {
 					userID: userData.user.userID,
 					postID: post.id,
 					action: action,
@@ -171,7 +171,7 @@ function PostDetail({ onClose, userData }) {
 
 			if (userData && userData.user && userData.user.userID) {
 				axios
-					.get("/post/hasLiked", {
+					.get("/api/post/hasLiked", {
 						params: {
 							userID: userData.user.userID,
 							postID: post.id,
