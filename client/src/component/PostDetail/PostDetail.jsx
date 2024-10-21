@@ -16,9 +16,10 @@ const CountFormat = (count) => {
 
 const timeFormat = (time) => {
 	const notiTime = moment.utc(time).toDate();
+	console.log(notiTime);
 	const now = new Date();
 	const nowUTC = new Date(now.toUTCString());
-	const diff = nowUTC - notiTime;
+	const diff = nowUTC - notiTime - 9 * 60 * 60 * 1000;
 	const diffMin = Math.floor(diff / 60000);
 	const diffHour = Math.floor(diffMin / 60);
 	const diffDay = Math.floor(diffHour / 24);
@@ -125,9 +126,7 @@ function PostDetail({ onClose, userData }) {
 				setPost(post);
 				const media = post.media.find((media) => media.id === Number(mediaId));
 				setMedia(media);
-				const mediaIndex = post.media.findIndex(
-					(media) => media.id === Number(mediaId)
-				);
+				const mediaIndex = post.media.findIndex((media) => media.id === Number(mediaId));
 				setCurrentIndex(mediaIndex);
 			})
 			.catch((error) => console.error("Lỗi:", error));
@@ -160,10 +159,7 @@ function PostDetail({ onClose, userData }) {
 					setLikeCount(like ? likeCount - 1 : likeCount + 1);
 				})
 				.catch((error) => {
-					console.error(
-						"An error occurred while liking/unliking the post",
-						error
-					);
+					console.error("An error occurred while liking/unliking the post", error);
 				});
 		} else {
 			alert("ログインしてください。");
@@ -188,10 +184,7 @@ function PostDetail({ onClose, userData }) {
 						}
 					})
 					.catch((error) => {
-						console.error(
-							"An error occurred while checking the like status",
-							error
-						);
+						console.error("An error occurred while checking the like status", error);
 					});
 			}
 		}
@@ -205,11 +198,7 @@ function PostDetail({ onClose, userData }) {
 		<div className="PostDetailDP">
 			<div className="PostDetail">
 				<div className="pDetailTop">
-					<div className="userIcon">
-						{userData && userData.user && (
-							<img src={userData.user.avatar} alt="" />
-						)}
-					</div>
+					<div className="userIcon">{userData && userData.user && <img src={userData.user.avatar} alt="" />}</div>
 					<div className="settingBtn"></div>
 				</div>
 				<div className="pDetailM">
@@ -229,14 +218,8 @@ function PostDetail({ onClose, userData }) {
 							</div>
 						</div>
 						<div className="PText">
-							{post.content.length > 350 && !tIsExpanded
-								? `${post.content.substring(0, 350)}...`
-								: post.content}
-							{post.content.length > 350 && (
-								<span onClick={toggleExpanded}>
-									{tIsExpanded ? "" : "  すべてを見る"}
-								</span>
-							)}
+							{post.content.length > 350 && !tIsExpanded ? `${post.content.substring(0, 350)}...` : post.content}
+							{post.content.length > 350 && <span onClick={toggleExpanded}>{tIsExpanded ? "" : "  すべてを見る"}</span>}
 						</div>
 						<div className="pReactBarW">
 							<div className="reactCount">
@@ -244,16 +227,11 @@ function PostDetail({ onClose, userData }) {
 									<i></i>
 									{CountFormat(likeCount)}{" "}
 								</div>
-								<div className="cmtCount">
-									コメント{CountFormat(post.comment_count)}件
-								</div>
+								<div className="cmtCount">コメント{CountFormat(post.comment_count)}件</div>
 							</div>
 							<div className="btnBox">
 								<div className="btnW">
-									<div
-										className={`btn ${like ? "active" : ""}`}
-										onClick={handleLike}
-									>
+									<div className={`btn ${like ? "active" : ""}`} onClick={handleLike}>
 										<i></i>
 										いいね！
 									</div>
@@ -271,14 +249,8 @@ function PostDetail({ onClose, userData }) {
 				</div>
 				<div className="cmtBox">
 					{showAllComments
-						? comments.map((comment, index) => (
-								<CommentW key={index} comment={comment} />
-						  ))
-						: comments
-								.slice(0, 6)
-								.map((comment, index) => (
-									<CommentW key={index} comment={comment} />
-								))}
+						? comments.map((comment, index) => <CommentW key={index} comment={comment} />)
+						: comments.slice(0, 6).map((comment, index) => <CommentW key={index} comment={comment} />)}
 					{comments.length > 6 && !showAllComments && (
 						<div className="seeMore" onClick={handleSeeMoreClick}>
 							すべてを見る
@@ -295,10 +267,7 @@ function PostDetail({ onClose, userData }) {
 					}
 				}}
 			>
-				<div
-					className={`preBtn ${post.media.length === 1 ? "none" : ""}`}
-					onClick={handlePrevClick}
-				>
+				<div className={`preBtn ${post.media.length === 1 ? "none" : ""}`} onClick={handlePrevClick}>
 					<span></span>
 				</div>
 				<div className="media">
@@ -308,10 +277,7 @@ function PostDetail({ onClose, userData }) {
 						<img src={media ? media.url : ""} alt="" />
 					)}
 				</div>
-				<div
-					className={`nextBtn ${post.media.length === 1 ? "none" : ""}`}
-					onClick={handleNextClick}
-				>
+				<div className={`nextBtn ${post.media.length === 1 ? "none" : ""}`} onClick={handleNextClick}>
 					<span></span>
 				</div>
 				<div className="btnBox">

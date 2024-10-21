@@ -3,9 +3,10 @@ import moment from "moment-timezone";
 
 const timeFormat = (time) => {
 	const notiTime = moment.utc(time).toDate();
+	console.log(notiTime);
 	const now = new Date();
 	const nowUTC = new Date(now.toUTCString());
-	const diff = nowUTC - notiTime;
+	const diff = nowUTC - notiTime - 9 * 60 * 60 * 1000;
 	const diffMin = Math.floor(diff / 60000);
 	const diffHour = Math.floor(diffMin / 60);
 	const diffDay = Math.floor(diffHour / 24);
@@ -25,6 +26,7 @@ const timeFormat = (time) => {
 		return `たった今`;
 	}
 };
+
 function CommentW({ comment }) {
 	const [CIsExpanded, CSetIsExpanded] = useState(false);
 	const toggleExpanded = () => {
@@ -46,9 +48,7 @@ function CommentW({ comment }) {
 							? `${comment.content.substring(0, 175)}...`
 							: comment.content}
 						{comment.content && comment.content.length > 175 && (
-							<span onClick={toggleExpanded}>
-								{CIsExpanded ? "" : "  すべてを見る"}
-							</span>
+							<span onClick={toggleExpanded}>{CIsExpanded ? "" : "  すべてを見る"}</span>
 						)}
 					</div>
 					<div className={`cmtMedia ${comment.mediaURL === "" ? "none" : ""}`}>
