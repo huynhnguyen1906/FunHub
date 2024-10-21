@@ -3,8 +3,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const apiRoutes = require("./src/routers/web");
 const path = require("path");
-const checkOrigin = require("./middlewares/checkOrigin"); // Import middleware
-
+const checkOrigin = require("./src/middlewares/checkOrigin");
 const app = express();
 const port = process.env.PORT || 8081;
 const hostname = process.env.HOST_NAME;

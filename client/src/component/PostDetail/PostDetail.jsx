@@ -16,7 +16,6 @@ const CountFormat = (count) => {
 
 const timeFormat = (time) => {
 	const notiTime = moment.utc(time).toDate();
-	console.log(notiTime);
 	const now = new Date();
 	const nowUTC = new Date(now.toUTCString());
 	const diff = nowUTC - notiTime - 9 * 60 * 60 * 1000;
